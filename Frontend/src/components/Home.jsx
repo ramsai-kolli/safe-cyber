@@ -1,102 +1,91 @@
-import './styles/Home.css';
-import startup from '../assets/startup.svg';
-import authori from '../assets/lauthority.jpg';
-import drugins from '../assets/drugins.svg';
-import Header from './Header';
-import FAQ from './FAQs';
-import Footer from './Dashboard comps/Footer';
-import Gochatbot from './Gochatbot';
-import Images from './Images';
-function Home()
-{
-    let startupqr='startup';
-    let druginspector='druginspector';
-    let authority='authority';
-    function startupLogin()
-    {
-        window.location.href = `/login?value=${startupqr}`;
-    }
-    function authoriLogin()
-    {
-        window.location.href = `/login?value=${authority}`;
-    }
-    function drugLogin()
-    {
-        window.location.href = `/login?value=${druginspector}`;
-    }
-    function goStartup()
-    {
-        window.location.href=`/signupstartup`;
-    }
-    function gohometwo()
-    {
-        window.location.href=`/hometwo`;
-    }
-    function goauth()
-    {
-        window.location.href='/signupauthority'
-    }
-    function godrug()
-    {
-        window.location.href='/signupdrug'
-    }
-    
-    const StartupFaqData = [
-        { question: "What is AYUSH?", answer: "AYUSH stands for Ayurveda, Yoga & Naturopathy, Unani, Siddha, and Homeopathy. It refers to traditional Indian systems of medicine." },
-        { question: "How can I register my AYUSH startup?", answer: "You can register your AYUSH startup through the AYUSH Startup Registration Portal provided by the Ministry of AYUSH." },
-        { question: "What are the eligibility criteria for AYUSH startup funding?", answer: "To be eligible for AYUSH funding, your startup must focus on traditional systems of medicine and wellness, and meet other guidelines specified by the Ministry of AYUSH." },
-        { question: "Are there any grants available for AYUSH startups?", answer: "Yes, there are several grants and funding opportunities available for AYUSH startups, including seed funding and innovation grants from the government." },
-        { question: "What certifications are required for AYUSH products?", answer: "AYUSH products typically require certifications from the AYUSH Ministry and the Food Safety and Standards Authority of India (FSSAI), depending on the product." },
-        { question: "How can I obtain a license for manufacturing AYUSH products?", answer: "You can apply for a manufacturing license through the State Licensing Authority under the Ministry of AYUSH, following the guidelines specific to your system of medicine (e.g., Ayurveda or Homeopathy)." },
-        { question: "What is the AYUSH Export Promotion Council?", answer: "The AYUSH Export Promotion Council helps promote and regulate the export of AYUSH products and services internationally." },
-        { question: "Can AYUSH startups apply for international funding?", answer: "Yes, AYUSH startups can apply for international funding through various global initiatives and funding programs that support traditional and alternative medicine." },
-        { question: "What are the tax benefits for AYUSH startups?", answer: "AYUSH startups may be eligible for tax benefits under the Startup India initiative and specific tax exemptions related to health and wellness sectors." },
-        { question: "What support is provided by the Ministry of AYUSH to startups?", answer: "The Ministry of AYUSH provides a variety of support mechanisms, including mentorship, incubation support, and financial assistance for startups focusing on traditional medicine and wellness." },
-      ];
-      const handleRedirect = () => {
-        window.open("https://youtu.be/lLrq8nG4U1c?si=kVBeRfZGTUcHGd5K", "_blank");
-      };
-      const handleAbout= () => {
-        window.location.href='/aboutus';
-      }
+import "./styles/Home.css";
 
-    return(
-        <div className='the-home'>
-       <Header/>
-       <Images/>
+import Header from "./Header";
+import FAQ from "./FAQs";
+import Footer from "./Dashboard comps/Footer";
+import Gochatbot from "./Gochatbot";
+import Images from "./Images";
 
-            <div className='rec-butns'>
+function Home() {
+  const CyberFaqData = [
+    {
+      question: "How does the AI-powered detection system work?",
+      answer:
+        "Our system uses advanced machine learning, NLP, and generative AI models to analyze online content, identify harmful patterns, and flag content for moderation.",
+    },
+    {
+      question: "Can the system detect hate speech in multiple languages?",
+      answer:
+        "Yes, our solution supports multilingual detection by leveraging NLP techniques and pre-trained language models for a wide range of languages.",
+    },
+    {
+      question: "How is misinformation detected and mitigated?",
+      answer:
+        "The system uses fact-checking algorithms, knowledge graphs, and cross-referencing with trusted sources to identify and flag misleading content.",
+    },
+    {
+      question: "What measures are in place to ensure user privacy?",
+      answer:
+        "We employ strict data anonymization, encryption, and compliance with global privacy standards like GDPR to protect user information.",
+    },
+    {
+      question: "Can the system adapt to emerging online threats?",
+      answer:
+        "Yes, the AI models are continuously updated using new datasets to adapt to evolving threats and ensure effective moderation.",
+    },
+    {
+      question:
+        "How does the system differentiate between harmful content and freedom of speech?",
+      answer:
+        "The solution uses context-aware models to balance content moderation with freedom of expression, minimizing false positives.",
+    },
+    {
+      question: "Does the system provide real-time content moderation?",
+      answer:
+        "Absolutely, the platform is optimized for real-time detection and moderation, ensuring immediate action against harmful content.",
+    },
+    {
+      question:
+        "What are the benefits of using this solution for online platforms?",
+      answer:
+        "It enhances user safety, reduces moderation workload, improves platform trust, and helps maintain compliance with content policies.",
+    },
+    {
+      question: "How accurate is the detection system?",
+      answer:
+        "Our solution achieves high accuracy through continuous training on diverse datasets, reducing false positives and false negatives.",
+    },
+    {
+      question: "Is the system scalable for large online platforms?",
+      answer:
+        "Yes, the architecture is designed to scale seamlessly, handling high volumes of content efficiently for platforms of any size.",
+    },
+  ];
+  const handleRedirect = () => {
+    window.open("https:", "_blank");
+  };
+  const handleAbout = () => {
+    window.location.href = "/aboutus";
+  };
+
+  return (
+    <div className="the-home">
+      <Header />
+      <Images />
+
+      {/* <div className='rec-butns'>
                 <button id="ytlink" onClick={handleRedirect}>  Click here to watch the demo video</button>
                 <button id="about-us" onClick={handleAbout}>  About developers</button>
-            </div>
-    
-        <div className="home-main">
-           <div className="home-main-startup">
-               <img id="home-main-img" src={startup}/>
-               <p id="type-title">Startup Applicant</p>
-               <button id="home-main-signin" onClick={goStartup} >Sign Up</button>
-               <button id="home-main-login" onClick={startupLogin}>Login</button>
-           </div>
-           <div className="home-main-auth">
-               <img id="home-main-img2" src={authori}/>
-               <p id="type-title">Licensing Authority</p>
-               <button id="home-main-signin" onClick={goauth} >Sign Up</button>
-               <button id="home-main-login" onClick={authoriLogin}>Login</button>
-           </div>
-           <div className="home-main-drug">
-               <img id="home-main-img3" src={drugins}/>
-               <p id="type-title">Drug Inspector</p>
-               <button id="home-main-signin" onClick={godrug} >Sign Up</button>
-               <button id="home-main-login" onClick={drugLogin}>Login</button>
-           </div>
-           </div>
-           <center><button id="gohometwo" onClick={gohometwo}>Are you a Farmer/doctor Wanna collaborate?</button></center>
-        <div className="home-faq">
-            <FAQ faqdata={StartupFaqData} who={"Ayush StartUps"} />
-        </div>
-       <Gochatbot/>
-        <Footer/>
-        </div>
-    );
+            </div> */}
+
+      <div className="home-main">{/* <Hero /> */}</div>
+
+      <div className="home-faq">
+        <FAQ faqdata={CyberFaqData} who={"Cyberbullying"} />
+      </div>
+      <Gochatbot />
+      <Footer />
+    </div>
+  );
 }
 export default Home;
