@@ -1,0 +1,91 @@
+Problem statement : 
+
+Scaling Trust: AI-Powered Detection of Online Harms
+The rapid growth of online platforms has led to an exponential increase in harmful content, including hate speech, misinformation, and cyberbullying. Traditional moderation methods struggle to keep up with the volume and complexity of these threats, leaving platforms vulnerable to abuse and users exposed to harm.
+
+Objective:
+Participants are tasked with developing AI-driven solutions that enhance the detection and moderation of harmful content at scale. Solutions should leverage machine learning, natural language processing (NLP), and generative AI to identify and mitigate emerging threats in real time, ensuring safer online communities.
+
+
+
+Features : 
+
+idea 1 :  (cyber bullying)
+to develop kinda "twitter post tab" where the textual matter entered by the user will filtered out by replacing cuss words / bad words with ***. and also images/videos with vulgar content be stopped from posting them. its kinda prototype of twitter and instagram
+
+
+idea 2 : ( Mis-info )
+to develop a "input text box" where user enter the suspicious info . and then our website will say that "true info (green box)" or "Fake info (red box)" by calling google gemini api
+
+true or fake is designed based up on the source from which it arrived. like if it is from govt orgs then we say true or else TV9 channel we say fake news
+
+irrespective of what news it is the source will be tagged to it
+we give the score of 0-100 for a news on basis of trueness. 100 if true 0 if fake. 70 if almost trustable
+ { allow, flag, block } either of the 3 is decided from the percentage 
+
+
+idea 3 : 
+we can make it multi language right
+so mention multy language detection as a feature
+
+
+idea 4 : ( cyber bully / cum Mis-info)
+we can put a group chat feature.
+where each and every message from users will be tagged 
+    1.  red and green colors based on ( mis info or not)
+    2. cusswords and badwords will be replaced by stars ***
+to make a peaceful group communication
+
+
+idea 5 : 
+a portal where people can drop complaint directly to the cybercrime police directly in a tab
+ we will drop an email to cybersecurity india@gmail.com 
+
+idea 6 : 
+Ban the user for 3 days " to not entering into our platform" if he did 5 times cyberbyllies ( used cuss words or vulgar images ) continously.
+
+idea 7 : 
+giving "users in the grp chat"  an option to report other "user's bad word msg " ( which was missed by us) and get it deleted
+if any messages in group chat get more negative reports as we expected then its gets checked and reviwed by our ai and then its get deleted
+
+idea 8 :
+Unintentional harm nothing but humor detection 
+
+which may be considered as a harm by ai. But its not a harm
+
+So we ask user an explanation  to prove that it is a joke but not a bully/ harm
+
+idea 9
+trending page :
+where it shows currently most trending FAKE news-es such as
+
+#trending 6
+covid 25 is getting virus to everyone. lockdown from tommorrow 
+# trending 9 
+2000 rupee notes banned 5000 notes is printing
+
+idea 10 : 
+( ee okka idea mathram chat gpt ninchi thiskunna ..migatha paina ideas anni na own eh ) 
+
+Metrics Dashboards:
+
+a dashboard where it shows the count of deletions and moderations we done so far. and shows our website impact
+
+idea 11 : 
+ a chatbot which helps the users queiries to fight against the cyberbullies
+
+like they can ask :
+someone used bad words comments in my Instagram pictures . how to fight against him ??
+
+
+
+note :  hate speech is the third category, 
+
+Tech : 
+ 1. multilingual NLP libraries like Hugging Face Transformers.
+ 2. OpenCV and YOLO (video recognition)
+
+
+
+
+
