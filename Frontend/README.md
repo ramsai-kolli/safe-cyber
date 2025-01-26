@@ -1,6 +1,6 @@
-# CyberSafe Frontend
+# SafeCyber Frontend
 
-- This is the frontend repo for our Cybersafe website.
+- This is the frontend repo for our SafeCyber website.
 - Live Link -
 
 ## Demo Video
