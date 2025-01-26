@@ -1,0 +1,70 @@
+.tot-cont{
+  margin-top: 12vh;
+  height: 50vh;
+  width: 45vw;
+}
+
+.container {
+  border: 5px solid black;
+  padding-top: 20px;   /* padding to cover profile circle */
+  padding-bottom: 50px;
+  border-radius: 70px;
+  background-color: #3b8be0;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  margin-top: 50px;
+}
+
+.container:hover {
+  transform: translateY(-20px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  background-color: #2a75bd;
+}
+
+#yrprofile {
+  font-size: 1rem;
+  color: black;
+  /* font-weight: 300;
+  font-family: bold; */
+  /* padding-left: 100px;
+  padding-right: 100px; */
+  margin: 10px;
+  justify-content: space-between;
+}
+
+.profilecircle {
+  border-radius: 50%;
+  background-color: #a1c1e2;
+  height: 11vw;
+  width: 11vw;
+  position: absolute;
+  top: -75px; 
+  right: 50%; 
+  transform: translateX(50%);
+  border: 2px solid black;
+  text-align: center;
+  font-size: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: bold;
+  transition: transform 0.3s ease; 
+}
+
+.container:hover .profilecircle {
+  transform: translateX(50%) scale(1.05);
+}
+
+.startupdata {
+  /* padding-top: 80px; */
+  margin-top: 7vw;
+  overflow: auto;
+}
+
+.companyname {
+  font-size: 1.5rem;
+  padding: 2%;
+} 
+.yrpdata{
+  width:80%;
+}
