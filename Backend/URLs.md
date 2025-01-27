@@ -28,4 +28,26 @@
 
 3. Group Chat :
 
-4. Trending fake:
+4. Trending fake news:
+
+   1. Create News
+
+   - url: /trend-create
+   - input : {tdata : "2000 rpee banned"}
+   - output : {success : true} // successfully created
+   - action/backend : push it to DB by { happened: 1, content: {tdata} }
+
+   2. Get trend list
+
+   - url: /trend-list
+   - input : null \*\* so use get method
+   - action: sort it in Descending order on basis of happened int-count
+   - output : [ {content1: ""}, {content2 : ""} ]
+
+   3. Upvote / happened to me
+
+   - url : /happenedtome
+   - input : id of trend-content (if posble) else trend-cont like "2000 rupee .."
+   - action/backnd : increase count by 1
+   - output : {success: true}
+   - action/frontend : reload the page
