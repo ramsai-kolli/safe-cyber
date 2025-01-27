@@ -1,10 +1,11 @@
 import "./styles/Home.css";
 
 import Header from "./Header";
-import FAQ from "./FAQs";
+import FAQ from "./Home/FAQs";
 import Footer from "./Dashboard comps/Footer";
-import Gochatbot from "./Gochatbot";
-import Images from "./Images";
+import Gochatbot from "./Home/Gochatbot";
+import Images from "./Home/Images";
+import Hero from "./Hero comps/Hero";
 
 function Home() {
   const CyberFaqData = [
@@ -78,7 +79,9 @@ function Home() {
                 <button id="about-us" onClick={handleAbout}>  About developers</button>
             </div> */}
 
-      <div className="home-main">{/* <Hero /> */}</div>
+      <div className="home-main">
+        <Hero />
+      </div>
 
       <div className="home-faq">
         <FAQ faqdata={CyberFaqData} who={"Cyberbullying"} />

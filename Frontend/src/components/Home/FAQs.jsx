@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import './styles/FAQs.css';  
+import "../styles/FAQs.css";
 
 const FAQ = (props) => {
-
-  const faqData=props.faqdata;
+  const faqData = props.faqdata;
 
   const [visibleAnswerIndex, setVisibleAnswerIndex] = useState(null);
 
@@ -12,7 +11,8 @@ const FAQ = (props) => {
   };
 
   const gradientstyle = {
-    background: 'linear-gradient(109.6deg, rgb(26, 185, 230) 11.3%, rgb(67, 93, 198) 69.9%)',
+    background:
+      "linear-gradient(109.6deg, rgb(26, 185, 230) 11.3%, rgb(67, 93, 198) 69.9%)",
   };
 
   return (
@@ -20,13 +20,14 @@ const FAQ = (props) => {
       <h1>Frequently Asked Questions - {props.who}</h1>
       {faqData.map((item, index) => (
         <div key={index}>
-          <p
-            onClick={() => toggleAnswer(index)}
-            className="faq-question"
-          >
+          <p onClick={() => toggleAnswer(index)} className="faq-question">
             {item.question}
           </p>
-          <div className={visibleAnswerIndex === index ? "faq-answer" : "faq-answer-hidden"}>
+          <div
+            className={
+              visibleAnswerIndex === index ? "faq-answer" : "faq-answer-hidden"
+            }
+          >
             {item.answer}
           </div>
         </div>

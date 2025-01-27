@@ -6,7 +6,7 @@ import { useEffect } from "react";
 // import Header from './Header';
 // import Footer from './Dashboard comps/Footer';
 // import startuppic from "../assets/loginstartup.jpg";
-import LoadingPage from "../LoadingPage";
+import LoadingPage from "../Separate Comps/LoadingPage";
 
 function Startupsignup() {
   const [startUpdata, setStartUpdata] = useState({
