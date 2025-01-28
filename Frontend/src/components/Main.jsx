@@ -1,13 +1,17 @@
-import "./styles/Home.css";
-
+import "./styles/Main.css";
+import { useState } from "react";
 import Header from "./Header";
 import FAQ from "./Home/FAQs";
 import Footer from "./Dashboard comps/Footer";
 import Gochatbot from "./Home/Gochatbot";
-import Images from "./Home/Images";
 import Hero from "./Hero comps/Hero";
+import Homecomp from "./Hero comps/Homecomp";
+import ContentSensor from "./Hero comps/ContentSensor";
+import Misinfo from "./Hero comps/Misinfo";
+import AiChatBot from "./Hero comps/AiChatBot";
 
 function Home() {
+  const [comp,setComp]=useState(1);
   const CyberFaqData = [
     {
       question: "How does the AI-powered detection system work?",
@@ -68,11 +72,34 @@ function Home() {
   const handleAbout = () => {
     window.location.href = "/aboutus";
   };
-
+  const gohome =()=>{
+    setComp(1);
+  }
+  const gosensor =()=>{
+    setComp(2);
+  }
+  const gomisinfo =()=>{
+    setComp(3);
+  }
+  const gobot = ()=>{
+    setComp(4);
+  }
   return (
     <div className="the-home">
       <Header />
-      <Images />
+      <div className="home-nav">
+        <p onClick={gohome}>Home</p>
+        <p onClick={gosensor}>Content Sensor</p>
+        <p onClick={gomisinfo}>Misinfo Validation</p>
+        <p onClick={gobot}>Gemini Chatbot</p>
+      </div>
+      <div>
+        {
+          comp == 1 ? (<Homecomp/>) : ( comp == 2 ? (<ContentSensor/>) :
+          (comp == 3 ? (<Misinfo/>) : ( comp ==4 ? (<AiChatBot/>) : (null)
+        )))
+        }
+      </div>
 
       {/* <div className='rec-butns'>
                 <button id="ytlink" onClick={handleRedirect}>  Click here to watch the demo video</button>

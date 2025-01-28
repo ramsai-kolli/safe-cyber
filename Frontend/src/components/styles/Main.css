@@ -164,3 +164,18 @@ body{
     margin-top: 30px; 
     margin-bottom: 30px;
 }
+.home-nav{
+    display:flex;
+    flex-direction:row;
+    height:30px;
+    color:white;
+    padding-top:100px;
+    background-color: rgba(14, 78, 165, 1);
+}
+.home-nav p{
+
+    margin-left:15px;
+    font-size:1.2rem;
+    cursor:pointer;
+    
+}
