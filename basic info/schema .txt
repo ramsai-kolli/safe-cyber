@@ -1,5 +1,12 @@
 user {
-   name : string
-   email :
-   password :
+   name : String
+   email : String
+   password : String
 } 
+
+// Schema for both fakenews and scam 
+
+fakenews {
+   headline: String,
+   tcontent: String
+}
