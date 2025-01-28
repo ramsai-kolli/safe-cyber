@@ -1,8 +1,6 @@
-import Header from "../Header";
-import Footer from "../Dashboard comps/Footer";
-
 import { useState } from "react";
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
+import "../styles/AiChatBot.css";
 import {
   MainContainer,
   ChatContainer,
@@ -83,23 +81,22 @@ function AiChatBot() {
 
   return (
     <>
-      <Header />
       <div className="gipp">
         <div
           style={{
             position: "relative",
             height: "75vh",
-            width: "98vw",
-            paddingTop: "100px",
+            width: "100%",
           }}
         >
           <MainContainer>
             <ChatContainer>
               <MessageList
                 scrollBehavior="smooth"
+                // style={{ backgroundColor: "green", color: "red" }}
                 typingIndicator={
                   isTyping ? (
-                    <TypingIndicator content="Aayush Chatbot is typing" />
+                    <TypingIndicator content="Cyber Support is typing ......" />
                   ) : null
                 }
               >
@@ -115,7 +112,6 @@ function AiChatBot() {
           </MainContainer>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

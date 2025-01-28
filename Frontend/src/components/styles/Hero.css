@@ -1,0 +1,16 @@
+.home-nav {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    color: rgb(0, 0, 0);
+    padding-top:90px;
+    padding-bottom: 10px;
+    /* background-color: rgba(14, 78, 165, 1); old */
+    /* background-color: #14675f; */
+    background-color: rgb(255, 255, 255);
+  }
+  .home-nav p {
+    margin-left: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+  }

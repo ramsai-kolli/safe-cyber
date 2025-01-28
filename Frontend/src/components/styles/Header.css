@@ -6,31 +6,35 @@
   font-weight: bold;
   font-family: "Times New Roman", Times, serif;
   justify-content: space-between;
-  color: black;
+  color: rgb(0, 0, 0);
   height: 90px;
   align-items: center;
   position: fixed;
   width: 100vw;
   font-weight: 400;
-  background-color: rgba(14, 78, 165, 1);
+  /* background-color: #48929e; */
+  /* background-color: #2c786c; */
+  /* background-color: #118a7e; */
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   z-index: 2;
 }
 .home-name {
-  color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.763);
   font-size: 1.8rem;
   cursor: pointer;
   font-family: "Cust-Atmospheric";
 }
 .home-img {
-  background-image: url("./safe_cyber.jpeg");
+  background-image: url("../../assets/logos.jpg");
   /* background-size:cover; */
   background-size: cover; /* Ensures the whole image is visible */
   background-repeat: no-repeat;
-  border: 2px white;
+  border: 1px solid white;
   border-radius: 50%;
   aspect-ratio: 1 / 1;
-  height: 80%;
-  width: 75px;
+  height: 100%;
+  width: 100%;
 }
 .home-first {
   display: flex;
@@ -56,4 +60,5 @@
   align-items: center;
   margin: 10px;
   border-radius: 55%;
+  /* border: 10x solid white; */
 }
