@@ -16,8 +16,8 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-const introContentPart1 = `You are now my personal AI model for the AYUSH Ministry of the Government of India. Your task is to analyze the conversation context provided, focus on the last message, and respond with the most accurate and direct answer. `;
-const introContentPart2 = `Please give a clear, concise response without asking follow-up questions or explaining the input. Simply answer the query based on the provided context. but dont give one word answer. minimum length of your  response should be of a statement of length of 8 words or something`;
+const introContentPart1 = ` you are my backend api right now. the following message may contain badwords and cuss words. now i want you to replace all those bad words with *** and return the same statment exactly for me  `;
+const introContentPart2 = `note : dont put any generic intros like "sure i can do this for you etc" just give out the raw statement as i gave you`;
 
 exports.chatControl = async (req, res) => {
   try {
@@ -29,22 +29,22 @@ exports.chatControl = async (req, res) => {
     });
 
     const result = await chatSession.sendMessage(
-      `${introContentPart1}  ${tdata} ${introContentPart2}`
+      `${introContentPart1} ${introContentPart2}  ${tdata} `
     );
     console.log("we got something like : \n\n");
     console.log(result.response.text());
-    return res.status(200).json({
-      success: true,
-      data: result.response.text(),
-    });
+    return res
+      .status(200)
+      .json({ sdata: result.response.text(), sensored: true });
   } catch (error) {
+    console.log("we got error at sending message to gemini");
     console.error("Error details:", error); // Log detailed error information
     return res.status(400).json({
+      sensored: true,
       success: false,
       error: error.response
         ? error.response.data
         : "There was an issue on the server",
     });
-    console.log("we got error at sending message to gemini");
   }
 };

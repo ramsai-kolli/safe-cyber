@@ -75,13 +75,9 @@ const sendEmail = require("./routes/sendEmailRoute");
 const tokenVerify = require("./routes/tokenVerifyRoute");
 const status = require("./routes/statusRoute");
 const contSen = require("./routes/contSenRoute");
-// const PeerForum=require("./routes/PeerForumRoute");
+// const groupChat = require("./routes")
 
 // pdf routes
-
-// const pdfQualityCheck=require("./routes/PdfQualityCheck");
-// const verifyQuideline=require("./routes/VerifyQuidelineRoute");
-// const Pdfmanagement=require("./routes/pdfUploadingRoute");
 
 // assigning the persons
 app.use("/api", farmer);
@@ -98,10 +94,6 @@ app.use("/api", sendEmail);
 app.use("/api", tokenVerify);
 app.use("/api", status);
 app.use("/api", contSen);
-// app.use("/api",pdfQualityCheck);
-// app.use("/api",verifyQuideline);
-// app.use("/api",PeerForum);
-// app.use("/api",Pdfmanagement);
 
 // Serve the static files (HTML, CSS, JS)
 app.use(express.static("public"));
