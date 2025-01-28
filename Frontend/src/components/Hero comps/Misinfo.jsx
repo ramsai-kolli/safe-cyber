@@ -5,6 +5,7 @@ function Misinfo() {
     <div>
       {/*    ..     */}
       {/* misinfo verify */}
+      <p>Mis info</p>
     </div>
   );
 }

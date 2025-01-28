@@ -2,12 +2,12 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import Login from "./components/Login.jsx";
 
-import Home from "./components/Home.jsx";
+import Main from "./components/Main.jsx";
 import Startupsignup from "./components/Separate Comps/Startupsignup.jsx";
 
 import Startupdashboard from "./components/Dashboard comps/Startupdashboard.jsx";
 import Authoritydash from "./components/Dashboard comps/Authoritydash.jsx";
-import AiChatBot from "./components/Separate Comps/AiChatBot.jsx";
+import AiChatBot from "./components/Hero comps/AiChatBot.jsx";
 
 import Drugindash from "./components/Dashboard comps/Drugindash.jsx";
 import AboutUs from "./components/Separate Comps/AboutUs.jsx";
@@ -17,7 +17,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Main/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signupstartup" element={<Startupsignup />} />
           <Route path="/startupdash" element={<Startupdashboard />} />
