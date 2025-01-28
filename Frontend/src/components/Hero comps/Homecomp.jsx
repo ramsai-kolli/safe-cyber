@@ -4,6 +4,7 @@ function Homecomp() {
   return (
     <>
     <Images/>
+    <p>home</p>
     </>
   )
 }
