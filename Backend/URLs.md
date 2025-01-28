@@ -32,22 +32,49 @@
 
    1. Create News
 
-   - url: /trend-create
-   - input : {tdata : "2000 rpee banned"}
+   - url: /tfake-create
+   - input : {headline:"",tcontent : "rpee banned"}
    - output : {success : true} // successfully created
-   - action/backend : push it to DB by { happened: 1, content: {tdata} }
+   - action/backend : check if headline already exist ?? then push it to DB by { happened: 1, headline:"", tcontent: "" }
 
    2. Get trend list
 
-   - url: /trend-list
-   - input : null \*\* so use get method
-   - action: sort it in Descending order on basis of happened int-count
-   - output : [ {content1: ""}, {content2 : ""} ]
+   - url: /tfake-list
+   - input : null (get method)
+   - action: sort it in Descending order by happened-int-count
+   - output : [ {headline:"",tcontent: ""}, {headline:"",tcontent: ""} ]
 
    3. Upvote / happened to me
 
    - url : /happenedtome
-   - input : id of trend-content (if posble) else trend-cont like "2000 rupee .."
-   - action/backnd : increase count by 1
+   - input : {headline}
+   - action/backnd : increase happened-count by 1
    - output : {success: true}
    - action/frontend : reload the page
+
+5. Trending scams:
+
+   1. Create scam
+
+   - url: /tscam-create
+   - same above
+
+   2. Get trend list
+
+   - url: /tscam-list
+   - same above
+
+   3. Upvote / happened to me
+
+   - url : /noticedit
+   - same
+
+6. complaint portal
+
+   - url : /complaint
+   - input : {tdata: "he abused me"}
+   - action/back : send email of tdata to cybersecurty@gmail.com
+   - output/back : {success: true}
+
+7. Cyber-Support AI chatbot
+   - we already have it
