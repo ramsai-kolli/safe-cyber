@@ -1,130 +1,85 @@
-import "./styles/Login.css";
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import axios from "axios";
+ import "./styles/Login.css";
+// import React, { useState, useEffect } from "react";
+// import { useLocation } from "react-router-dom";
+// import axios from "axios";
 import Header from "./Header";
-import doctorpic from "../assets/logindoctor.jpg";
-import startuppic from "../assets/loginstartup.jpg";
-import farmerpic from "../assets/loginfarmer.jpg";
-import drugpic from "../assets/logindrug.jpg";
-import authorpic from "../assets/loginauthority.jpg";
+// import doctorpic from "../assets/logindoctor.jpg";
+// import startuppic from "../assets/loginstartup.jpg";
+// import farmerpic from "../assets/loginfarmer.jpg";
+// import drugpic from "../assets/logindrug.jpg";
+// import authorpic from "../assets/loginauthority.jpg";
 
-import LoadingPage from "../components/Separate Comps/LoadingPage";
+// import LoadingPage from "../components/Separate Comps/LoadingPage";
 
-function Login() {
-  const [logit, setLogit] = useState({ Email_ID: "  ", password: "" });
-  const [invalidtext, setInvalidtext] = useState("");
-  const [replacepic, setreplacepic] = useState();
-  const [bringTheLoadingPage, setBringTheLoadingPage] = useState(false);
 
-  const params = useLocation();
-  let value = new URLSearchParams(params.search);
-  let usertype = value.get("value");
-  let invalid = false;
-  const intake = usertype === "farmer" ? "phone number" : "email";
-  const handleChange = (e) => {
+import React,{ useState,useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+
+
+function Login(){
+   const [user, setUser] = useState({
+        
+       email : "",
+       password : "",
+         
+   });
+
+   const changeHandler = (e) => {
     const { name, value } = e.target;
-    setLogit({ ...logit, [name]: value });
-    if (name === "password" && value.length < 8) {
-      setInvalidtext("Password must contain 8 letters");
-    } else if (name === "password" && value.length >= 8) {
-      setInvalidtext("");
-    }
+    setUser({ ...user, [name]: value });
   };
 
-  const handelSubmit = async (e) => {
-    setBringTheLoadingPage(true); // made true
-    e.preventDefault();
-    if (logit.password.length < 8) {
-      invalid = true;
-    }
-    invalid
-      ? setInvalidtext("password must contain 8 letters")
-      : setInvalidtext("");
-    if (usertype === "farmer")
-      setLogit({ phone_number: logit.Email_ID, password: logit.password }); // changing the req.body backend recievers feild name in-according to the farmer
-    try {
-      const response = await axios.post(
-        `https://ayush-sih-backend.vercel.app/api/${usertype}-login`,
-        logit,
-        {
-          withCredentials: true, // Ensures cookies or sessions are included in cross-origin requests
-        }
-      );
-      // setBringTheLoadingPage(false);   this global false setting  is not working for some reason.
-      if (response.data.success) {
-        const tokenrec = response.data.token;
-        setBringTheLoadingPage(false);
-        alert("Logged in successfully!");
-        if (usertype === "farmer") {
-          window.location.href = `/farmerdash?phno=${logit.phone_number}&token=${tokenrec}`;
-          return null;
-        }
-        const encodedEmail = btoa(logit.Email_ID); // Encode the email using Base64
-        console.log("encodedEmail ", encodedEmail, "token rec", tokenrec);
-        window.location.href = `/${usertype}dash?email=${encodedEmail}&token=${tokenrec}`;
-      } else {
-        setBringTheLoadingPage(false);
-        console.log("thrown message from backend : ", response.data.message);
-        alert("thrown message from backend : " + response.data.message);
+  //const location = useLocation();
+       //console.log(location)
+  //const message = location.state?.message || 'Welcome to Home2!'; // Get the message or default text
+  // console.log(message);
+
+    const submitHandler = (e) => {
+      e.preventDefault();
+      console.log("submit handle");
+      if(user.password.length<6) 
+      {
+          alert('password must contain 6 letters');
+       }
+      try{
+          axios.post('http://localhost:5555/login',user).then(res=>{
+                  alert("login Succesfully!");
+                  console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
+   
+                  setUser({name:'',email:'',password:'',age:''});
+                  window.location.href = '/home3';
+                // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
+  
+                  
+                  // LOGIN page redirected from here
+              })
+             // console.log("register")
+             
       }
-    } catch (error) {
-      setBringTheLoadingPage(false);
-      console.error("Error occurred:", error);
-      alert("invalid login details , please try again");
-    }
-  };
-  useEffect(() => {
-    if (usertype === "doctor") setreplacepic(doctorpic);
-    else if (usertype === "druginspector") setreplacepic(drugpic);
-    else if (usertype === "farmer") setreplacepic(farmerpic);
-    else if (usertype === "authority") setreplacepic(authorpic);
-    else if (usertype === "startup") setreplacepic(startuppic);
-  }, []);
-  return (
-    <div className="login-total">
-      <Header />
+      catch(error){
+          console.log('Error sending registration request',error);
+      }
+     
+  };    
 
-      {bringTheLoadingPage ? (
-        <LoadingPage text={"Loading..."} />
-      ) : (
-        <div className="login-flex">
-          <img src={replacepic} id="login-img" />
-          <form id="login-form" onSubmit={handelSubmit}>
-            <div className="Login-container">
-              {usertype === "authority" ? (
-                <p className="login-headin">{"Licensing Authority Login"}</p>
-              ) : usertype === "druginspector" ? (
-                <p className="login-headin">{"Drug Inspector Login"}</p>
-              ) : (
-                <p className="login-headin">
-                  {usertype.replace(/^./, (str) => str.toUpperCase())} Login
-                </p>
-              )}
-              <label className="Login-label">Enter the {intake} </label>
-              <input
-                type="text"
-                className="Login-input"
-                name="Email_ID"
-                required
-                onChange={handleChange}
-              />
-              <br />
-              <label className="Login-label">Enter the password</label>
-              <input
-                type="password"
-                className="Login-input"
-                name="password"
-                onChange={handleChange}
-              />
-              <br />
-              {invalidtext && <p className="Login-error">{invalidtext}</p>}
-              <button className="Login-button">Submit</button>
-            </div>
-          </form>
+    return(
+        <>
+
+         <Header />
+        <div id="login-css-d"> 
+        <form id='login-form' onSubmit={submitHandler} >
+          <label>this is login form</label><br></br>
+          <label>Phone No:</label>
+          <input value={user.email} onChange={changeHandler} name='phone' type="tel"></input><br></br>
+          <label>Password:</label>
+          <input value={user.password} onChange={changeHandler} name='password' type="password"></input><br></br>
+          <button type="submit">Submit</button>
+
+        </form>        
         </div>
-      )}
-    </div>
-  );
+        </>
+    )
 }
 export default Login;
+ 
