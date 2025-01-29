@@ -15,6 +15,7 @@ const Images = () => {
 
   // Function to go to the next image
   const nextSlide = () => {
+
     setCurrentIndex((prevIndex) =>
       prevIndex === images.length - 1 ? 0 : prevIndex + 1
     );
@@ -34,7 +35,7 @@ const Images = () => {
     }, 3000); // Change the image every 3 seconds
 
     return () => {
-      clearInterval(interval); // Clean up the interval when the component unmounts
+      clearInterval(interval);
     };
   }, [currentIndex]);
 
