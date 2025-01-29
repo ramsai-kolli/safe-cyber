@@ -2,18 +2,21 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
+
 const path = require("path"); // to use __dirname
 const session = require("express-session");
 
 require("dotenv").config(); // to access the values .env file
 
+const user = require("./routes/userRoute");
+const fakenews = require("./routes/fakenewsRoute");
+const spam = require("./routes/scamRoute");
+// require('dotenv').config(); // to access the values .env file
+
 const app = express();
 
 // List of allowed origins
-const allowedOrigins = [
-  "https://ayush-sih-2024-frontend.vercel.app",
-  "https://chaitanyakadali.vercel.app",
-];
+const allowedOrigins = ["https://safecyber.vercel.app"];
 
 // Dynamic origin function
 const corsOptions = {
@@ -40,8 +43,8 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//MongoDB Atlas Connection
 try {
-  // MongoDB Atlas Connection
   const mongoUri = process.env.MONGO_URI;
 
   if (!mongoUri) {
@@ -77,27 +80,28 @@ const status = require("./routes/statusRoute");
 const contSen = require("./routes/contSenRoute");
 // const groupChat = require("./routes")
 
-// pdf routes
-
-// assigning the persons
-app.use("/api", farmer);
-app.use("/api", doctor);
-app.use("/api", startup);
-app.use("/api", licensingAuthority);
-app.use("/api", drugInspector);
-
 // assigning the apis
 app.use("/api", chat);
-app.use("/api", district);
+
 app.use("/api", sendEmail);
 
 app.use("/api", tokenVerify);
-app.use("/api", status);
+
 app.use("/api", contSen);
+// MongoDB Compass connection
+// mongoose
+//   .connect("mongodb://localhost:27017/cyber-safe")
+//   .then(() => console.log("Connected to database"))
+//   .catch((e) => console.log(e));
+
+//assigning api to user
+app.use("/api", user);
+app.use("/api", fakenews);
+app.use("/api", spam);
 
 // Serve the static files (HTML, CSS, JS)
 app.use(express.static("public"));
-// to display (serve) by default html content ( to make sure that the server is running when HOSTED)
+// to display (serve) html ( to make sure that the server is running when HOSTED)
 app.get(["/", "/api"], (req, res) => {
   try {
     res.sendFile(__dirname + "/index.html");
