@@ -1,0 +1,18 @@
+.sensor-main{
+    width:100%;
+    height:70vh;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.sensor-head{
+    
+    display: flex;
+    justify-content:space-around;
+    gap:50px;
+    width: 400px;
+}
+.sensor-hero{
+    margin-top:100px;
+}
