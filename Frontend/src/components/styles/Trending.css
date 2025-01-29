@@ -1,0 +1,21 @@
+.trending-main{
+    width:100%;
+    height:fit-content;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.trending-head{
+    
+    display: flex;
+    justify-content:space-around;
+    gap:50px;
+    width: 400px;
+}
+.trending-head p{
+    cursor: pointer;
+}
+.trending-hero{
+    margin-top:100px;
+}
