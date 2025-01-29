@@ -18,9 +18,14 @@ export default function Header() {
           SafeCyber
         </p>
       </div>
-      <button className="heads-button" onClick={gochatbot}>
-        Chat Bot
+      <div>
+      <button className="heads-signup" onClick={gochatbot}>
+        Signup
       </button>
+      <button className="heads-login" onClick={gochatbot}>
+        Login
+      </button>
+      </div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ const FAQ = (props) => {
 
   const gradientstyle = {
     background:
-      "linear-gradient(109.6deg, rgb(26, 185, 230) 11.3%, rgb(67, 93, 198) 69.9%)",
+      "linear-gradient(109.6deg, rgb(27, 139, 93) 11.3%, rgb(26, 197, 83) 69.9%)",
   };
 
   return (

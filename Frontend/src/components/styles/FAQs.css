@@ -1,12 +1,12 @@
 /* Root styling */
 :root {
     /* --primary-color: #00c6ff; */
-    --primary-color: rgb(3, 11, 22);
+    --primary-color: rgb(13, 97, 15);
     --secondary-color: #0000001d;
     --background-color: #f0f8ff;
     --text-color:white;
-    --hover-color: #0050a5;
-    --accent-color: #4fc3f7;
+    --hover-color: #196a36;
+    --accent-color: rgb(47, 220, 168);
   }
   
  
