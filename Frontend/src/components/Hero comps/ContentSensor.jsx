@@ -5,6 +5,7 @@ function ContentSensor() {
     <div>
       {/*    ..    */}
       {/* the contentent sensoring with input text feild */}
+      
       <p>sensor</p>
     </div>
   );
