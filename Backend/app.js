@@ -11,7 +11,6 @@ require("dotenv").config(); // to access the values .env file
 const user = require("./routes/userRoute");
 const fakenews = require("./routes/fakenewsRoute");
 const spam = require("./routes/scamRoute");
-// require('dotenv').config(); // to access the values .env file
 
 const app = express();
 
@@ -64,29 +63,17 @@ try {
   console.log("cloud connecting error");
 }
 
-// importings of persons
-const farmer = require("./routes/farmerRoute");
-const doctor = require("./routes/doctorRoute");
-const startup = require("./routes/startUpRoute");
-const licensingAuthority = require("./routes/LicensingAuthorityRoute");
-const drugInspector = require("./routes/drugInspectorRoute");
-
 // importing apis
 const chat = require("./routes/chatRoute");
-const district = require("./routes/districtRoute");
 const sendEmail = require("./routes/sendEmailRoute");
 const tokenVerify = require("./routes/tokenVerifyRoute");
-const status = require("./routes/statusRoute");
 const contSen = require("./routes/contSenRoute");
 // const groupChat = require("./routes")
 
 // assigning the apis
 app.use("/api", chat);
-
 app.use("/api", sendEmail);
-
 app.use("/api", tokenVerify);
-
 app.use("/api", contSen);
 // MongoDB Compass connection
 // mongoose
