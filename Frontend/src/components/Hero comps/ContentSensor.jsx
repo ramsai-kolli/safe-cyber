@@ -1,5 +1,5 @@
 import '../styles/ContentSensor.css'
-import Text from './text';
+import Text from './Text';
 import Media from './Media';
 import { useState } from "react";
 
