@@ -1,0 +1,21 @@
+.mis-content{
+    height:300px;
+    width:500px;
+  border:2px solid black;
+  display:flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  
+}
+.mis-main{
+    height:70vh;
+    width:100%;
+   display:flex;
+   justify-content: center;
+   align-items: center;
+}
+.mis-input{
+    width:35rem;
+    height:70px;
+}
