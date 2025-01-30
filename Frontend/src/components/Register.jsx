@@ -55,19 +55,19 @@ const changeHandler = (e) => {
         <Header />
         
          
-        <div id="register-form-d"> 
-         <label>this is register form</label><br></br>
-        <form id='register-form' onSubmit={submitHandler} >
+        <div class="div1-register"> 
+         <label class="label-register">this is register form</label><br></br>
+        <form class="from-register" onSubmit={submitHandler} >
            
           
            
-          <input value={user.name} onChange={changeHandler} name='name' type='text' placeholder="enter name"  ></input><br></br>
+          <input class="input-register" value={user.name} onChange={changeHandler} name='name' type='text' placeholder="enter name"  ></input><br></br>
            
             
-          <input value={user.email} onChange={changeHandler} name='email' type="email" placeholder='enter email:'></input><br></br>                                                                                                               
+          <input class="input-register" value={user.email} onChange={changeHandler} name='email' type="email" placeholder='enter email:'></input><br></br>                                                                                                               
          
-          <input value={user.password} onChange={changeHandler} name='password' type="password"  placeholder='enter password'></input><br></br>
-          <button type="submit">Submit</button>
+          <input class="input-register" value={user.password} onChange={changeHandler} name='password' type="password"  placeholder='enter password'></input><br></br>
+          <button class="btn-register" type="submit">Submit</button>
 
         </form>        
         </div>
