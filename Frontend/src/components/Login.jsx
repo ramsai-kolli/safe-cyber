@@ -42,15 +42,17 @@ function Login(){
        }
       try{
           axios.post('https://safecyber-api.onrender.com/api/user-sign-in',user).then(res=>{
-                  alert("login Succesfully!");
+            if(res.data.success){
+            alert("login Succesfully!");
                   console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
    
                   setUser({name:'',email:'',password:'',age:''});
                   window.location.href = '/home3';
                 // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
-  
-                  
                   // LOGIN page redirected from here
+            }else{
+              alert("Error : ",res.data.message);
+            }
               })
              // console.log("register")
              
