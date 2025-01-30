@@ -29,11 +29,9 @@ function Login(){
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
-
-  //const location = useLocation();
-       //console.log(location)
-  //const message = location.state?.message || 'Welcome to Home2!'; // Get the message or default text
-  // console.log(message);
+ const goregister = ()=>{
+    window.location.href=`/register`;
+ }
 
     const submitHandler = (e) => {
       e.preventDefault();
@@ -69,13 +67,13 @@ function Login(){
          <Header />
         <div class="div1-login"> 
         <form class='form-login' onSubmit={submitHandler} >
-          <label class="label-login1">this is login form</label><br></br>
-          <label class="label-login">Phone No:</label>
+          <label class="label-login1">login form</label><br></br>
+          <label class="label-login">Email ID:</label>
           <input class="input-login" value={user.email} onChange={changeHandler} name='phone' type="tel"></input><br></br>
           <label class="label-login">Password:</label>
           <input class="input-login" value={user.password} onChange={changeHandler} name='password' type="password"></input><br></br>
           <button class="btn-login" type="submit">Submit</button>
-
+        <p onClick={goregister}>Click here to register</p>
         </form>        
         </div>
         </>

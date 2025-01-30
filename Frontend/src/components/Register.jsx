@@ -19,7 +19,9 @@ const changeHandler = (e) => {
   const { name, value } = e.target;
   setUser({ ...user, [name]: value });
 };
-
+const gologin = ()=>{
+  window.location.href=`/login`
+}
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("submit handle");
@@ -50,26 +52,17 @@ const changeHandler = (e) => {
 
     return(
         <>
-         
-         
         <Header />
-        
-         
-        <div class="div1-register"> 
+        <div class="div-register"> 
          <label class="label-register">this is register form</label><br></br>
         <form class="from-register" onSubmit={submitHandler} >
-           
-          
-           
           <input class="input-register" value={user.name} onChange={changeHandler} name='name' type='text' placeholder="enter name"  ></input><br></br>
-           
-            
           <input class="input-register" value={user.email} onChange={changeHandler} name='email' type="email" placeholder='enter email:'></input><br></br>                                                                                                               
-         
           <input class="input-register" value={user.password} onChange={changeHandler} name='password' type="password"  placeholder='enter password'></input><br></br>
           <button class="btn-register" type="submit">Submit</button>
-
-        </form>        
+        
+        </form>     
+        <p className="reg-to-log" onClick={gologin}>Already registered ? Click here to Login</p>   
         </div>
        
         </>
