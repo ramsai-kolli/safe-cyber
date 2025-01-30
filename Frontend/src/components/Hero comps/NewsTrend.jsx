@@ -93,7 +93,9 @@ export default function NewsTrend() {
             <div key={item.id} className="scam-card">
               <h3>{item.headline}</h3>
               <p>{item.content}</p>
-              <button onClick={() => handleButtonClick(item.id)}>Noticed it!</button>
+              <button onClick={() => handleButtonClick(item.id)}>Noticed it!
+                
+              </button>
             </div>
           ))
         )}

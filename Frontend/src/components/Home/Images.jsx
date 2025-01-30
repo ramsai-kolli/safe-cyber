@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 // Import your local images
 import Image1 from "../../assets/bannerpic2.jpg";
-import Image4 from "../../assets/bannerimg1.jpg";
-import Image3 from "../../assets/bannerimg3.jpg";
+import Image2 from "../../assets/bannerpic3.jpg";
+import Image3 from "../../assets/bannerpic5.jpg";
 import "../styles/Images.css";
 // import "../components/styles/Images.css";
 
 const Images = () => {
   // Array of imported images
-  const images = [Image1];
+  const images = [Image1,Image2,Image3];
 
   // State to keep track of the current image index
   const [currentIndex, setCurrentIndex] = useState(0);
