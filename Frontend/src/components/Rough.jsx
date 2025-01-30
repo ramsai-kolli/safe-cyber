@@ -1,14 +1,10 @@
 import { ChatContainer, MessageInput } from "@chatscope/chat-ui-kit-react";
+import ChatBox from "./Hero comps/GroupChat/ChatBox";
 
 function Rough() {
   return (
     <>
-      <ChatContainer>
-        <div as={MessageInput}>
-          <MessageInput />
-          <button>Custom button</button>
-        </div>
-      </ChatContainer>
+      <ChatBox />
     </>
   );
 }
