@@ -20,7 +20,7 @@ function AiChatBot() {
   const [messages, setMessages] = useState([
     {
       message:
-        "Hello, I'm a SafeCyber ai chat-model (powered by Gemini Ai)! I can help you to fight against Cyberbullies !",
+        "Hello, I'm a SafeCyber ai chat-model (powered by Gemini Ai)! .I can help you to fight against Cyberbullies !",
       sentTime: "just now",
       sender: "Gemini Ai",
     },
@@ -50,7 +50,7 @@ function AiChatBot() {
 
     try {
       const response = await fetch(
-        "https://ayush-sih-backend.vercel.app/api/chat",
+        "https://safecyber-api.vercel.app/api/chat",
         {
           method: "POST",
           headers: {
