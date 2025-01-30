@@ -12,6 +12,7 @@ const user = require("./routes/userRoute");
 const fakenews = require("./routes/fakenewsRoute");
 const spam = require("./routes/scamRoute");
 const contsensImage = require("./routes/imageSensorRoute");
+const groupchat = require("./routes/groupChatRoute");
 
 const app = express();
 
@@ -76,6 +77,12 @@ try {
   console.log("cloud connecting error");
 }
 
+// MongoDB Compass connection
+// mongoose
+//   .connect("mongodb://localhost:27017/cyber-safe")
+//   .then(() => console.log("Connected to database"))
+//   .catch((e) => console.log(e));
+
 // importing apis
 const chat = require("./routes/chatRoute");
 const sendEmail = require("./routes/sendEmailRoute");
@@ -89,11 +96,7 @@ app.use("/api", sendEmail);
 app.use("/api", tokenVerify);
 app.use("/api", contSen);
 app.use("/api", contsensImage);
-// MongoDB Compass connection
-// mongoose
-//   .connect("mongodb://localhost:27017/cyber-safe")
-//   .then(() => console.log("Connected to database"))
-//   .catch((e) => console.log(e));
+app.use("/api", groupchat);
 
 //assigning api to user
 app.use("/api", user);
