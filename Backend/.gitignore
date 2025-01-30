@@ -11,3 +11,6 @@ node_modules
 dotenv
 
 backend/.env
+
+
+backend/uploads

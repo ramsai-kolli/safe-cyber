@@ -11,6 +11,7 @@ require("dotenv").config(); // to access the values .env file
 const user = require("./routes/userRoute");
 const fakenews = require("./routes/fakenewsRoute");
 const spam = require("./routes/scamRoute");
+const contsensImage = require("./routes/imageSensorRoute");
 
 const app = express();
 
@@ -75,6 +76,7 @@ app.use("/api", chat);
 app.use("/api", sendEmail);
 app.use("/api", tokenVerify);
 app.use("/api", contSen);
+app.use("/api", contsensImage);
 // MongoDB Compass connection
 // mongoose
 //   .connect("mongodb://localhost:27017/cyber-safe")
