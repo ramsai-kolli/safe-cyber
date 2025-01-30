@@ -57,7 +57,7 @@ exports.userLogin = catchAsyncErrors(async (req, res) => {
     if (!passwordMatch) {
       // Passwords don't match, send error response
       return res
-        .status(403)
+        .status(201)
         .json({ success: false, message: "Password is wrong" });
     }
 

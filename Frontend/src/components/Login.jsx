@@ -71,7 +71,7 @@ function Login(){
         <form class='form-login' onSubmit={submitHandler} >
           <label class="label-login1">login form</label><br></br>
           <label class="label-login">Email ID:</label>
-          <input class="input-login" value={user.email} onChange={changeHandler} name='phone' type="tel"></input><br></br>
+          <input class="input-login" value={user.email} onChange={changeHandler} name='email' type="tel"></input><br></br>
           <label class="label-login">Password:</label>
           <input class="input-login" value={user.password} onChange={changeHandler} name='password' type="password"></input><br></br>
           <button class="btn-login" type="submit">Submit</button>
