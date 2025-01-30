@@ -67,14 +67,14 @@ function Login(){
         <>
 
          <Header />
-        <div id="login-css-d"> 
-        <form id='login-form' onSubmit={submitHandler} >
-          <label>this is login form</label><br></br>
-          <label>Phone No:</label>
-          <input value={user.email} onChange={changeHandler} name='phone' type="tel"></input><br></br>
-          <label>Password:</label>
-          <input value={user.password} onChange={changeHandler} name='password' type="password"></input><br></br>
-          <button type="submit">Submit</button>
+        <div class="div1-login"> 
+        <form class='form-login' onSubmit={submitHandler} >
+          <label class="label-login1">this is login form</label><br></br>
+          <label class="label-login">Phone No:</label>
+          <input class="input-login" value={user.email} onChange={changeHandler} name='phone' type="tel"></input><br></br>
+          <label class="label-login">Password:</label>
+          <input class="input-login" value={user.password} onChange={changeHandler} name='password' type="password"></input><br></br>
+          <button class="btn-login" type="submit">Submit</button>
 
         </form>        
         </div>
