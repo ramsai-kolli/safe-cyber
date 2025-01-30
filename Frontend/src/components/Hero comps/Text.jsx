@@ -1,5 +1,6 @@
 import { useState } from "react";
-import '../styles/Text.css'
+import '../styles/Text.css';
+import axios from "axios";
 const Text =()=>{
     const [tdata,setData]=useState("");
     const [sdata,setSdata]=useState("data");
