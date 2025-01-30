@@ -1,110 +1,52 @@
-/* #register-head {
-    margin-top: 0px;  
-  } 
-  
-  #register-form-d {
-    
-    padding-top: 100px;
-  } */
- /* General container styles */
-.div1-misinfo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f0f4f7; /* Light background color */
-    padding: 10px; /* Add padding to avoid edge collisions */
-  }
-  
-  .div2-misinfo {
-    width: 100%;
-    max-width: 400px; /* Reduced max-width for smaller layout */
-    background-color: #ffffff;
-    padding: 20px; /* Reduced padding */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for card */
-    text-align: center;
-  }
-  
-  .para-misinfo {
-    font-size: 18px; /* Smaller font size */
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 15px;
-  }
-  
-  /* Textarea Styling */
-  .input-misinfo {
-    width: 100%;
-    min-height: 80px; /* Reduced height */
-    padding: 10px; /* Reduced padding */
-    font-size: 12px; /* Smaller font size */
-    line-height: 18px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    resize: none; /* Prevent manual resizing */
-    outline: none;
-    margin-bottom: 15px; /* Reduced margin */
-    box-sizing: border-box;
-    transition: border-color 0.3s ease-in-out;
-  }
-  
-  .input-misinfo:focus {
-    border-color: #6e8efb; /* Blue border on focus */
-  }
-  
-  /* Button Styling */
-  .btn-misinfo {
-    width: 60%; /* Maintain small width */
-    padding: 12px; /* Reduced padding */
-    background-color: #28a745; /* Green background */
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 14px; /* Smaller font size */
-    font-weight: bold; /* Bold text */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-sizing: border-box;
-    margin-top: 15px; /* Reduced space above button */
-  }
-  
-  .btn-misinfo:hover {
-    background-color: #218838; /* Darker green on hover */
-  }
-  
-  .btn-misinfo:active {
-    background-color: #1e7e34; /* Even darker green when clicked */
-  }
-  
-  /* Result Section Styling */
-  .div3-misinfo {
-    margin-top: 20px;
-    padding: 15px; /* Reduced padding */
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .para2-misinfo {
-    font-size: 20px; /* Smaller heading font size */
-    font-weight: bold;  /* Bold heading */
-    color: #333333;
-    margin-bottom: 8px; /* Reduced margin */
-    text-align: left;
-  }
-  
-  .para3-misinfo,
-  .para4-misinfo,
-  .para5-misinfo {
-    font-size: 14px; /* Smaller font size */
-    font-weight: normal;  /* Normal text */
-    color: #555555;
-    margin: 3px 0;
-    padding: 6px; /* Reduced padding */
-    padding-left: 0;
-    background-color: #ffffff;
-    text-align: left;
-    border-radius: 4px;
-  }
-  
+
+.div-register { 
+  padding-top: 200px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); 
+  width: 500px;
+  height:350px;
+  margin:auto;
+  text-align: center;
+}
+
+.label-register {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1b5e20; 
+  display: block;
+  margin-bottom: 10px;
+}
+
+.input-register {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  /* border: 2px solid #66bb6a; */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-register:focus {
+  border-color: #2e7d32; /* Dark green */
+  box-shadow: 0 0 8px rgba(46, 125, 50, 0.5);
+}
+
+.btn-register {
+  background-color: #2e7d32; /* Dark green */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-register:hover {
+  background-color: #1b5e20; /* Darker green */
+}
+.reg-to-log{
+  cursor: pointer;
+}
