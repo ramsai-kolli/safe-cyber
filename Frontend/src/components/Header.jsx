@@ -7,14 +7,17 @@ export default function Header() {
   function gologin() {
     window.location.href = `/login`;
   }
+  function gohome(){
+    window.location.href= `/`;
+  }
   return (
     <div className="home-head">
       <div className="home-first">
         <div className="outer-img">
-          <div className="home-img"></div>
+          <div className="home-img" ></div>
         </div>
 
-        <p className="home-name"  >
+        <p className="home-name" onClick={gohome}  >
           SafeCyber
         </p>
       </div>
