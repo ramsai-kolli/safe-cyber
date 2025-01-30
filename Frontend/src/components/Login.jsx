@@ -41,7 +41,7 @@ function Login(){
           alert('password must contain 6 letters');
        }
       try{
-          axios.post('https://safecyber-api.onrender.com/user-sign-in',user).then(res=>{
+          axios.post('https://safecyber-api.onrender.com/api/user-sign-in',user).then(res=>{
                   alert("login Succesfully!");
                   console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
    
