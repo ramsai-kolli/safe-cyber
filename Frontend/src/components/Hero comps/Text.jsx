@@ -3,19 +3,20 @@ import '../styles/Text.css'
 const Text =()=>{
     const [tdata,setData]=useState("");
     const [sdata,setSdata]=useState("data");
-    let flag=true;
+    let [flag,setFlag ]=useState(true);
     const handleChange=(e)=>{
       setData(e.target.value);
     }
     const handleSubmit =async()=>{
         try{
-         let response=await axios.post('https://safecyber-api.onrender.com/api/contsensor-text',tdata);
+         await axios.post('https://safecyber-api.onrender.com/api/contsensor-text',tdata).then(response=>{
          if(response.data.success)
          {
            setSdata(response.data.sdata);
            const issensd = response.data.sensored;
-         flag=true;
+         setFlag(true);
          }
+        })
         }
         catch(e)
         {

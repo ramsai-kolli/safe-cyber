@@ -33,7 +33,7 @@ function Login(){
     window.location.href=`/register`;
  }
 
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
       e.preventDefault();
       console.log("submit handle");
       if(user.password.length<6) 
@@ -41,7 +41,7 @@ function Login(){
           alert('password must contain 6 letters');
        }
       try{
-          axios.post('https://safecyber-api.onrender.com/api/user-sign-in',user).then(res=>{
+         await axios.post('https://safecyber-api.onrender.com/api/user-sign-in',user).then(res=>{
             if(res.data.success){
             alert("login Succesfully!");
                   console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
