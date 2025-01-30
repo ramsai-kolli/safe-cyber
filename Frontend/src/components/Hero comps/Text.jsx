@@ -9,12 +9,13 @@ const Text =()=>{
     }
     const handleSubmit =async()=>{
         try{
-         let response=await axios.post('',tdata);
-         // if(response.data.success)
-         // {
-         //   setSdata(response.data.sdata);
-         // flag=true;
-         // }
+         let response=await axios.post('https://safecyber-api.onrender.com/api/contsensor-text',tdata);
+         if(response.data.success)
+         {
+           setSdata(response.data.sdata);
+           const issensd = response.data.sensored;
+         flag=true;
+         }
         }
         catch(e)
         {
@@ -24,7 +25,7 @@ const Text =()=>{
    return(
     <div>
      <input className='text-inp' onChange={handleChange} />
-     <p onClick={handleSubmit}>Submit</p>
+     <button onClick={handleSubmit}>Submit</button>
      { flag &&
        <div>
          <p>{sdata}</p>
