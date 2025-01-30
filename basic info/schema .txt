@@ -10,3 +10,19 @@ fakenews {
    headline: String,
    tcontent: String
 }
+
+
+collection : groupchat
+docs -> {
+group_id : 1,
+sentemail : "email",
+sentname: "name",
+time: time,
+mdata:""
+}
+
+collection : metadata
+
+{
+group_id
+}
