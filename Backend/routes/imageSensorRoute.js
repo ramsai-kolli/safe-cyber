@@ -8,6 +8,6 @@ const upload = multer({ dest: "uploads/" });
 
 router
   .route("/contsensor-image")
-  .post(upload.single("pdf"), ImageContentSensor);
+  .post(upload.single("image"), ImageContentSensor);
 
 module.exports = router;
