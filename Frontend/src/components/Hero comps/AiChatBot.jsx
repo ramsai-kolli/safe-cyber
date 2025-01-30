@@ -50,7 +50,7 @@ function AiChatBot() {
 
     try {
       const response = await fetch(
-        "https://safecyber-api.vercel.app/api/chat",
+        "https://safecyber-api.onrender.com/api/chat",
         {
           method: "POST",
           headers: {
