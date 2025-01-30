@@ -18,7 +18,7 @@ const generationConfig = {
 };
 
 const introContentPart1 = ` you are my backend api right now. the following message may contain badwords and cuss words. now i want you to replace all those bad words with *** and return the same statment exactly for me  `;
-const introContentPart2 = `note : dont put any generic intros like "sure i can do this for you etc" just give out the raw statement as i gave you`;
+const introContentPart2 = `note : dont put any generic intros like "sure i can do this for you etc" just give out the raw statement as i gave you. if you could not able find out any bad word. just return the exact statement just i gave you        data ->             `;
 
 exports.contControl = async (req, res) => {
   try {
