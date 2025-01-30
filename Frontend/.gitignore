@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-# src/components/Rough.jsx
+src/components/Rough.jsx

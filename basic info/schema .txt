@@ -2,6 +2,9 @@ user {
    name : String
    email : String
    password : String
+   
+  violated_count: int   // backend only (if count )
+  banned_time : time   -->isbanned (time -present_time == 2 days)
 } 
 
 // Schema for both fakenews and scam 
