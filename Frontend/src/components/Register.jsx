@@ -28,7 +28,7 @@ const changeHandler = (e) => {
         alert('password must contain 6 letters');
      }
     try{
-        axios.post('http://localhost:5555/register',user).then(res=>{
+        axios.post('https://safecyber-api.onrender.com/user-sign-up',user).then(res=>{
                 alert("registered Succesfully!");
                  
  
