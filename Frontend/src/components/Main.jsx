@@ -3,9 +3,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Hero from "./Hero comps/Hero";
 function Home() {
-  const handleRedirect = () => {
-    window.open("https:", "_blank");
-  };
   const handleAbout = () => {
     window.location.href = "/aboutus";
   };

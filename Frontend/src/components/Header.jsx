@@ -1,28 +1,31 @@
 import React from "react";
 import "./styles/Header.css";
 export default function Header() {
-  function gochatbot() {
-    window.location.href = "/chatbot";
+  function goregister() {
+    window.location.href = `/register`;
   }
-  function gohome() {
-    window.location.href = "/";
+  function gologin() {
+    window.location.href = `/login`;
+  }
+  function gohome(){
+    window.location.href= `/`;
   }
   return (
     <div className="home-head">
       <div className="home-first">
         <div className="outer-img">
-          <div className="home-img"></div>
+          <div className="home-img" ></div>
         </div>
 
-        <p className="home-name" onClick={gohome}>
+        <p className="home-name" onClick={gohome}  >
           SafeCyber
         </p>
       </div>
       <div>
-      <button className="heads-signup" onClick={gochatbot}>
+      <button className="heads-signup" onClick={goregister}>
         Signup
       </button>
-      <button className="heads-login" onClick={gochatbot}>
+      <button className="heads-login" onClick={gologin}>
         Login
       </button>
       </div>
