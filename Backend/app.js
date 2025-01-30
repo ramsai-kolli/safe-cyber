@@ -11,6 +11,8 @@ require("dotenv").config(); // to access the values .env file
 const user = require("./routes/userRoute");
 const fakenews = require("./routes/fakenewsRoute");
 const spam = require("./routes/scamRoute");
+const contsensImage = require("./routes/imageSensorRoute");
+const groupchat = require("./routes/groupChatRoute");
 
 const app = express();
 
@@ -18,23 +20,35 @@ const app = express();
 const allowedOrigins = ["https://safecyber.vercel.app"];
 
 // Dynamic origin function
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     // If no origin or origin is in the allowed list, allow it
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS --->said by dynamic function"));
+//     }
+//   }, // Explicitly allow this frontend
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "authorization"],
+//   credentials: true, // Allow credentials (cookies, authorization headers)
+// };
+
+// app.use(cors(corsOptions));
+
+// Handle preflight (OPTIONS) requests
+// app.options("*", cors(corsOptions));
+
 const corsOptions = {
-  origin: function (origin, callback) {
-    // If no origin or origin is in the allowed list, allow it
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS --->said by dynamic function"));
-    }
-  }, // Explicitly allow this frontend
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "authorization"],
-  credentials: true, // Allow credentials (cookies, authorization headers)
+  origin: "*", // Allows all origins
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Enable if your frontend needs cookies/auth
 };
 
 app.use(cors(corsOptions));
 
-// Handle preflight (OPTIONS) requests
+// Handle preflight (OPTIONS) requests globally
 app.options("*", cors(corsOptions));
 
 // Middleware
@@ -63,6 +77,12 @@ try {
   console.log("cloud connecting error");
 }
 
+// MongoDB Compass connection
+// mongoose
+//   .connect("mongodb://localhost:27017/cyber-safe")
+//   .then(() => console.log("Connected to database"))
+//   .catch((e) => console.log(e));
+
 // importing apis
 const chat = require("./routes/chatRoute");
 const sendEmail = require("./routes/sendEmailRoute");
@@ -75,11 +95,8 @@ app.use("/api", chat);
 app.use("/api", sendEmail);
 app.use("/api", tokenVerify);
 app.use("/api", contSen);
-// MongoDB Compass connection
-// mongoose
-//   .connect("mongodb://localhost:27017/cyber-safe")
-//   .then(() => console.log("Connected to database"))
-//   .catch((e) => console.log(e));
+app.use("/api", contsensImage);
+app.use("/api", groupchat);
 
 //assigning api to user
 app.use("/api", user);
@@ -91,7 +108,7 @@ app.use(express.static("public"));
 // to display (serve) html ( to make sure that the server is running when HOSTED)
 app.get(["/", "/api"], (req, res) => {
   try {
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "/public/index.html");
   } catch (e) {
     console.log("erorrrrr", e);
   }

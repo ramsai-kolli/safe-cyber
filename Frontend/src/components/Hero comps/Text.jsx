@@ -3,7 +3,7 @@ import '../styles/Text.css'
 const Text =()=>{
     const [tdata,setData]=useState("");
     const [sdata,setSdata]=useState("data");
-    let flag=false;
+    let flag=true;
     const handleChange=(e)=>{
       setData(e.target.value);
     }
