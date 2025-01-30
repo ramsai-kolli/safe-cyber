@@ -19,31 +19,26 @@ const app = express();
 const allowedOrigins = ["https://safecyber.vercel.app"];
 
 // Dynamic origin function
-// const corsOptions = {
-//   origin: function (origin, callback) {
-//     // If no origin or origin is in the allowed list, allow it
-//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(new Error("Not allowed by CORS --->said by dynamic function"));
-//     }
-//   }, // Explicitly allow this frontend
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   allowedHeaders: ["Content-Type", "authorization"],
-//   credentials: true, // Allow credentials (cookies, authorization headers)
-// };
-
-// app.use(cors(corsOptions));
-
-// Handle preflight (OPTIONS) requests
-// app.options("*", cors(corsOptions));
-
 const corsOptions = {
-  origin: "*", // Allows all origins
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true, // Enable if your frontend needs cookies/auth
+  origin: function (origin, callback) {
+    // If no origin or origin is in the allowed list, allow it
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS --->said by dynamic function"));
+    }
+  }, // Explicitly allow this frontend
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "authorization"],
+  credentials: true, // Allow credentials (cookies, authorization headers)
 };
+
+// const corsOptions = {
+//   origin: "*", // Allows all origins
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   credentials: true, // Enable if your frontend needs cookies/auth
+// };
 
 app.use(cors(corsOptions));
 
