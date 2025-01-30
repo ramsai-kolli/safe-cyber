@@ -77,6 +77,12 @@ try {
   console.log("cloud connecting error");
 }
 
+// MongoDB Compass connection
+// mongoose
+//   .connect("mongodb://localhost:27017/cyber-safe")
+//   .then(() => console.log("Connected to database"))
+//   .catch((e) => console.log(e));
+
 // importing apis
 const chat = require("./routes/chatRoute");
 const sendEmail = require("./routes/sendEmailRoute");
@@ -91,11 +97,6 @@ app.use("/api", tokenVerify);
 app.use("/api", contSen);
 app.use("/api", contsensImage);
 app.use("/api", groupchat);
-// MongoDB Compass connection
-// mongoose
-//   .connect("mongodb://localhost:27017/cyber-safe")
-//   .then(() => console.log("Connected to database"))
-//   .catch((e) => console.log(e));
 
 //assigning api to user
 app.use("/api", user);
