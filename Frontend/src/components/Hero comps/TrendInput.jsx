@@ -1,11 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { Dialog , styled} from '@mui/material';
-import '../styles/trending.css';
 
 
 function TrendInput(props){
-const [isdailog,setisdailog] = useState(false);
+    const [isdailog,setisdailog] = useState(false);
 
 function showDailog() {
     setisdailog(!isdailog);
@@ -18,7 +17,6 @@ function showDailog() {
      maxWidth: '100',
      maxHeight: '100%',
      borderRadius: 0,
-     // boxShadow: 'none',
      overflow: 'hidden',
      backgroundColor:'grey'
  }
@@ -35,7 +33,7 @@ return (
             PaperProps={{ sx: dialogStyle }}
         > 
         <p> this is sample </p>
-        <button className="raise" onClick={showDailog}>Submit</button>
+        <button className="raise" onClick={showDailog}>Submit</button>   
         </Dialog>
        </div>
      }
