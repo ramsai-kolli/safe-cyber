@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Images from "../Home/Images";
 import FAQ from "../Home/FAQs";
 import "../styles/Homecomp.css";
-function Homecomp() {
+function Homecomp({sendData}) {
+  const [tabno,setTabnno]=useState(null);
   const CyberFaqData = [
     {
       question: "How does the AI-powered detection system work?",
@@ -61,6 +62,71 @@ function Homecomp() {
     <div className="homes-main">
       <Images />
       <div className="home-faq">
+        <div className="home-censor">
+        <div className="home-censor-text">
+         <h3>Abuse Censor</h3>
+         <div className="home-censor-tdiv">
+         <p>To filter out toxic text and images</p><p className="home-censor-btn" onClick={()=>{sendData(2)}}>Click here</p>
+         </div>
+        </div>
+        <div className="home-censor-img">
+        </div>
+        </div>
+
+        <div className="home-censor">
+        <div className="home-censor-text">
+         <h3>Fact Check</h3>
+         <div className="home-censor-tdiv">
+         <p>To Check spreading info is real or fake</p><p className="home-censor-btn" onClick={()=>{sendData(3)}}>Click here</p>
+         </div>
+        </div>
+        <div className="home-censor-img">
+        </div>
+        </div>
+
+        <div className="home-censor">
+        <div className="home-censor-text">
+         <h3>Trending</h3>
+         <div className="home-censor-tdiv">
+         <p>To check what's trending</p><p className="home-censor-btn" onClick={()=>{sendData(4)}}>Click here</p>
+         </div>
+        </div>
+        <div className="home-censor-img">
+        </div>
+        </div>
+
+        <div className="home-censor">
+        <div className="home-censor-text">
+         <h3>Group Chat</h3>
+         <div className="home-censor-tdiv">
+         <p>To Chat with people in groups without abuse words </p><p className="home-censor-btn" onClick={()=>{sendData(5)}}>Click here</p>
+         </div>
+        </div>
+        <div className="home-censor-img">
+        </div>
+        </div>
+
+        <div className="home-censor">
+        <div className="home-censor-text">
+         <h3>Gemini Chatbot</h3>
+         <div className="home-censor-tdiv">
+         <p>To get assistance of gemini chat bot</p><p className="home-censor-btn" onClick={()=>{sendData(6)}}>Click here</p>
+         </div>
+        </div>
+        <div className="home-censor-img">
+        </div>
+        </div>
+
+        <div className="home-censor">
+        <div className="home-censor-text">
+         <h3>Complaint portal</h3>
+         <div className="home-censor-tdiv">
+         <p>To file a complaint to cybercrime office</p><p className="home-censor-btn" onClick={()=>{sendData(7)}}>Click here</p>
+         </div>
+        </div>
+        <div className="home-censor-img">
+        </div>
+        </div>
         <FAQ faqdata={CyberFaqData} who={"Cyberbullying"} />
       </div>
     </div>
