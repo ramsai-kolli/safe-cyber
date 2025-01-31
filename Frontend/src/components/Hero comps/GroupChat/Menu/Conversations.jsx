@@ -19,9 +19,9 @@ const StyledDivider = styled(Divider)`
     opacity: .6;
 `;
 
-const Conversations = ({ text }) => {
+const Conversations = ({ email }) => {  // once text
     const [users, setUsers] = useState([]);
-    
+    const [user, setUser] = useState(null);
     // const { account, socket, setActiveUsers } = useContext(AccountContext);
 
     useEffect(() => {
@@ -40,13 +40,37 @@ const Conversations = ({ text }) => {
     //     })
     // }, [account])
 
+    useEffect(() => {
+        const fetchData = async() => {
+            // let data = await getUsers();
+            // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
+            // setUsers(fiteredData);
+            try{
+                 await axios.post('https://safecyber-api.onrender.com/api/getuinfo',email).then(res=>{
+                    if(res.data.success){
+                    alert("retreived !");           
+                    setUser();
+                    }else{
+                      alert("Error : to retrieve get-user-info");
+                    }
+                      })
+                     // console.log("register")
+                     
+              }
+              catch(error){
+                  console.log('Error sending registration request',error);
+              }
+        }
+        fetchData();
+    }, [text]);
+
     return (
         <Component>
             {
                 users && users.map((user, index) => (
                     user.sub !== account.sub && 
                         <>
-                            <Conversation user={user} />
+                            <Conversation email={email} />
                             {
                                 users.length !== (index + 1)  && <StyledDivider />
                             }

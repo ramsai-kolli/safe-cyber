@@ -41,7 +41,7 @@ const Text = styled(Typography)`
     font-size: 14px;
 `;
 
-const Conversation = ({ user }) => {
+const Conversation = ({ email }) => {  // once user
     // const url = user.picture || emptyProfilePicture;
     
     // const { setPerson } = useContext(UserContext);

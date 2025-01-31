@@ -26,7 +26,7 @@ function GroupChat({email}) {
       {
         !flag && <>
         
-        <TotalChat />
+        <TotalChat email={email}/>
         </>
       }
       </div>

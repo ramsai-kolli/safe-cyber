@@ -7,14 +7,14 @@ import { Box } from '@mui/material';
 // import Search from './Search';
 import Conversations from './Conversations';
 
-const Menu = () => {
+const Menu = (props) => {
     const [text, setText] = useState('');
     
     return (
         <Box>
             {/* <Header/> */}
             {/* <Search setText={setText} /> */}
-            <Conversations text={text} />
+            <Conversations email={props.email} />
         </Box>
     )
 }

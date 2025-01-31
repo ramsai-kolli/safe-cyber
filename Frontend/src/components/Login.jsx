@@ -45,7 +45,7 @@ function Login(){
             alert("login Succesfully!");
                   console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
    
-                  setUser({name:'',email:'',password:'',age:''});
+                  setUser({name:'',email:'',password:''});
                   window.location.href = `/?email=${encodeURIComponent(user.email)}`;
                 // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
                   // LOGIN page redirected from here
