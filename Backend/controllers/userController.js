@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs"); // object for password hashing
 const user = require("../models/usermodel"); // object of new user collection
 const catchAsyncErrors = require("../middleware/catchAsyncErrors"); // by default error catcher
-const authenticateJWT = require("../middleware/authMiddleware"); //validate the Token after login
 
 // require("dotenv").config();
 
@@ -9,7 +8,7 @@ const jwt = require("jsonwebtoken"); //object to Generate JWT token
 
 // Registration for new user
 exports.createUser = catchAsyncErrors(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, chats } = req.body;
 
   const Email_Validation = await user.findOne({ email });
 
@@ -28,6 +27,7 @@ exports.createUser = catchAsyncErrors(async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      chats,
     });
 
     await newUser.save();
@@ -71,6 +71,28 @@ exports.userLogin = catchAsyncErrors(async (req, res) => {
       message: "Login successful",
       //   token: token,
       user_details: user_details,
+    });
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ success: false, error: "Internal server error" });
+  }
+});
+
+exports.getUserInfo = catchAsyncErrors(async (req, res) => {
+  const { email } = req.body;
+  try {
+    const matched_data = await user.findOne({ email });
+
+    if (!matched_data) {
+      return res
+        .status(202)
+        .json({ success: false, message: "user data not found" });
+    }
+
+    return res.status(201).json({
+      success: true,
+      message: "user found successfully",
+      data: matched_data,
     });
   } catch (error) {
     console.error("Error during login:", error);
