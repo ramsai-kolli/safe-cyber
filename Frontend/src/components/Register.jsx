@@ -54,7 +54,7 @@ const gologin = ()=>{
         <>
         <Header />
         <div class="div-register"> 
-         <label class="label-register">this is register form</label><br></br>
+         <label class="label-register">Register form</label><br></br>
         <form class="from-register" onSubmit={submitHandler} >
           <input class="input-register" value={user.name} onChange={changeHandler} name='name' type='text' placeholder="enter name"  ></input><br></br>
           <input class="input-register" value={user.email} onChange={changeHandler} name='email' type="email" placeholder='enter email:'></input><br></br>                                                                                                               
