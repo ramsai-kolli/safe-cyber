@@ -14,10 +14,18 @@ function Login(){
        password : "",
          
    });
+   const [invalidtext, setInvalidtext] = useState("");
 
    const changeHandler = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
+    if(name==="password"&& value.length<8)
+      {
+        setInvalidtext("Password must contain 8 letters");
+      }
+      else if(name==="password"&&value.length>=8){
+        setInvalidtext("");
+      }
   };
  const goregister = ()=>{
     window.location.href=`/register`;
@@ -37,7 +45,7 @@ function Login(){
             alert("login Succesfully!");
                   console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
    
-                  setUser({name:'',email:'',password:'',age:''});
+                  setUser({name:'',email:'',password:''});
                   window.location.href = `/?email=${encodeURIComponent(user.email)}`;
                 // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
                   // LOGIN page redirected from here
@@ -64,7 +72,8 @@ function Login(){
           <label class="label-login">Email ID:</label>
           <input class="input-login" value={user.email} onChange={changeHandler} name='email' type="tel"></input><br></br>
           <label class="label-login">Password:</label>
-          <input class="input-login" value={user.password} onChange={changeHandler} name='password' type="password"></input><br></br>
+          <input class="input-login" value={user.password} onChange={changeHandler} name='password' type="password"></input>
+          { invalidtext && <p className="Login-error">{invalidtext}</p>}
           <button class="btn-login" type="submit">Submit</button>
         <p onClick={goregister}>Click here to register</p>
         </form>        
