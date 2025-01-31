@@ -3,7 +3,7 @@ import '../styles/Text.css';
 import axios from "axios";
 const Text =()=>{
     const [tdata,setData]=useState("");
-    const [sdata,setSdata]=useState("data");
+    const [sdata,setSdata]=useState("data is a data of the dt ain the data also the data at the date and in the inof of the data is the data");
     let [flag,setFlag ]=useState(true);
     const handleChange=(e)=>{
       setData(e.target.value);
@@ -25,9 +25,9 @@ const Text =()=>{
         }
     }
    return(
-    <div>
+    <div className="text-main">
      <input className='text-inp' onChange={handleChange} />
-     <button onClick={handleSubmit}>Submit</button>
+     <button className="text-btn" onClick={handleSubmit}>Submit</button>
      { flag &&
        <div>
          <p>{sdata}</p>
