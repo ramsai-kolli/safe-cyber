@@ -10,7 +10,7 @@ import axios from 'axios';
 function Login(){
    const [user, setUser] = useState({
         
-       email : "heyy",
+       email : "",
        password : "",
          
    });

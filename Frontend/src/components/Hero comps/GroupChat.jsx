@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import '../styles/GroupChat.css'
 function GroupChat({email}) {
     let flag=true;
     if(email)
@@ -13,7 +13,7 @@ function GroupChat({email}) {
         window.location.href='/register';
       }
   return (
-    <div>GroupChat
+    <div>
     {flag && (
         <div className="login-prompt">
           <div className="login-box">

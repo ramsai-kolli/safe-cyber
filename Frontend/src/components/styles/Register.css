@@ -2,15 +2,15 @@
 .div-register { 
   padding-top: 200px;
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 128, 0, 0.2); 
-  width: 500px;
-  height:350px;
+  box-shadow: 0 4px 8px rgba(16, 17, 16, 0.2); 
+  width: 600px;
+  height:400px;
   margin:auto;
   text-align: center;
 }
 
 .label-register {
-  font-size: 18px;
+  font-size: 2rem;
   font-weight: bold;
   color: #1b5e20; 
   display: block;
