@@ -19,3 +19,16 @@
 .trending-hero{
     margin-top:100px;
 }
+
+.raise {
+    /* background-color: rgb(12, 192, 75); */
+    background-color: rgb(16, 128, 16);
+    color:white;
+    margin-right: 30px;
+    height: 50px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+  }
