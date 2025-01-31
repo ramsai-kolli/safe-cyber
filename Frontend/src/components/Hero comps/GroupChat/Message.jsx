@@ -42,37 +42,46 @@ const Time = styled(Typography)`
   margin-top: auto;
 `;
 
-const Message = ({ message }) => {
-  //   const { account } = useContext(AccountContext);
+const Message = ({  message, email}) => {
+
+  //  message= {  chat_id ,chat_name,  sentemail,  
+  // sentname,  time,  mdata}
 
   return (
     <>
-      {account.sub === message.senderId ? (
+      {message.sentemail === email ? (
         <Own>
-          {message.type === "file" ? (
+          {/* {message.type === "file" ? (
             <ImageMessage message={message} />
           ) : (
             <TextMessage message={message} />
           )}
+           */}
+           <TextMessage message={message} />
         </Own>
       ) : (
         <Wrapper>
-          {message.type === "file" ? (
+          {/* {message.type === "file" ? (
             <ImageMessage message={message} />
           ) : (
             <TextMessage message={message} />
-          )}
+          )} */}
+          <TextMessage message={message} />
         </Wrapper>
       )}
     </>
   );
 };
-
+const formatDate = (date) => {
+  const hours = new Date(date).getHours();
+  const minutes = new Date(date).getMinutes();
+  return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+}
 const TextMessage = ({ message }) => {
   return (
     <>
-      <Text>{message.text}</Text>
-      <Time>{formatDate(message.createdAt)}</Time>
+      <Text>{message.mdata}</Text>
+      <Time>{formatDate(message.time)}</Time>
     </>
   );
 };

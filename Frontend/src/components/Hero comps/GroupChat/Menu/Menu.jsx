@@ -9,12 +9,12 @@ import Conversations from './Conversations';
 
 const Menu = (props) => {
     const [text, setText] = useState('');
-    console.log(props.email,"at menu") // true
+    // console.log(props.email,"at menu") // true
     return (
         <Box>
             {/* <Header/> */}
             {/* <Search setText={setText} /> */}
-            <Conversations email={props.email} setCurrentUserInfo={props.setCurrentUserInfo} />
+            <Conversations email={props.email} setallMsgsofChat={props.setallMsgsofChat} />
         </Box>
     )
 }

@@ -32,9 +32,8 @@ const Container = styled(Box)`
   padding: 1px 80px;
 `;
 
-const Messages = ({ person, conversation }) => {
-  const [messages, setMessages] = useState([]);
-  const [incomingMessage, setIncomingMessage] = useState(null);
+const Messages = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
+  // const [incomingMessage, setIncomingMessage] = useState(null);
   const [value, setValue] = useState();
   const [file, setFile] = useState();
   const [image, setImage] = useState();
@@ -63,7 +62,7 @@ const Messages = ({ person, conversation }) => {
 
   //   useEffect(() => {
   //     scrollRef.current?.scrollIntoView({ transition: "smooth" });
-  //   }, [messages]);
+  //   }, [allMsgsofChat]);
 
   //   useEffect(() => {
   //     incomingMessage &&
@@ -109,10 +108,10 @@ const Messages = ({ person, conversation }) => {
   return (
     <Wrapper>
       <Component>
-        {messages &&
-          messages.map((message) => (
+        {allMsgsofChat &&
+          allMsgsofChat.map((message) => (
             <Container ref={scrollRef}>
-              <Message message={message} />
+              <Message message={message} email={email} />
             </Container>
           ))}
       </Component>

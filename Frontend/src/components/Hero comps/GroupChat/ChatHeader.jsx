@@ -1,9 +1,5 @@
-import { useContext } from "react";
-
 import { Box, Typography, styled } from "@mui/material";
 import { Search, MoreVert } from "@mui/icons-material";
-
-// import { AccountContext } from "../../../context/AccountProvider";
 import defaultProfilePicture from "./emtyprof.jpg";
 
 const Header = styled(Box)`
@@ -40,16 +36,13 @@ const Status = styled(Typography)`
   margin-left: 12px !important;
 `;
 
-const ChatHeader = ({ person }) => {
-  const url = person.picture || defaultProfilePicture;
-
-  //   const { activeUsers } = useContext(AccountContext);
-
+const ChatHeader = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
+  // const url = person.picture || defaultProfilePicture;
   return (
     <Header>
       <Image src={defaultProfilePicture} alt="display picture" />
       <Box>
-        <Name>{"person.name"}</Name>
+        <Name>{allMsgsofChat?.chat_name ?allMsgsofChat?.chat_name :"loading"}</Name>
         <Status>
           {/* {activeUsers?.find((user) => user.sub === person.sub)
             ? "Online"

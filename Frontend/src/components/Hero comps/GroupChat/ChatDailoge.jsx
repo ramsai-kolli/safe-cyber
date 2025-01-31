@@ -38,17 +38,17 @@ const dialogStyle = {
 const ChatDialog = (props) => {
 
     // const { person } = useContext(UserContext);
-    const [currentUserInfo, setCurrentUserInfo] = useState();
+    const [allMsgsofChat, setallMsgsofChat] = useState();
     
     return (
        <div>
             <Component>
                 <LeftComponent>
-                    <Menu email={props.email} setCurrentUserInfo={setCurrentUserInfo} />
+                    <Menu email={props.email} setallMsgsofChat={setallMsgsofChat} />
                 </LeftComponent>
                 <RightComponent>
                     
-                     <ChatBox email={props.email} currentUserInfo={currentUserInfo}  setCurrentUserInfo={setCurrentUserInfo}/>
+                     <ChatBox email={props.email} allMsgsofChat={allMsgsofChat}  setallMsgsofChat={setallMsgsofChat}/>
                     
                 </RightComponent>
             </Component>

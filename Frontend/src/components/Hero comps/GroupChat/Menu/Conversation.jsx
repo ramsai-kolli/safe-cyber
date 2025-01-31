@@ -72,7 +72,7 @@ const Conversation = (props) => {  // once user
     }, []);
 
     const getChat = async () => {
-        props.setCurrentUserInfo(message)
+        props.setallMsgsofChat(message)
     }
 
     return (
@@ -82,7 +82,7 @@ const Conversation = (props) => {  // once user
             </Box>
             <Box style={{width: '100%'}}>
                 <Container>
-                    <Typography>{"chat id : "+props.chat_id}</Typography>
+                    <Typography>{ message.chat_name ? message.chat_name:"no name (null)"  }</Typography>
                     { 
                         // message.mdata
                         <Timestamp>
