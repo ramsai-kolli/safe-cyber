@@ -52,9 +52,12 @@ export default function ScamTrend() {
     ) : (
       data.map((item) => (
         <div key={item.id} className="scam-card">
-          <h3>{item.headline}</h3>
-          <p>{item.content}</p>
-          <button onClick={() => handleButtonClick(item.id)}>Happened to me</button>
+          <div className='scam-line'>
+          <h3 className='scam-line-head'>{item.heading}</h3>
+          <button onClick={() => handleButtonClick(item.id)} className='scam-line-btn'>Happened to me</button>
+          </div>
+          <p className='scam-line-mat'>{item.content}</p>
+         
         </div>
       ))
     )}
