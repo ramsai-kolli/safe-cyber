@@ -4,7 +4,7 @@ import axios from "axios";
 const Text =()=>{
     const [tdata,setData]=useState("");
     const [sdata,setSdata]=useState("data is a data of the dt ain the data also the data at the date and in the inof of the data is the data");
-    let [flag,setFlag ]=useState(true);
+    let [flag,setFlag ]=useState(false);
     const handleChange=(e)=>{
       setData(e.target.value);
     }
