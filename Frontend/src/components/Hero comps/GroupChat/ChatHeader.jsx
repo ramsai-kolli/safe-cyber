@@ -39,16 +39,16 @@ const Status = styled(Typography)`
 const ChatHeader = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
   // const url = person.picture || defaultProfilePicture;
   return (
-    <Header>
+   allMsgsofChat&& <Header>
       <Image src={defaultProfilePicture} alt="display picture" />
       <Box>
-        <Name>{allMsgsofChat?.chat_name ?allMsgsofChat?.chat_name :"loading"}</Name>
-        <Status>
+        <Name>{allMsgsofChat[0].chat_name ?allMsgsofChat[0].chat_name :"loading"}</Name>
+        {/* <Status>
           {/* {activeUsers?.find((user) => user.sub === person.sub)
             ? "Online"
-            : "Offline"} */}
+            : "Offline"} 
           "Offline"
-        </Status>
+        </Status> */}
       </Box>
       <RightContainer>
         <Search />

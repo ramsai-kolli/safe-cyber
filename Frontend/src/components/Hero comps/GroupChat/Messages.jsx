@@ -52,17 +52,11 @@ const Messages = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
   //     });
   //   }, []);
 
-  //   useEffect(() => {
-  //     const getMessageDetails = async () => {
-  //       let data = await getMessages(conversation?._id);
-  //       setMessages(data);
-  //     };
-  //     getMessageDetails();
-  //   }, [conversation?._id, person._id, newMessageFlag]);
 
-  //   useEffect(() => {
-  //     scrollRef.current?.scrollIntoView({ transition: "smooth" });
-  //   }, [allMsgsofChat]);
+
+    useEffect(() => {
+      scrollRef.current?.scrollIntoView({ transition: "smooth" });
+    }, [allMsgsofChat]);
 
   //   useEffect(() => {
   //     incomingMessage &&
@@ -75,34 +69,39 @@ const Messages = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
   //   );
 
   const sendText = async (e) => {
-    // let code = e.keyCode || e.which;
-    // if (!value) return;
-    // if (code === 13) {
-    //   let message = {};
-    //   if (!file) {
-    //     message = {
-    //       senderId: account.sub,
-    //       receiverId: receiverId,
-    //       conversationId: conversation._id,
-    //       type: "text",
-    //       text: value,
-    //     };
-    //   } else {
-    //     message = {
-    //       senderId: account.sub,
-    //       conversationId: conversation._id,
-    //       receiverId: receiverId,
-    //       type: "file",
-    //       text: image,
-    //     };
-    //   }
-    //   socket.current.emit("sendMessage", message);
-    //   await newMessages(message);
-    //   setValue("");
-    //   setFile();
-    //   setImage("");
-    //   setNewMessageFlag((prev) => !prev);
-    // }
+    let code = e.keyCode || e.which;
+    if (!value) return;
+    if (code === 13) {
+      let message = {};
+      if (!file) {
+        // message = {
+        //   senderId: account.sub,
+        //   receiverId: receiverId,
+        //   conversationId: conversation._id,
+        //   type: "text",
+        //   text: value,
+        // };
+  message= {  chat_id :allMsgsofChat[0]?.chat_id ,
+              chat_name:allMsgsofChat[0]?.chat_name,
+              sentemail: email,  
+              sentname,  time,  
+            mdata:value}
+      } else {
+        message = {
+          senderId: account.sub,
+          conversationId: conversation._id,
+          receiverId: receiverId,
+          type: "file",
+          text: image,
+        };
+      }
+      // socket.current.emit("sendMessage", message);
+      await newMessages(message);
+      setValue("");
+      setFile();
+      setImage("");
+      setNewMessageFlag((prev) => !prev);
+    }
   };
 
   return (
