@@ -12,7 +12,7 @@ const router = express.Router();
 router.route("/tscam-create").post(asyncMiddleware(NewScamNews));
 
 // if a user suffered with that scam
-router.route("/noticed-it").post(asyncMiddleware(voteCountForScamNews));
+router.route("/happened-to-me").post(asyncMiddleware(voteCountForScamNews));
 
 // fetching the fake news based on votes
 router

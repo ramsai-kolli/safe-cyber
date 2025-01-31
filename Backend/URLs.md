@@ -44,9 +44,9 @@
    - action: sort it in Descending order by happened-int-count
    - output : [ {headline:"",tcontent: ""}, {headline:"",tcontent: ""} ]
 
-   3. Upvote / happened to me
+   3. Upvote /noticed-it
 
-   - url : /happenedtome
+   - url : /noticed-it
    - input : {headline}
    - action/backnd : increase happened-count by 1
    - output : {success: true}
@@ -66,7 +66,7 @@
 
    3. Upvote / happened to me
 
-   - url : /noticedit
+   - url : /happened-to-me
    - same
 
 6. complaint portal
