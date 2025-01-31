@@ -25,7 +25,7 @@
 }
 
 .text-inp:focus {
-    border-color: #007bff;
+    border-color: #28a745;
     background-color: #eef5ff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
@@ -37,7 +37,7 @@
     font-size: 16px;
     font-weight: bold;
     color: #fff;
-    background-color: #007bff;
+    background-color: #28a745;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -45,12 +45,12 @@
 }
 
 .text-btn:hover {
-    background-color: #0056b3;
+    background-color:#176a2a ;
     transform: scale(1.05);
 }
 
 .text-btn:active {
-    background-color: #00408a;
+    background-color: #ffffff;
     transform: scale(0.98);
 } 
 
@@ -61,7 +61,7 @@
     color: #333;
     text-align: center;
     margin-top: 10px;
-    background-color: #e9f5ff;
+    background-color: #ffffff;
     padding: 10px;
     border-radius: 8px;
     width: 100%;

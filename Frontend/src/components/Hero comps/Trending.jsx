@@ -6,15 +6,15 @@ import { useState } from 'react';
 
  function Trending() {
     const [component,setComponent]= useState('Scam');
-
-    const goscam =()=>{ setComponent('Scam')}
-    const gosearch=()=>{ setComponent('News')}
+    const [tab,setTab]=useState(1);
+    const goscam =()=>{ setComponent('Scam');setTab(1)}
+    const gosearch=()=>{ setComponent('News');setTab(2)}
  
     return (
       <div className="trending-main">
        <div className="trending-head">
-        <p onClick={goscam}>Trending Scam</p>
-        <p onClick={gosearch}>Trending Searches</p>
+        <p onClick={goscam} className={tab === 1 ? "active-tab" : ""}>Trending Scam</p>
+        <p onClick={gosearch}className={tab === 2 ? "active-tab" : ""}>Trending Searches</p>
        </div>
        <div className="trending-hero">
         {
