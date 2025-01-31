@@ -17,9 +17,7 @@
   .home-nav {
     display: flex;
     gap: 20px;
-    padding-top: 80px;
-    border-bottom: 2px solid transparent; 
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+ 
 
   }
   
@@ -35,7 +33,16 @@
   .home-nav p:hover {
     color: #119c46; /* Hover effect */
   }
-  
+  .hero-logout{
+      padding-top:16px;
+  }
+  .home-comp-bar{
+    display:flex;
+    justify-content: space-between;
+    padding-top: 80px;
+    border-bottom: 2px solid transparent; 
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  }
   /* Active tab effect */
   .active-tab {
     color: #11b96d; /* Change text color when active */

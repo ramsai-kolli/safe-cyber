@@ -1,6 +1,6 @@
 #logout{
     border:none;
-    height:30px;
+    height:40px;
     font-size: 1.1rem;
     margin:10px;
     background-color: red;
@@ -8,4 +8,8 @@
     border-radius: 10px;
     color:white;
     font-weight: bold;
+    cursor:pointer;
+}
+#logout:hover{
+    background-color: rgb(159, 33, 33);
 }

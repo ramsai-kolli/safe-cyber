@@ -1,13 +1,20 @@
 import React, {useState} from 'react';
 
-function GroupChat() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+function GroupChat({email}) {
+    let flag=true;
+    if(email)
+    {
+      flag=false;
+    }
+    else{
+      flag=true;
+    }
     const handleClick = ()=>{
         window.location.href='/register';
       }
   return (
     <div>GroupChat
-    {!isLoggedIn && (
+    {flag && (
         <div className="login-prompt">
           <div className="login-box">
             <p>Please login to access this feature.</p>
@@ -15,6 +22,12 @@ function GroupChat() {
           </div>
         </div>
       )}
+      {
+        !flag && <>
+        
+        <p>successful group chat</p>
+        </>
+      }
       </div>
   )
 }

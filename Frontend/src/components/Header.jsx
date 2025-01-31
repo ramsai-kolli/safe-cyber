@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles/Header.css";
-export default function Header() {
+export default function Header({email}) {
   function goregister() {
     window.location.href = `/register`;
   }
@@ -10,6 +10,15 @@ export default function Header() {
   function gohome(){
     window.location.href= `/`;
   }
+  let flag=true;
+  if(email)
+  {
+    flag=false;
+  }
+  else{
+   flag=true;
+  }
+  
   return (
     <div className="home-head">
       <div className="home-first">
@@ -22,12 +31,15 @@ export default function Header() {
         </p>
       </div>
       <div>
-      <button className="heads-signup" onClick={goregister}>
+
+     { flag && <><button className="heads-signup" onClick={goregister}>
         Signup
       </button>
       <button className="heads-login" onClick={gologin}>
         Login
       </button>
+      </>
+     }
       </div>
     </div>
   );
