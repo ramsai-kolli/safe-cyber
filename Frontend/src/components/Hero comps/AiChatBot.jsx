@@ -42,10 +42,19 @@ function AiChatBot() {
     await processMessageToBackend(newMessages);
   };
 
+  // async function processMessageToBackend(chatMessages) {
+  //   const apiMessages = chatMessages.map((messageObject) => ({
+  //     role: messageObject.sender === "Assistant" ? "assistant" : "user",
+  //     content: messageObject.message,
+  //   }));
+
   async function processMessageToBackend(chatMessages) {
-    const apiMessages = chatMessages.map((messageObject) => ({
+    const apiMessages = chatMessages.map((messageObject, index) => ({
       role: messageObject.sender === "Assistant" ? "assistant" : "user",
-      content: messageObject.message,
+      content:
+        index === chatMessages.length - 1 // Append text only to the last message
+          ? `${messageObject.message} By default generate the output in English`
+          : messageObject.message,
     }));
 
     try {
