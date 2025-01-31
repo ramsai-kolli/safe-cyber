@@ -1,15 +1,5 @@
  import "./styles/Login.css";
-// import React, { useState, useEffect } from "react";
-// import { useLocation } from "react-router-dom";
-// import axios from "axios";
 import Header from "./Header";
-// import doctorpic from "../assets/logindoctor.jpg";
-// import startuppic from "../assets/loginstartup.jpg";
-// import farmerpic from "../assets/loginfarmer.jpg";
-// import drugpic from "../assets/logindrug.jpg";
-// import authorpic from "../assets/loginauthority.jpg";
-
-// import LoadingPage from "../components/Separate Comps/LoadingPage";
 
 
 import React,{ useState,useEffect } from 'react';
@@ -20,7 +10,7 @@ import axios from 'axios';
 function Login(){
    const [user, setUser] = useState({
         
-       email : "",
+       email : "heyy",
        password : "",
          
    });
@@ -41,13 +31,14 @@ function Login(){
           alert('password must contain 6 letters');
        }
       try{
+        window.location.href = `/?email=${encodeURIComponent(user.email)}`;
          await axios.post('https://safecyber-api.onrender.com/api/user-sign-in',user).then(res=>{
             if(res.data.success){
             alert("login Succesfully!");
                   console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
    
                   setUser({name:'',email:'',password:'',age:''});
-                  window.location.href = '/home3';
+                  window.location.href = `/?email=${encodeURIComponent(user.email)}`;
                 // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
                   // LOGIN page redirected from here
             }else{
