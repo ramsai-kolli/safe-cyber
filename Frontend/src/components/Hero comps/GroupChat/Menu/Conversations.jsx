@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-
+import React from 'react';
 import { Box, styled, Divider } from '@mui/material';
 
 // import { AccountContext } from '../../../context/AccountProvider';
@@ -19,7 +19,7 @@ const StyledDivider = styled(Divider)`
     opacity: .6;
 `;
 
-const Conversations = ({ email }) => {  // once text
+const Conversations = (props) => {  // once text
     const [chats, setChats] = useState([{chat_id:1}]);
     // const [user, setUser] = useState(null);
     // const { account, socket, setActiveUsers } = useContext(AccountContext);
@@ -46,14 +46,14 @@ const Conversations = ({ email }) => {  // once text
             // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
             // setUsers(fiteredData);
             try{
-                 await axios.post('https://safecyber-api.onrender.com/api/getuinfo',email).then(res=>{
+                 await axios.post('https://safecyber-api.onrender.com/api/getuinfo',{email: props.email}).then(res=>{
                     if(res.data.success){
                     alert("retreived !");           
                     // setUser(res.data.data);
                     setChats(res.data.data.chats);
                     console.log("res.data.data.chats    : ",res.data.data.chats)
                     }else{
-                      alert("Error : to retrieve get-user-info");
+                      alert("Error : to retrieve get-user-info email -> ",props.email);
                     }
                       })
                      // console.log("register")
@@ -71,12 +71,13 @@ const Conversations = ({ email }) => {  // once text
             {
                 chats && chats.map((obj, index) => (
                     // user.sub !== account.sub && 
-                        <>
-                            <Conversation chat_id={obj.chat_id} />
+                    <React.Fragment key={obj.chat_id || index}> 
+                            <Conversation chat_id={obj.chat_id}  setCurrentChatId={props.setCurrentChatId}/>
                             {
                                 chats.length !== (index + 1)  && <StyledDivider />
                             }
-                        </>
+                        
+                    </React.Fragment>
                 ))
             }
         </Component>

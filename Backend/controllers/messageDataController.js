@@ -75,7 +75,7 @@ exports.getMessageData = catchAsyncErrors(async (req, res) => {
     return res.status(201).json({
       success: true,
       message: `successfully retrived all messages with chat_id:${chat_id}`,
-      data: matched_chat_data,
+      msgs: matched_chat_data,
     });
   } catch (error) {
     return res.status(500).json({
