@@ -41,7 +41,7 @@ const Text = styled(Typography)`
     font-size: 14px;
 `;
 
-const Conversation = ({ email }) => {  // once user
+const Conversation = ({ chat_id }) => {  // once user
     // const url = user.picture || emptyProfilePicture;
     
     // const { setPerson } = useContext(UserContext);
@@ -50,12 +50,31 @@ const Conversation = ({ email }) => {  // once user
     const [message, setMessage] = useState({});
 
     useEffect(() => {
-        // const getConversationMessage = async() => {
-        //     const data = await getConversation({ senderId: account.sub, receiverId: user.sub });
-        //     setMessage({ text: data?.message, timestamp: data?.updatedAt });
-        // }
-        // getConversationMessage();
-    }, [newMessageFlag]);
+        const getConversationMessage = async() => {
+            // const data = await getConversation({ senderId: account.sub, receiverId: user.sub });
+            // setMessage({ text: data?.message, timestamp: data?.updatedAt });
+
+            try{
+                await axios.post('https://safecyber-api.onrender.com/api/getmsg',chat_id).then(res=>{
+                   if(res.data.success){
+                //    alert("retreived !");           
+                //    setUser(res.data.data);
+                //    setChats(res.data.data.chats);
+                //    console.log(res.data.data.chats)
+                setMessage(res.data.data)
+                   }else{
+                     alert("Error : to retrieve get-user-info");
+                   }
+                     })
+                    // console.log("register")
+                    
+             }
+             catch(error){
+                 console.log('Error sending registration request',error);
+             }
+        }
+        getConversationMessage();
+    }, []);
 
     // const getUser = async () => {
     //     setPerson(user);
@@ -69,14 +88,14 @@ const Conversation = ({ email }) => {  // once user
             </Box>
             <Box style={{width: '100%'}}>
                 <Container>
-                    <Typography>{user.name}</Typography>
+                    <Typography>{message.sentname}</Typography>
                     { 
-                        message?.text && 
-                        <Timestamp>{formatDate(message?.timestamp)}</Timestamp>        
+                        message.mdata
+                        // <Timestamp>{formatDate(message?.timestamp)}</Timestamp>        
                     }
                 </Container>
                 <Box>
-                    <Text>{message?.text?.includes('localhost') ? 'media' : message.text}</Text>
+                    <Text>{message.mdata}</Text>
                 </Box>
             </Box>
         </Component>

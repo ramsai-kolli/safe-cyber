@@ -20,7 +20,7 @@ const StyledDivider = styled(Divider)`
 `;
 
 const Conversations = ({ email }) => {  // once text
-    const [users, setUsers] = useState([]);
+    const [chats, setChats] = useState();
     const [user, setUser] = useState(null);
     // const { account, socket, setActiveUsers } = useContext(AccountContext);
 
@@ -31,7 +31,7 @@ const Conversations = ({ email }) => {  // once text
             // setUsers(fiteredData);
         }
         fetchData();
-    }, [text]);
+    }, []);
 
     // useEffect(() => {
     //     socket.current.emit('addUser', account);
@@ -49,7 +49,9 @@ const Conversations = ({ email }) => {  // once text
                  await axios.post('https://safecyber-api.onrender.com/api/getuinfo',email).then(res=>{
                     if(res.data.success){
                     alert("retreived !");           
-                    setUser();
+                    setUser(res.data.data);
+                    setChats(res.data.data.chats);
+                    console.log(res.data.data.chats)
                     }else{
                       alert("Error : to retrieve get-user-info");
                     }
@@ -62,17 +64,17 @@ const Conversations = ({ email }) => {  // once text
               }
         }
         fetchData();
-    }, [text]);
+    }, [email]);
 
     return (
         <Component>
             {
-                users && users.map((user, index) => (
-                    user.sub !== account.sub && 
+                chats && chats.map((chat_id, index) => (
+                    // user.sub !== account.sub && 
                         <>
-                            <Conversation email={email} />
+                            <Conversation chat_id={chat_id} />
                             {
-                                users.length !== (index + 1)  && <StyledDivider />
+                                chats.length !== (index + 1)  && <StyledDivider />
                             }
                         </>
                 ))

@@ -1,7 +1,14 @@
 import { useState } from "react";
 import '../styles/Media.css';
 import axios from "axios";
-const Text =()=>{
+import {  AttachFile } from "@mui/icons-material";
+import { styled } from "@mui/material";
+
+
+const ClipIcon = styled(AttachFile)`
+  transform: "rotate(40deg)";
+`;
+const Media =()=>{
     const [tdata,setData]=useState("");
     const [sdata,setSdata]=useState("data is a data of the dt ain the data also the data at the date and in the inof of the data is the data");
     let [flag,setFlag ]=useState(true);
@@ -26,7 +33,9 @@ const Text =()=>{
     }
    return(
     <div className="text-main">
-     <input className='text-inp' onChange={handleChange} />
+     <label htmlFor="fileInput">
+        <ClipIcon />
+      </label>
      <button className="text-btn" onClick={handleSubmit}>Submit</button>
      { flag &&
        <div>
@@ -36,4 +45,4 @@ const Text =()=>{
     </div>
    );
  }
- export default Text;
+ export default Media;
