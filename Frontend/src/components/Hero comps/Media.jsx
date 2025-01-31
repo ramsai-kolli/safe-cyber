@@ -1,12 +1,13 @@
 import '../styles/Media.css';
 import axios from "axios";
 import {  AttachFile } from "@mui/icons-material";
+// import ImageIcon from "../../assets/img-icon.svg";
 import { styled } from "@mui/material";
 import {  useState, useEffect } from "react";
 
 
 const ClipIcon = styled(AttachFile)`
-  transform: "rotate(40deg)";
+  height:40px;
 `;
 const Media =()=>{
     const [tdata,setData]=useState("");
