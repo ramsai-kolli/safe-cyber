@@ -11,4 +11,5 @@ router.route("/pushmsg").post(SaveMessageData);
 
 //messges retrieving route
 router.route("/getmsg").post(getMessageData);
+
 module.exports = router;
