@@ -1,5 +1,6 @@
 // import { useContext } from 'react';
 import { Dialog, styled, Box } from '@mui/material';
+import { useState } from 'react';
 
 // import { UserContext } from '../../context/UserProvider';
 
@@ -37,16 +38,17 @@ const dialogStyle = {
 const ChatDialog = (props) => {
 
     // const { person } = useContext(UserContext);
+    const [currentChatId, setCurrentChatId] = useState(0);
     
     return (
        <div>
             <Component>
                 <LeftComponent>
-                    <Menu email={props.email}/>
+                    <Menu email={props.email} setCurrentChatId={setCurrentChatId} />
                 </LeftComponent>
                 <RightComponent>
                     
-                     <ChatBox email={props.email}/>
+                     <ChatBox email={props.email} currentChatId={currentChatId}  setCurrentChatId={setCurrentChatId}/>
                     
                 </RightComponent>
             </Component>

@@ -69,15 +69,15 @@ const Conversation = (props) => {  // once user
             // setMessage({ text: data?.message, timestamp: data?.updatedAt });
 
             try{
-                await axios.post('https://safecyber-api.onrender.com/api/getmsg',props.chat_id).then(res=>{
+                await axios.post('https://safecyber-api.onrender.com/api/getmsg',{chat_id: props.chat_id}).then(res=>{
                    if(res.data.success){
                 //    alert("retreived !");           
-                   console.log(res.data.data.chats)
+                   console.log("conversation.jsx : -> ",res.data.data)
                
                
                 // setMessage(res.data.data)
                    }else{
-                     alert("Error : to retrieve get-user-info");
+                     alert("Error : to retrieve getmsg");
                    }
                      })
                     // console.log("register")
@@ -90,13 +90,12 @@ const Conversation = (props) => {  // once user
         getConversationMessage();
     }, []);
 
-    // const getUser = async () => {
-    //     setPerson(user);
-    //     await setConversation({ senderId: account.sub, receiverId: user.sub });
-    // }
+    const getChat = async () => {
+        props.setCurrentChatId(props.chat_id)
+    }
 
     return (
-        <Component onClick={() => getUser()}>
+        <Component onClick={() => getChat()}>
             <Box>
                 {/* <Image src={url} alt="display picture" /> */}
             </Box>
