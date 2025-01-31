@@ -3,10 +3,13 @@ import ScamTrend from './ScamTrend';
 import NewsTrend from './NewsTrend';
 import '../styles/Trending.css';
 import { useState } from 'react';
+
  function Trending() {
     const [component,setComponent]= useState('Scam');
+
     const goscam =()=>{ setComponent('Scam')}
     const gosearch=()=>{ setComponent('News')}
+ 
     return (
       <div className="trending-main">
        <div className="trending-head">
@@ -20,10 +23,9 @@ import { useState } from 'react';
         {
           component=='News' && <NewsTrend/>
         }
-        {
-          component==null && <div><p>Please select a option</p></div>
-        }
+        
        </div>
+
       </div>
     );
 }

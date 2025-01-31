@@ -13,7 +13,7 @@ function Main() {
   console.log(email);
   return (
     <div className="the-home">
-      <Header />
+      <Header email={email}/>
       <Hero email={email}/>
       <Footer />
     </div>
