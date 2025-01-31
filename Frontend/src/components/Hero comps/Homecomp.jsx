@@ -58,18 +58,10 @@ function Homecomp({sendData}) {
         "Yes, the architecture is designed to scale seamlessly, handling high volumes of content efficiently for platforms of any size.",
     },
   ];
-  function golink()
-  {
-    if(tabno)
-    {
-    sendData(tabno);
-    }
-  }
   return (
     <div className="homes-main">
       <Images />
       <div className="home-faq">
-        <p onClick={golink}>link</p>
         <div className="home-censor">
         <div className="home-censor-text">
          <h3>Abuse Censor</h3>
