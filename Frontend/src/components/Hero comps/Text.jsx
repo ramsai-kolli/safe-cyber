@@ -33,9 +33,9 @@ const Text =()=>{
         );
   
         const data = await response.json();
-        if(data.data.success)
+        if(data.success)
            {
-             setSdata(data.data.sdata);
+             setSdata(data.sdata);
             //  const issensd = response.data.sensored;
            setFlag(true);
            }
