@@ -1,93 +1,115 @@
-import '../styles/Media.css';
+import "../styles/Media.css";
 import axios from "axios";
-import {  AttachFile } from "@mui/icons-material";
-// import ImageIcon from "../../assets/img-icon.svg";
+import { AttachFile } from "@mui/icons-material";
 import { styled } from "@mui/material";
-import {  useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
 
 const ClipIcon = styled(AttachFile)`
-  height:40px;
+  height: 40px;
 `;
-const Media =()=>{
-    const [tdata,setData]=useState("");
-    const [sdata,setSdata]=useState("data is a data of the dt ain the data also the data at the date and in the inof of the data is the data");
-    let [flag,setFlag ]=useState(true);
-    const [value, setValue] = useState();
-    const [file, setFile] = useState();
-    const uploadFileToGemini = async (data) => {
-      try {
-          return await axios.post('https://safecyber-api.onrender.com/api/contsensor-image', data);
-      } catch (error) {
-          console.log('Error while calling newConversations API ', error);
+
+const Media = () => {
+  const [sdata, setSdata] = useState("upload the file");
+  const [flag, setFlag] = useState(true);
+  const [value, setValue] = useState();
+  const [file, setFile] = useState(null); // Ensure it starts as null
+
+  const uploadFileToGemini = async (data) => {
+    try {
+      const data = new FormData();
+      data.append("image", file);
+      const response = await axios.post(
+        "https://safecyber-api.onrender.com/api/contsensor-image",
+        data,
+        { headers: { "Content-Type": "multipart/form-data" } } // Ensure correct headers
+      );
+      console.log("File Upload Response: ", response.data);
+      if (response.data.success) {
+        setSdata(response.data.message);
+      } else {
+        setSdata(response.data.message + response.data.reason);
       }
-  }
-     useEffect(() => {
-        const getImage = async () => {
-          if (file) {
-            const data = new FormData();
-            data.append("name", file.name);
-            data.append("file", file);
-              console.log("heyyy")
-            // const response = await uploadFileToGemini(data);
-            try {
-              const response = await axios.post('https://safecyber-api.onrender.com/api/contsensor-image', data);
-              console.log("respppp : ",response.data);
-            } catch (error) {
-              console.log('Error while calling newConversations API ', error);
-          }
-            // setImage(response.data);
-            console.log("respppp : ",response.data);
-          }
-        };
-        getImage();
-      }, [file]);
-
-    
-    const handleChange=(e)=>{
-      setData(e.target.value);
+      return response;
+    } catch (error) {
+      console.error("Error while uploading file", error);
     }
+  };
 
-    const handleSubmit =async()=>{
-        try{
-         await axios.post('https://safecyber-api.onrender.com/api/contsensor-text',tdata).then(response=>{
-         if(response.data.success)
-         {
-           setSdata(response.data.sdata);
-           const issensd = response.data.sensored;
-         setFlag(true);
-         }
-        })
-        }
-        catch(e)
-        {
-         console.log(e);
-        }
-    }
-    const onFileChange = (e) => {
-      setValue(e.target.files[0].name);
-      setFile(e.target.files[0]);
-      console.log("got the file : ",e.target.files[0] )
+  useEffect(() => {
+    const getImage = async () => {
+      if (!file) return; // Prevent execution if no file is selected
+
+      const data = new FormData();
+      data.append("image", file); //  Use "image" instead of "file"
+
+      console.log("Uploading file:", file.name);
+
+      try {
+        const response = await uploadFileToGemini(data);
+        console.log("Upload response:", response?.data);
+      } catch (error) {
+        console.error("Error while uploading file:", error);
+      }
     };
 
-   return(
+    getImage();
+  }, [file]); // Only runs when `file` changes
+
+  const handleChange = (e) => {
+    setData(e.target.value);
+  };
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       "https://safecyber-api.onrender.com/api/contsensor-text",
+  //       { text: tdata } // Send as JSON object
+  //     );
+  //     if (response.data.success) {
+  //       setSdata(response.data.sdata);
+  //       setFlag(true);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+
+  const onFileChange = (e) => {
+    if (e.target.files.length > 0) {
+      setValue(e.target.files[0].name);
+      setFile(e.target.files[0]); // Set file state, triggering useEffect
+      console.log("File selected:", e.target.files[0]);
+    }
+  };
+
+  return (
     <div className="text-main">
-     <label htmlFor="fileInput">
+      <label htmlFor="fileInput">
         <ClipIcon />
       </label>
       <input
         type="file"
         id="fileInput"
         style={{ display: "none" }}
-        onChange={(e) => onFileChange(e)}
+        onChange={onFileChange}
       />
-     <button className="text-btn" onClick={handleSubmit}>Submit</button>
-     { flag &&
-       <div>
-         <p>{sdata}</p>
-       </div>
-     }
+      <button className="text-btn" onClick={uploadFileToGemini}>
+        Submit
+      </button>
+      {file && (
+        <p
+          style={{ marginTop: "10px", marginBottom: "0px", fontWeight: "bold" }}
+        >
+          Selected File: {file.name}
+        </p>
+      )}
+      {flag && (
+        <div>
+          <p>{sdata}</p>
+        </div>
+      )}
     </div>
-   );
- }
- export default Media;
+  );
+};
+
+export default Media;
