@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import '../styles/GroupChat.css'
+import TotalChat from './GroupChat/TotalChat';
 function GroupChat({email}) {
     let flag=true;
     if(email)
@@ -25,7 +26,7 @@ function GroupChat({email}) {
       {
         !flag && <>
         
-        <p>successful group chat</p>
+        <TotalChat />
         </>
       }
       </div>
