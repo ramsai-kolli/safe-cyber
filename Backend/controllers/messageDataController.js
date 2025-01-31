@@ -1,12 +1,13 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors"); // Assuming this is a custom error handling middleware
 const messagedata = require("../models/messageDataModel"); // GroupChat model
 const chatinfo = require("../models/chatinfoModel"); // Metadata model
+const user = require("../models/usermodel");
 
 exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
-  const { chat_id, sentemail, sentname, mdata } = req.body;
+  const { chat_id, sentemail, mdata } = req.body;
 
   // Check if required data is provided
-  if (!chat_id || !sentemail || !sentname || !mdata) {
+  if (!chat_id || !sentemail || !mdata) {
     return res.status(400).json({
       success: false,
       message: "Please enter all the required fields.",
@@ -16,9 +17,18 @@ exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
   try {
     const chat_name = await chatinfo.findOne({ chat_id });
     if (!chat_name) {
-      return res.status(205).json({
+      return res.status(204).json({
         success: false,
         message: "chat_id doesnt find in the chatinfo model",
+      });
+    }
+
+    const fetch_name = await user.findOne({ email: sentemail });
+
+    if (!fetch_name) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found.",
       });
     }
 
@@ -37,7 +47,7 @@ exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
       chat_id,
       chat_name: chat_name.chat_name,
       sentemail,
-      sentname,
+      sentname: fetch_name.name,
       time: formattedTime,
       mdata, // Using formatted date and time
     });
