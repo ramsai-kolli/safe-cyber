@@ -4,7 +4,7 @@ import { styled, Box, Typography } from "@mui/material";
 
 // import { UserContext } from '../../../context/UserProvider';
 // import { AccountContext } from '../../../context/AccountProvider';
-
+import axios from 'axios';
 // import { setConversation, getConversation } from '../../../service/api';
 // import { emptyProfilePicture } from '../../../constants/data';
 // import { formatDate } from '../../../utils/common-utils';
@@ -41,13 +41,27 @@ const Text = styled(Typography)`
     font-size: 14px;
 `;
 
-const Conversation = ({ chat_id }) => {  // once user
+const Conversation = (props) => {  // once user
     // const url = user.picture || emptyProfilePicture;
     
     // const { setPerson } = useContext(UserContext);
     // const { account, newMessageFlag }  = useContext(AccountContext);
 
-    const [message, setMessage] = useState({});
+    const [message, setMessage] = useState([{
+        chat_id: 1,
+        chat_name: "og gang",
+        sentemail: "charan@gmail.com",
+        sentname: "chaitanya",
+        time: "time",
+        mdata: "hi brooo 1 ",
+      },{
+        chat_id: 1,
+        chat_name: "og gang",
+        sentemail: "charan@gmail.com",
+        sentname: "chaitanya",
+        time: "time",
+        mdata: "hi brooo 2 ",
+      }]);
 
     useEffect(() => {
         const getConversationMessage = async() => {
@@ -55,13 +69,13 @@ const Conversation = ({ chat_id }) => {  // once user
             // setMessage({ text: data?.message, timestamp: data?.updatedAt });
 
             try{
-                await axios.post('https://safecyber-api.onrender.com/api/getmsg',chat_id).then(res=>{
+                await axios.post('https://safecyber-api.onrender.com/api/getmsg',props.chat_id).then(res=>{
                    if(res.data.success){
                 //    alert("retreived !");           
-                //    setUser(res.data.data);
-                //    setChats(res.data.data.chats);
-                //    console.log(res.data.data.chats)
-                setMessage(res.data.data)
+                   console.log(res.data.data.chats)
+               
+               
+                // setMessage(res.data.data)
                    }else{
                      alert("Error : to retrieve get-user-info");
                    }
@@ -88,17 +102,18 @@ const Conversation = ({ chat_id }) => {  // once user
             </Box>
             <Box style={{width: '100%'}}>
                 <Container>
-                    <Typography>{message.sentname}</Typography>
+                    <Typography>{"chat id : "+props.chat_id}</Typography>
                     { 
-                        message.mdata
+                        // message.mdata
                         // <Timestamp>{formatDate(message?.timestamp)}</Timestamp>        
                     }
                 </Container>
                 <Box>
-                    <Text>{message.mdata}</Text>
+                    <Text>{message[message.length - 1].mdata}</Text>
                 </Box>
             </Box>
         </Component>
+        // <p>this is for one</p>
     )
 }
 
