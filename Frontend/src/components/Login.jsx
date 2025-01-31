@@ -20,7 +20,7 @@ import axios from 'axios';
 function Login(){
    const [user, setUser] = useState({
         
-       email : "",
+       email : "heyy",
        password : "",
          
    });
@@ -33,7 +33,7 @@ function Login(){
     window.location.href=`/register`;
  }
 
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
       e.preventDefault();
       console.log("submit handle");
       if(user.password.length<6) 
@@ -41,20 +41,21 @@ function Login(){
           alert('password must contain 6 letters');
        }
       try{
-          axios.post('http://localhost:5555/login',user).then(res=>{
-                  alert("login Succesfully!");
-                  console.log(res.data.message);// without window.location.href = '/home2'; this console.log is worked sucessfully
-   
-                  setUser({name:'',email:'',password:'',age:''});
-                  window.location.href = '/home3';
-                // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
+        window.location.href = `/?email=${encodeURIComponent(user.email)}`;
+          // let response=axios.post('http://localhost:5555/login',user);
+          //         console.log(res.data.message);
+          //       if(response.data.success)
+          //       {
+          //         alert("Successfully Logined")
+          //         window.location.href = `/email?email=${encodeURIComponent(user.email)}`;
+          //       }
+                  
+                
   
                   
-                  // LOGIN page redirected from here
-              })
-             // console.log("register")
-             
-      }
+                 
+              }
+         
       catch(error){
           console.log('Error sending registration request',error);
       }

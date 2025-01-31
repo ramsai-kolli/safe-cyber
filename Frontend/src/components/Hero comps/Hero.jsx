@@ -7,7 +7,12 @@ import ComplaintPortal from "./ComplaintPortal";
 import { useState } from "react";
 import '../styles/Hero.css'
 import Trending from "./Trending";
-function Hero() {
+function Hero({email}) {
+  if (email) {
+    console.log("mail is",email);
+  } else {
+    console.log("Nothing received");
+  }
   const [comp, setComp] = useState(1);
   let componentToDisplay;
   switch (comp) {
@@ -37,6 +42,7 @@ function Hero() {
   }
   return (
     <div>
+      
   <div className="home-nav">
         <p onClick={()=>{setComp(1)}} className={comp === 1 ? "active-tab" : ""}>Home</p>
         <p onClick={()=>{setComp(2)}} className={comp === 2 ? "active-tab" : ""}>AbuseSensor</p>
@@ -48,6 +54,9 @@ function Hero() {
         
       </div>
       <div>
+        {/* {
+      email!=null && <p>{email}</p> 
+        } */}
      {componentToDisplay}
       </div>   
     </div>
