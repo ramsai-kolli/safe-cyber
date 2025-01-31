@@ -37,7 +37,7 @@ exports.contControl = async (req, res) => {
     // const boolv = (sensd !== tdata) ? true :false; 
     return res
       .status(200)
-      .json({ success:true, sdata: sensd , sensored: true }); // making sens true for temprry
+      .json({ success:true, sdata: sensd , sensored: true,given:tdata }); // making sens true for temprry
   } catch (error) {
     console.log("we got error at sending message to gemini");
     console.error("Error details:", error); // Log detailed error information
