@@ -4,14 +4,15 @@ import Media from './Media';
 import { useState } from "react";
 
 function ContentSensor() {
-  const [component,setComponent]= useState(null);
-  const gotext =()=>{ setComponent('Text')}
-  const goimage=()=>{ setComponent('Media')}
+  const [component,setComponent]= useState('Text');
+  const[tab,setTab]=useState(1)
+  const gotext =()=>{ setComponent('Text');setTab(1)}
+  const goimage=()=>{ setComponent('Media');setTab(2)}
   return (
     <div className="sensor-main">
      <div className="sensor-head">
-      <p onClick={gotext}>Text</p>
-      <p onClick={goimage}>Media</p>
+      <p onClick={gotext}className={tab === 1 ? "active-tab" : ""}>Text</p>
+      <p onClick={goimage}className={tab === 2 ? "active-tab" : ""}>Image</p>
      </div>
      <div className="sensor-hero">
       {
