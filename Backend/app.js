@@ -19,34 +19,54 @@ const app = express();
 // List of allowed origins
 const allowedOrigins = ["https://safecyber.vercel.app"];
 
-// Dynamic origin function
+// // Dynamic origin function
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     // If no origin or origin is in the allowed list, allow it
+//     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS --->said by dynamic function"));
+//     }
+//   }, // Explicitly allow this frontend
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "authorization"],
+//   credentials: true, // Allow credentials (cookies, authorization headers)
+// };
+
+// // const corsOptions = {
+// //   origin: "*", // Allows all origins
+// //   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+// //   allowedHeaders: ["Content-Type", "Authorization"],
+// //   credentials: true, // Enable if your frontend needs cookies/auth
+// // };
+
+// app.use(cors(corsOptions));
+
+// // Handle preflight (OPTIONS) requests globally
+// app.options("*", cors(corsOptions));
+
+// Middleware
+
 const corsOptions = {
   origin: function (origin, callback) {
-    // If no origin or origin is in the allowed list, allow it
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS --->said by dynamic function"));
-    }
-  }, // Explicitly allow this frontend
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "authorization"],
-  credentials: true, // Allow credentials (cookies, authorization headers)
+    callback(null, true); // Allows all origins dynamically
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["*"],
+  credentials: true, // Allows credentials (cookies, auth headers)
 };
-
-// const corsOptions = {
-//   origin: "*", // Allows all origins
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//   allowedHeaders: ["Content-Type", "Authorization"],
-//   credentials: true, // Enable if your frontend needs cookies/auth
-// };
 
 app.use(cors(corsOptions));
 
-// Handle preflight (OPTIONS) requests globally
-app.options("*", cors(corsOptions));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
-// Middleware
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
