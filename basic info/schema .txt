@@ -5,6 +5,7 @@ user {
    
   violated_count: int   // backend only (if count )
   banned_time : time   -->isbanned (time -present_time == 2 days)
+  chats:[ chat_ids ]
 } 
 
 // Schema for both fakenews and scam 
@@ -15,17 +16,20 @@ fakenews {
 }
 
 
-collection : groupchat
+collection : messagedata
 docs -> {
-group_id : 1,
+chat_id : 1,
+chat_name:"",
 sentemail : "email",
 sentname: "name",
 time: time,
 mdata:""
 }
 
-collection : metadata
-
+collection : chat_info
 {
-group_id
+   chat_id
+   chat_name
+//praticipants :["ramsai","deva"]
+
 }

@@ -4,7 +4,7 @@ require("dotenv").config(); // Load API key from .env file
 
 // Initialize Gemini API with your API key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // Function to process uploaded image and extract text
 exports.ImageContentSensor = async (req, res) => {
@@ -27,9 +27,14 @@ exports.ImageContentSensor = async (req, res) => {
           mimeType: req.file.mimetype,
         },
       },
-      `Check whether the extracted text contains any curse words. If yes, return "TEXT_TRUE", otherwise return "TEXT_FALSE".
+      `Check whether the extracted text contains any curse words and nudity. If yes, return "TEXT_TRUE", otherwise return "TEXT_FALSE".
        Also, check if the image contains any offensive symbols or gestures. If yes, return "IMAGE_TRUE", otherwise return "IMAGE_FALSE".
-       Respond ONLY with two words: either "TEXT_TRUE IMAGE_TRUE", "TEXT_TRUE IMAGE_FALSE", "TEXT_FALSE IMAGE_TRUE", or "TEXT_FALSE IMAGE_FALSE".`,
+       Respond with the format: "TEXT_TRUE IMAGE_TRUE" or other possible combinations.
+       Additionally, if any offensive content is detected, provide a paragraph of why the image does not obey the rules.
+       Example response format:
+       TEXT_TRUE IMAGE_FALSE
+       Explanation:
+               The text contains inappropriate language.It includes offensive phrases that violate content guidelines.[Continue the explanation for 10 lines...]`,
     ]);
 
     // Delete the uploaded image file after processing
@@ -37,17 +42,19 @@ exports.ImageContentSensor = async (req, res) => {
 
     // Extract response text
     const responseText = result.response.text().trim();
-
     console.log("Gemini API Response:", responseText);
 
-    // Check if Gemini detected offensive content
-    const containsCurseWords = responseText.includes("TEXT_TRUE");
-    const containsCurseActions = responseText.includes("IMAGE_TRUE");
+    // Split response into the status and explanation
+    const [status, ...explanationLines] = responseText.split("\n");
+
+    const containsCurseWords = status.includes("TEXT_TRUE");
+    const containsCurseActions = status.includes("IMAGE_TRUE");
 
     if (containsCurseWords || containsCurseActions) {
       return res.status(201).json({
         success: false,
         message: "Image contains offensive content and does not obey.",
+        reason: explanationLines.join("\n"),
       });
     }
 

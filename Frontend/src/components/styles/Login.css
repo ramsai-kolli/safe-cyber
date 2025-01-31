@@ -2,6 +2,13 @@
   padding-top: 100px;
  } */
  
+ .Login-error{
+    margin-top: 5px;
+    color: rgb(171, 34, 34);
+    font-size: 12PX;
+    text-align: left;
+ }
+
 
  .div1-login {
     background: white;
