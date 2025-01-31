@@ -34,7 +34,7 @@ const dialogStyle = {
     overflow: 'hidden'
 };
 
-const ChatDialog = () => {
+const ChatDialog = (props) => {
 
     // const { person } = useContext(UserContext);
     
@@ -42,11 +42,11 @@ const ChatDialog = () => {
        <div>
             <Component>
                 <LeftComponent>
-                    <Menu/>
+                    <Menu email={props.email}/>
                 </LeftComponent>
                 <RightComponent>
                     
-                     <ChatBox/>
+                     <ChatBox email={props.email}/>
                     
                 </RightComponent>
             </Component>

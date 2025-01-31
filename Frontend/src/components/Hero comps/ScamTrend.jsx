@@ -1,6 +1,6 @@
 import React , {useState, useEffect}from 'react'
 import TrendInput from './TrendInput';
-
+import axios from 'axios';
 export default function ScamTrend() {
   const [data, setData] = useState(
     [

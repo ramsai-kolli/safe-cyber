@@ -47,9 +47,9 @@ function Misinfo() {
          }
   }
   return (
-    <div class="div1-misinfo">
-      <div class="div2-misinfo">
-        <p class="para-misinfo">Enter info to check</p>
+    <div className="div1-misinfo">
+      <div className="div2-misinfo">
+        <p className="para-misinfo">Enter info to check</p>
         <textarea
           ref={textAreaRef}
           className="input-misinfo"
@@ -58,14 +58,14 @@ function Misinfo() {
           onChange={handleChange}
           placeholder="Start typing..."
         />
-        <button class="btn-misinfo" type='button'  onClick={handleSubmit}>Submit</button>
+        <button className="btn-misinfo" type='button'  onClick={handleSubmit}>Submit</button>
         
         { flag && (
           <div className='div3-misinfo'>
-            <p class="para2-misinfo">Result</p> 
-           <p class="para3-misinfo">Info provided is: {result.isReal}</p> 
-           <p class="para4-misinfo">Percentage of truness:{result.realper}</p> 
-           <p class="para5-misinfo">Source:{result.source}</p> 
+            <p className="para2-misinfo">Result</p> 
+           <p className="para3-misinfo">Info provided is: {result.isReal}</p> 
+           <p className="para4-misinfo">Percentage of truness:{result.realper}</p> 
+           <p className="para5-misinfo">Source:{result.source}</p> 
           </div>
         )
           

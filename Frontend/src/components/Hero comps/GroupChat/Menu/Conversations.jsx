@@ -19,7 +19,7 @@ const StyledDivider = styled(Divider)`
     opacity: .6;
 `;
 
-const Conversations = ({ email }) => {  // once text
+const Conversations = (email) => {  // once text
     const [chats, setChats] = useState([{chat_id:1}]);
     // const [user, setUser] = useState(null);
     // const { account, socket, setActiveUsers } = useContext(AccountContext);
@@ -53,7 +53,7 @@ const Conversations = ({ email }) => {  // once text
                     setChats(res.data.data.chats);
                     console.log("res.data.data.chats    : ",res.data.data.chats)
                     }else{
-                      alert("Error : to retrieve get-user-info");
+                      alert("Error : to retrieve get-user-info email -> ",email);
                     }
                       })
                      // console.log("register")
