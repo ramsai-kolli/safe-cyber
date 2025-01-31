@@ -10,14 +10,37 @@ const Text =()=>{
     }
     const handleSubmit =async()=>{
         try{
-         await axios.post('https://safecyber-api.onrender.com/api/contsensor-text',tdata).then(response=>{
-         if(response.data.success)
-         {
-           setSdata(response.data.sdata);
-           const issensd = response.data.sensored;
-         setFlag(true);
-         }
-        })
+        //  await axios.post('https://safecyber-api.onrender.com/api/contsensor-text',tdata).then(response=>{
+        //  if(response.data.success)
+        //  {
+        //    setSdata(response.data.sdata);
+        //    const issensd = response.data.sensored;
+        //  setFlag(true);
+        //  }
+        // })
+
+        const response = await fetch(
+          "https://safecyber-api.onrender.com/api/contsensor-text",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              tdata: tdata,
+            }),
+          }
+        );
+  
+        const data = await response.json();
+        if(data.data.success)
+           {
+             setSdata(data.data.sdata);
+            //  const issensd = response.data.sensored;
+           setFlag(true);
+           }
+
+
         }
         catch(e)
         {
