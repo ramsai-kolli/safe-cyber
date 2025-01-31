@@ -14,7 +14,7 @@ const Menu = (props) => {
         <Box>
             {/* <Header/> */}
             {/* <Search setText={setText} /> */}
-            <Conversations email={props.email} setCurrentChatId={props.setCurrentChatId} />
+            <Conversations email={props.email} setCurrentUserInfo={props.setCurrentUserInfo} />
         </Box>
     )
 }

@@ -1,14 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import { styled, Box, Typography } from "@mui/material";
-
-// import { UserContext } from '../../../context/UserProvider';
-// import { AccountContext } from '../../../context/AccountProvider';
 import axios from 'axios';
-// import { setConversation, getConversation } from '../../../service/api';
 // import { emptyProfilePicture } from '../../../constants/data';
-// import { formatDate } from '../../../utils/common-utils';
 
+const formatDate = (date) => {
+    const hours = new Date(date).getHours();
+    const minutes = new Date(date).getMinutes();
+    return `${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+}
 const Component = styled(Box)`
     height: 45px;
     display: flex;
@@ -47,41 +46,23 @@ const Conversation = (props) => {  // once user
     // const { setPerson } = useContext(UserContext);
     // const { account, newMessageFlag }  = useContext(AccountContext);
 
-    const [message, setMessage] = useState([{
-        chat_id: 1,
-        chat_name: "og gang",
-        sentemail: "charan@gmail.com",
-        sentname: "chaitanya",
-        time: "time",
-        mdata: "hi brooo 1 ",
-      },{
-        chat_id: 1,
-        chat_name: "og gang",
-        sentemail: "charan@gmail.com",
-        sentname: "chaitanya",
-        time: "time",
-        mdata: "hi brooo 2 ",
-      }]);
+    const [message, setMessage] = useState([]);
 
     useEffect(() => {
         const getConversationMessage = async() => {
-            // const data = await getConversation({ senderId: account.sub, receiverId: user.sub });
-            // setMessage({ text: data?.message, timestamp: data?.updatedAt });
-
+           
             try{
                 await axios.post('https://safecyber-api.onrender.com/api/getmsg',{chat_id: props.chat_id}).then(res=>{
                    if(res.data.success){
-                //    alert("retreived !");           
-                   console.log("conversation.jsx : -> ",res.data.data)
+                       
+                   console.log("conversation.jsx : const messages -> ",res.data.msgs)
                
                
-                // setMessage(res.data.data)
+                setMessage(res.data.msgs)
                    }else{
                      alert("Error : to retrieve getmsg");
                    }
-                     })
-                    // console.log("register")
-                    
+                     })                    
              }
              catch(error){
                  console.log('Error sending registration request',error);
@@ -91,7 +72,7 @@ const Conversation = (props) => {  // once user
     }, []);
 
     const getChat = async () => {
-        props.setCurrentChatId(props.chat_id)
+        props.setCurrentUserInfo(message)
     }
 
     return (
@@ -104,11 +85,16 @@ const Conversation = (props) => {  // once user
                     <Typography>{"chat id : "+props.chat_id}</Typography>
                     { 
                         // message.mdata
-                        // <Timestamp>{formatDate(message?.timestamp)}</Timestamp>        
+                        <Timestamp>
+                            {formatDate( message.length > 0 ? message[message.length - 1].time : "")}
+                            </Timestamp>        
                     }
                 </Container>
                 <Box>
-                    <Text>{message[message.length - 1].mdata}</Text>
+                    <Text>
+                        {message.length > 0 ? message[message.length - 1].mdata : "No messages"}
+                        
+                    </Text>
                 </Box>
             </Box>
         </Component>

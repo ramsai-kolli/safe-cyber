@@ -48,7 +48,7 @@ const Conversations = (props) => {  // once text
             try{
                  await axios.post('https://safecyber-api.onrender.com/api/getuinfo',{email: props.email}).then(res=>{
                     if(res.data.success){
-                    alert("retreived !");           
+                               
                     // setUser(res.data.data);
                     setChats(res.data.data.chats);
                     console.log("res.data.data.chats    : ",res.data.data.chats)
@@ -67,20 +67,19 @@ const Conversations = (props) => {  // once text
     }, []);
 
     return (
+        <>
         <Component>
-            {
-                chats && chats.map((obj, index) => (
-                    // user.sub !== account.sub && 
-                    <React.Fragment key={obj.chat_id || index}> 
-                            <Conversation chat_id={obj.chat_id}  setCurrentChatId={props.setCurrentChatId}/>
-                            {
-                                chats.length !== (index + 1)  && <StyledDivider />
-                            }
-                        
-                    </React.Fragment>
-                ))
-            }
+        {
+                    chats && chats.map((obj, index) => (
+                <React.Fragment key={index}>
+                    <Conversation chat_id={obj.chat_id} setCurrentUserInfo={props.setCurrentUserInfo} />
+                    {chats.length !== (index + 1) && <StyledDivider />}
+                </React.Fragment>
+            ))
+        }
         </Component>
+        
+</>
     )
 }
 
