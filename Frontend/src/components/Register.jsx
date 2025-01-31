@@ -7,22 +7,30 @@ import Header from "./Header";
 function Register(){
   const [user, setUser] = useState({
     name : "",                                                                                                                                                                                                                                                                                                               
-    
     email :"",
-    password : "",
+    password : ""
       
 });
+const [invalidtext, setInvalidtext] = useState("");
 
 const navigate = useNavigate();
 
 const changeHandler = (e) => {
   const { name, value } = e.target;
   setUser({ ...user, [name]: value });
+  
+  if(name==="password"&& value.length<8)
+    {
+      setInvalidtext("Password must contain 8 letters");
+    }
+    else if(name==="password"&&value.length>=8){
+      setInvalidtext("");
+    }
 };
 const gologin = ()=>{
   window.location.href=`/login`
 }
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
     console.log("submit handle");
     if(user.password.length<6) 
@@ -34,7 +42,7 @@ const gologin = ()=>{
                 alert("registered Succesfully!");
                  
  
-                setUser({name:'',phone:'',email:'',password:''});
+                setUser({name:"",email:"",password:""});
               
                navigate('/home2', { state: { message: res.data.message } }); 
 
@@ -56,9 +64,10 @@ const gologin = ()=>{
         <div class="div-register"> 
          <label class="label-register">this is register form</label><br></br>
         <form class="from-register" onSubmit={submitHandler} >
-          <input class="input-register" value={user.name} onChange={changeHandler} name='name' type='text' placeholder="enter name"  ></input><br></br>
-          <input class="input-register" value={user.email} onChange={changeHandler} name='email' type="email" placeholder='enter email:'></input><br></br>                                                                                                               
-          <input class="input-register" value={user.password} onChange={changeHandler} name='password' type="password"  placeholder='enter password'></input><br></br>
+          <input class="input-register"  onChange={changeHandler} value={user.name} name='name' type='text' placeholder="enter name"  ></input><br></br>
+          <input class="input-register"  onChange={changeHandler} value={user.email} name='email' type="email" placeholder='enter email:'></input><br></br>                                                                                                               
+          <input class="input-register" onChange={changeHandler} value={user.password} name='password' type="password"  placeholder='enter password'></input>
+          { invalidtext && <p className="register-error">{invalidtext}</p>}
           <button class="btn-register" type="submit">Submit</button>
         
         </form>     
