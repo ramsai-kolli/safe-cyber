@@ -9,6 +9,7 @@ import '../styles/Hero.css'
 import Trending from "./Trending";
 import Logout from "../Separate Comps/Logout";
 function Hero({email}) {
+  const [tab,setTab]=useState(0);
   let flag=true;
   if (email) {
     console.log("mail is",email);
@@ -18,10 +19,13 @@ function Hero({email}) {
     flag=false;
   }
   const [comp, setComp] = useState(1);
+  const handlechild = (childData)=>{
+       
+  }
   let componentToDisplay;
   switch (comp) {
     case 1:
-      componentToDisplay = <Homecomp />;
+      componentToDisplay = <Homecomp sendData={handlechild}/>;
       break;
     case 2:
       componentToDisplay = <ContentSensor />;

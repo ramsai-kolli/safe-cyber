@@ -33,21 +33,16 @@ const gologin = ()=>{
   const submitHandler = async(e) => {
     e.preventDefault();
     console.log("submit handle");
-    if(user.password.length<6) 
+    if(user.password.length<8) 
     {
-        alert('password must contain 6 letters');
+        alert('password must contain 8 letters');
      }
     try{
         axios.post('https://safecyber-api.onrender.com/api/user-sign-up',user).then(res=>{
                 alert("registered Succesfully!");
-                 
- 
-                setUser({name:"",email:"",password:""});
-              
-               navigate('/home2', { state: { message: res.data.message } }); 
+               setUser({name:"",email:"",password:""});
 
-                
-               
+              window.location.href='/login';
             }) 
            
     }
