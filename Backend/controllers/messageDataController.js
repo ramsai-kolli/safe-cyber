@@ -63,24 +63,20 @@ exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
 exports.getMessageData = catchAsyncErrors(async (req, res) => {
   const { chat_id } = req.body;
   try {
-    const matched_chat_data = await messagedata.findOne({ chat_id });
+    const matched_chat_data = await messagedata.find({ chat_id });
 
     if (!matched_chat_data) {
-      return res
-        .status(204)
-        .json({
-          success: false,
-          message: "no messages existed with the given chat_id",
-        });
+      return res.status(204).json({
+        success: false,
+        message: "no messages existed with the given chat_id",
+      });
     }
 
-    return res
-      .status(201)
-      .json({
-        success: true,
-        message: `successfully retrived all messages with chat_id:${chat_id}`,
-        data: matched_chat_data,
-      });
+    return res.status(201).json({
+      success: true,
+      message: `successfully retrived all messages with chat_id:${chat_id}`,
+      data: matched_chat_data,
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,

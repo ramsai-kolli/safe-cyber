@@ -52,31 +52,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //MongoDB Atlas Connection
-try {
-  const mongoUri = process.env.MONGO_URI;
+// try {
+//   const mongoUri = process.env.MONGO_URI;
 
-  if (!mongoUri) {
-    console.error("MongoDB URI not defined in .env file.");
-    process.exit(1);
-  }
+//   if (!mongoUri) {
+//     console.error("MongoDB URI not defined in .env file.");
+//     process.exit(1);
+//   }
 
-  mongoose
-    .connect(mongoUri)
-    .then(() => {
-      console.log("Connected to MongoDB Atlas CLOUD !!");
-    })
-    .catch((error) => {
-      console.error("Error connecting to MongoDB Atlas:", error);
-    });
-} catch (e) {
-  console.log("cloud connecting error");
-}
+//   mongoose
+//     .connect(mongoUri)
+//     .then(() => {
+//       console.log("Connected to MongoDB Atlas CLOUD !!");
+//     })
+//     .catch((error) => {
+//       console.error("Error connecting to MongoDB Atlas:", error);
+//     });
+// } catch (e) {
+//   console.log("cloud connecting error");
+// }
 
 // MongoDB Compass connection
-// mongoose
-//   .connect("mongodb://localhost:27017/cyber-safe")
-//   .then(() => console.log("Connected to database"))
-//   .catch((e) => console.log(e));
+mongoose
+  .connect("mongodb://localhost:27017/cyber-safe")
+  .then(() => console.log("Connected to database"))
+  .catch((e) => console.log(e));
 
 // importing apis
 const chat = require("./routes/chatRoute");
