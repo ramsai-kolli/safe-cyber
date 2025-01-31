@@ -12,7 +12,7 @@ const user = require("./routes/userRoute");
 const fakenews = require("./routes/fakenewsRoute");
 const spam = require("./routes/scamRoute");
 const contsensImage = require("./routes/imageSensorRoute");
-const groupchat = require("./routes/groupChatRoute");
+const msgData = require("./routes/msgDataRoute");
 
 const app = express();
 
@@ -91,7 +91,7 @@ app.use("/api", sendEmail);
 app.use("/api", tokenVerify);
 app.use("/api", contSen);
 app.use("/api", contsensImage);
-app.use("/api", groupchat);
+app.use("/api", msgData);
 
 //assigning api to user
 app.use("/api", user);
