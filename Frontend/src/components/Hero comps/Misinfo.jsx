@@ -5,7 +5,9 @@ import axios from "axios"; // Make sure to import axios for the API call
 function Misinfo() {
   const [inputValue, setInputValue] = useState("");
   const textAreaRef = useRef(null);
-
+  const [explanation, setExplanation] = useState(""); // Use state to store explanation
+  const [realper, setRealPer] = useState(""); // Use state for real percentage
+  const [source, setSource] = useState(""); // Use state for source
   const [tdata, setData] = useState("");
   const [result, setResult] = useState({
     isReal: false,
@@ -36,26 +38,23 @@ function Misinfo() {
     try {
       // Send input data to the '/chat' endpoint
       let response = await axios.post(
-        "https://https://safecyber-api.onrender.com/api/fact-check",
+        "https://safecyber-api.onrender.com/api/fact-check",
         {
           newsContent: inputValue,
         }
       );
 
-      // Assuming the response has the following structure:
-      // { data: { isReal: boolean, realper: number, source: string } }
+      if (response.data.success && response.data.data.length > 0) {
+        // Extract data correctly
+        const { explanation, realPercentage, source } = response.data.data[0];
 
-      if (response.data.success) {
-        const { isReal, realper, source } = response.data.data; // Adjust based on actual response structure
-        setResult({
-          explanation,
-          realper,
-          source,
-        });
-        setFlag(true); // Show the result section after receiving data
+        setExplanation(explanation);
+        setRealPer(realPercentage);
+        setSource(source);
+        setFlag(true); // Show the result section
       } else {
-        console.error(response.data.message);
-        setFlag(false); // Hide result if there's an error
+        console.error("Invalid response structure:", response.data);
+        setFlag(false);
       }
     } catch (e) {
       console.error(e);
@@ -82,11 +81,9 @@ function Misinfo() {
         {flag && (
           <div className="div3-misinfo">
             <p className="para2-misinfo">Result</p>
-            <p className="para3-misinfo">Explanation: {result.explanation}</p>
-            <p className="para4-misinfo">
-              Percentage of truness: {result.realper}%
-            </p>
-            <p className="para5-misinfo">Source: {result.source}</p>
+            <p className="para3-misinfo">Explanation: {explanation}</p>
+            <p className="para4-misinfo">Percentage of truness: {realper}%</p>
+            <p className="para5-misinfo">Source: {source}</p>
           </div>
         )}
       </div>
