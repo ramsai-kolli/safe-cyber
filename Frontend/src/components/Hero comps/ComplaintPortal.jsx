@@ -14,6 +14,27 @@ export default function ComplaintPortal({email}) {
       const handleClick = ()=>{
         window.location.href='/register';
       }
+      const handleSubmit =async ()=>{
+        
+          // let data = await getUsers();
+          // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
+          // setUsers(fiteredData);
+          try{
+               await axios.post('https://safecyber-api.onrender.com/api/sendm',message).then(res=>{
+                  if(res.data.success){
+              
+                  console.log("successfully pushed/uploaded the msg")
+                  }else{
+                    alert("Error : to push msg  ");
+                  }
+                    })
+                   // console.log("register")
+                   
+            }
+            catch(error){
+                console.log('Error sending registration request',error);
+            }
+      }
   return (
     <div>
       {flag && (
@@ -31,7 +52,7 @@ export default function ComplaintPortal({email}) {
      <div className="div2-com">
      <textarea className="textarea-com"></textarea>
      </div>
-     <button className="btn-com">submit</button>
+     <button className="btn-com" onClick={handleSubmit}>submit</button>
     
     </div>
       }
