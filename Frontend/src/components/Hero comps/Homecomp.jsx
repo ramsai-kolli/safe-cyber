@@ -80,7 +80,7 @@ function Homecomp({sendData}) {
          <p>To Check spreading info is real or fake</p><p className="home-censor-btn" onClick={()=>{sendData(3)}}>Click here</p>
          </div>
         </div>
-        <div className="home-censor-img">
+        <div className="home-fact-img">
         </div>
         </div>
 
@@ -91,7 +91,7 @@ function Homecomp({sendData}) {
          <p>To check what's trending</p><p className="home-censor-btn" onClick={()=>{sendData(4)}}>Click here</p>
          </div>
         </div>
-        <div className="home-censor-img">
+        <div className="home-trend-img">
         </div>
         </div>
 
@@ -102,7 +102,7 @@ function Homecomp({sendData}) {
          <p>To Chat with people in groups without abuse words </p><p className="home-censor-btn" onClick={()=>{sendData(5)}}>Click here</p>
          </div>
         </div>
-        <div className="home-censor-img">
+        <div className="home-group-img">
         </div>
         </div>
 
@@ -113,7 +113,7 @@ function Homecomp({sendData}) {
          <p>To get assistance of gemini chat bot</p><p className="home-censor-btn" onClick={()=>{sendData(6)}}>Click here</p>
          </div>
         </div>
-        <div className="home-censor-img">
+        <div className="home-chat-img">
         </div>
         </div>
 
