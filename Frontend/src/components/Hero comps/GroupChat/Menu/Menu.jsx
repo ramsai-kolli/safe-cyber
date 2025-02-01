@@ -8,7 +8,6 @@ import { Box } from '@mui/material';
 import Conversations from './Conversations';
 
 const Menu = (props) => {
-    const [text, setText] = useState('');
     // console.log(props.email,"at menu") // true
     return (
         <Box>
