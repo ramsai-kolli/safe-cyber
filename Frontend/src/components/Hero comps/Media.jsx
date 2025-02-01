@@ -5,11 +5,12 @@ import { styled } from "@mui/material";
 import { useState, useEffect } from "react";
 
 const ClipIcon = styled(AttachFile)`
-  height: 40px;
+  height: 40px;,
+  cursor:'pointer'
 `;
 
 const Media = () => {
-  const [sdata, setSdata] = useState("upload the file");
+  const [sdata, setSdata] = useState("");
   const [flag, setFlag] = useState(true);
   const [value, setValue] = useState();
   const [file, setFile] = useState(null); // Ensure it starts as null
@@ -83,9 +84,10 @@ const Media = () => {
   };
 
   return (
+    <>
     <div className="text-main">
       <label htmlFor="fileInput">
-        <ClipIcon />
+       <div className="media-pic"></div>
       </label>
       <input
         type="file"
@@ -93,9 +95,6 @@ const Media = () => {
         style={{ display: "none" }}
         onChange={onFileChange}
       />
-      <button className="text-btn" onClick={uploadFileToGemini}>
-        Submit
-      </button>
       {file && (
         <p
           style={{ marginTop: "10px", marginBottom: "0px", fontWeight: "bold" }}
@@ -103,12 +102,18 @@ const Media = () => {
           Selected File: {file.name}
         </p>
       )}
+      <button className="text-btn" onClick={uploadFileToGemini}>
+        Submit
+      </button>
+    
+    </div>
+      
       {flag && (
-        <div>
+        <div className="media-res">
           <p>{sdata}</p>
         </div>
       )}
-    </div>
+      </>
   );
 };
 
