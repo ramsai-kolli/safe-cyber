@@ -4,10 +4,10 @@ const chatinfo = require("../models/chatinfoModel"); // Metadata model
 const user = require("../models/usermodel");
 
 exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
-  const { chat_id, sentemail, mdata } = req.body;
+  const { chat_id, chat_name, sentemail, mdata } = req.body;
 
   // Check if required data is provided
-  if (!chat_id || !sentemail || !mdata) {
+  if (!chat_id || !chat_name || !sentemail || !mdata) {
     return res.status(400).json({
       success: false,
       message: "Please enter all the required fields.",
@@ -15,13 +15,13 @@ exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
   }
 
   try {
-    const chat_name = await chatinfo.findOne({ chat_id });
-    if (!chat_name) {
-      return res.status(204).json({
-        success: false,
-        message: "chat_id doesnt find in the chatinfo model",
-      });
-    }
+    // const chat_name = await chatinfo.findOne({ chat_id });
+    // if (!chat_name) {
+    //   return res.status(204).json({
+    //     success: false,
+    //     message: "chat_id doesnt find in the chatinfo model",
+    //   });
+    // }
 
     const fetch_name = await user.findOne({ email: sentemail });
 
@@ -45,7 +45,7 @@ exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
     // Create a new GroupChat document with the generated group_id and formatted time
     const newMsgData = new messagedata({
       chat_id,
-      chat_name: chat_name.chat_name,
+      chat_name: chat_name,
       sentemail,
       sentname: fetch_name.name,
       time: formattedTime,
