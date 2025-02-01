@@ -12,7 +12,7 @@ function Misinfo() {
   const [result, setResult] = useState({
     isReal: false,
     realper: 0,
-    source: "official",
+    source: "",
   });
   const [flag, setFlag] = useState(true); // This flag will toggle the result display
 
