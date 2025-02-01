@@ -34,7 +34,7 @@ export default function ComplaintPortal({email}) {
           // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
           // setUsers(fiteredData);
           try{
-            const sendMsg = {email:"devavatturi@gmail.com", message:inputValue };
+            const sendMsg = {email:"devavatturi@gmail.com", message:`the user email id : ${email} \n complaint: ${inputValue}` };
             console.log(" complaint obj : ", sendMsg);
                await axios.post('https://safecyber-api.onrender.com/api/send-email',sendMsg).then(res=>{
                   if(res.data.success){
