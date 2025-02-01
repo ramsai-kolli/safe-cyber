@@ -68,3 +68,81 @@ exports.chatControl = async (req, res) => {
     console.log("we got error at sending message to gemini");
   }
 };
+
+// Function to check if the news is fake or real
+exports.checkFakeNews = async (req, res) => {
+  try {
+    const introContentPart3 = `You are now tasked with determining if the following news content is fake or real. Analyze the content and provide a detailed explanation why the news is fake, along with a credibility score (as a percentage) and the source of the news ins the json format.`;
+
+    const { newsContent } = req.body; // The content of the news to check
+    const chatSession = model.startChat({
+      generationConfig,
+      history: [],
+    });
+
+    // Generate the lengthy string based on the news content
+    const messages = generateLengthyString([{ content: newsContent }]);
+
+    // Send the message to the AI model to determine if it's real or fake
+    const result = await chatSession.sendMessage(
+      `${introContentPart3} ${newsContent} 
+
+      Please provide the result in JSON format with the following keys:
+      {
+        "explanation": "Provide an explanation of whether the news is fake or real in 2 lines.",
+        "realPercentage": "A credibility score between 0-100.",
+        "source": "The website from which you verify the news in single line."
+      }
+        Do **not** include Markdown formatting or triple backticks.`
+    );
+    // Assume result contains the explanation, credibility score, and source
+    // const explanation = result.response.text().includes("fake")
+    //   ? "This news is fake."
+    //   : "This news is real.";
+    // const realPercentage = result.response.text().includes("fake") ? 0 : 100; // Example: 0% for fake news, 100% for real news
+    // const source = ""; // Placeholder, you'd extract this from the result or news source
+
+    let responseText = result.response.text();
+
+    // Clean up unwanted Markdown formatting (removes ```json ... ```)
+    responseText = responseText
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
+
+    let parsedData;
+    try {
+      parsedData = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error("Error parsing AI response:", parseError);
+      return res.status(500).json({
+        success: false,
+        error:
+          "Failed to parse AI response. AI might have returned an invalid format.",
+        rawResponse: responseText, // Debugging: Send raw response to frontend if needed
+      });
+    }
+
+    const { explanation, realPercentage, source } = parsedData;
+
+    // Return the results in the required format
+    return res.status(200).json({
+      success: true,
+      data: [
+        {
+          explanation: explanation,
+          realPercentage: realPercentage,
+          source: source,
+        },
+      ],
+    });
+  } catch (error) {
+    console.error("Error details:", error);
+    return res.status(400).json({
+      success: false,
+      error: error.response
+        ? error.response.data
+        : "There was an issue on the server",
+    });
+  }
+};
