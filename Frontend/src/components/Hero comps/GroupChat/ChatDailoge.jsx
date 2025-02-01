@@ -41,7 +41,7 @@ const ChatDialog = (props) => {
     const [allMsgsofChat, setallMsgsofChat] = useState();
     
     return (
-       <div>
+       
             <Component>
                 <LeftComponent>
                     <Menu email={props.email} setallMsgsofChat={setallMsgsofChat} />
@@ -52,7 +52,7 @@ const ChatDialog = (props) => {
                     
                 </RightComponent>
             </Component>
-        </div>
+      
     )
 }
 

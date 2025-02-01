@@ -46,7 +46,7 @@ const Conversation = (props) => {  // once user
     // const { setPerson } = useContext(UserContext);
     // const { account, newMessageFlag }  = useContext(AccountContext);
 
-    const [message, setMessage] = useState([]);
+    const [message, setMessage] = useState();
 
     useEffect(() => {
         const getConversationMessage = async() => {
@@ -76,13 +76,14 @@ const Conversation = (props) => {  // once user
     }
 
     return (
-        <Component onClick={() => getChat()}>
+        <>
+        {!message ? "loading convrsation" : <Component onClick={() => getChat()}>
             <Box>
                 {/* <Image src={url} alt="display picture" /> */}
             </Box>
             <Box style={{width: '100%'}}>
                 <Container>
-                    <Typography>{ message.chat_name ? message.chat_name:"no name (null)"  }</Typography>
+                    <Typography>{ message[0] ? message[0].chat_name:"no name (null)"  }</Typography>
                     { 
                         // message.mdata
                         <Timestamp>
@@ -98,7 +99,8 @@ const Conversation = (props) => {  // once user
                 </Box>
             </Box>
         </Component>
-        // <p>this is for one</p>
+}
+        </>
     )
 }
 
