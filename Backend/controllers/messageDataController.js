@@ -2,6 +2,60 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors"); // Assuming 
 const messagedata = require("../models/messageDataModel"); // GroupChat model
 const chatinfo = require("../models/chatinfoModel"); // Metadata model
 const user = require("../models/usermodel");
+// import axios from 'axios';
+// import { notify } from '../app';
+
+const censorIt =async(msgData)=>{
+  try{
+
+      const response = await fetch(
+        "https://safecyber-api.onrender.com/api/contsensor-text",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            tdata: msgData,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      if(data.success)
+        {
+        //    setSdata(data.sdata);
+  
+        return data.sdata;
+        }
+   return msgData;
+  }catch(e)
+  {
+   console.log(e);
+   return msgData;
+  }
+  return msgData;
+}
+
+const notify =async(obj)=>{
+  try{
+    const sendMsg = { message:`New message from cyber safe: ${obj}` };
+    console.log(" complaint obj : ", sendMsg);
+       await axios.post('https://safecyber-api.onrender.com/api/send-email',sendMsg).then(res=>{
+          if(res.data.success){
+      
+          console.log("successfully pushed/uploaded the msg")
+          }else{
+            console.log("Error : to push msg  ");
+          }
+            })
+           // console.log("register")
+           
+    }
+    catch(error){
+        console.log('Error sending registration request',error);
+    }
+}
 
 exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
   const { chat_id, chat_name, sentemail, mdata } = req.body;
@@ -15,16 +69,10 @@ exports.SaveMessageData = catchAsyncErrors(async (req, res) => {
   }
 
   try {
-    // const chat_name = await chatinfo.findOne({ chat_id });
-    // if (!chat_name) {
-    //   return res.status(204).json({
-    //     success: false,
-    //     message: "chat_id doesnt find in the chatinfo model",
-    //   });
-    // }
-
+    // mdata= await censorIt(mdata);
+    await notify({chat_name: chat_name,sentemail: sentemail,themesgdata: mdata})
     const fetch_name = await user.findOne({ email: sentemail });
-
+  
     if (!fetch_name) {
       return res.status(404).json({
         success: false,
