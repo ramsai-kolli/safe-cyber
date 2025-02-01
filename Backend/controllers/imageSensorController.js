@@ -34,7 +34,7 @@ exports.ImageContentSensor = async (req, res) => {
        Example response format:
        TEXT_TRUE IMAGE_FALSE
        Explanation:
-               The text contains inappropriate language.It includes offensive phrases that violate content guidelines.[Continue the explanation for 7 lines...]`,
+               The text contains inappropriate language.It includes offensive phrases that violate content guidelines.[Continue the explanation for 2 lines...]`,
     ]);
 
     // Delete the uploaded image file after processing
