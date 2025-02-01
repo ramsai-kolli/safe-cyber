@@ -42,11 +42,8 @@ function Misinfo() {
         }
       );
 
-      // Assuming the response has the following structure:
-      // { data: { isReal: boolean, realper: number, source: string } }
-
       if (response.data.success) {
-        const { isReal, realper, source } = response.data.data; // Adjust based on actual response structure
+        const { explanation, realper, source } = response.data.data; // Adjust based on actual response structure
         setResult({
           explanation,
           realper,
