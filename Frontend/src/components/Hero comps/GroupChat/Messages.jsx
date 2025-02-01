@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { Box, styled } from "@mui/material";
-
+import axios from "axios";
 // import { io } from 'socket.io-client';
 
 // import { getMessages, newMessages } from '../../../service/api';
@@ -84,23 +84,43 @@ const Messages = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
   message= {  chat_id :allMsgsofChat[0]?.chat_id ,
               chat_name:allMsgsofChat[0]?.chat_name,
               sentemail: email,  
-              sentname,  time,  
+              
             mdata:value}
       } else {
         message = {
-          senderId: account.sub,
-          conversationId: conversation._id,
-          receiverId: receiverId,
-          type: "file",
           text: image,
+          chat_id :allMsgsofChat[0]?.chat_id ,
+              chat_name:allMsgsofChat[0]?.chat_name,
+              sentemail: email,   
+            mdata:value
         };
       }
       // socket.current.emit("sendMessage", message);
-      await newMessages(message);
+      const postMsg = async() => {
+        // let data = await getUsers();
+        // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
+        // setUsers(fiteredData);
+        try{
+             await axios.post('https://safecyber-api.onrender.com/api/pushmsg',message).then(res=>{
+                if(res.data.success){
+            
+                console.log("successfully pushed/uploaded the msg")
+                }else{
+                  alert("Error : to push msg  ");
+                }
+                  })
+                 // console.log("register")
+                 
+          }
+          catch(error){
+              console.log('Error sending registration request',error);
+          }
+    }
+    postMsg();
       setValue("");
       setFile();
       setImage("");
-      setNewMessageFlag((prev) => !prev);
+      // setNewMessageFlag((prev) => !prev);
     }
   };
 
