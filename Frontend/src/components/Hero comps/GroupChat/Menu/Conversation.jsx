@@ -95,7 +95,7 @@ const Conversation = (props) => {  // once user
                 </Container>
                 <Box>
                     <Text>
-                        {message.length > 0 ? message[message.length - 1].mdata : "No messages"}
+{/*                         {message.length > 0 ? message[message.length - 1].mdata : "No messages"} */}
                         
                     </Text>
                 </Box>
