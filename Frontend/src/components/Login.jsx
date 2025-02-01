@@ -39,7 +39,6 @@ function Login(){
           alert('password must contain 6 letters');
        }
       try{
-        window.location.href = `/?email=${encodeURIComponent(user.email)}`;
          await axios.post('https://safecyber-api.onrender.com/api/user-sign-in',user).then(res=>{
             if(res.data.success){
             alert("login Succesfully!");
