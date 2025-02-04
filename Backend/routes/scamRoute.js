@@ -17,6 +17,6 @@ router.route("/happened-to-me").post(asyncMiddleware(voteCountForScamNews));
 // fetching the fake news based on votes
 router
   .route("/tscam-list")
-  .post(asyncMiddleware(getScamNewsSortedByhappened_int_count));
+  .get(asyncMiddleware(getScamNewsSortedByhappened_int_count));
 
 module.exports = router;

@@ -14,7 +14,7 @@ import { useState } from 'react';
       <div className="trending-main">
        <div className="trending-head">
         <p onClick={goscam} className={tab === 1 ? "active-tab" : ""}>Trending Scam</p>
-        <p onClick={gosearch}className={tab === 2 ? "active-tab" : ""}>Trending Searches</p>
+        <p onClick={gosearch}className={tab === 2 ? "active-tab" : ""}>Trending News</p>
        </div>
        <div className="trending-hero">
         {
