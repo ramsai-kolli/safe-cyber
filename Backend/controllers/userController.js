@@ -150,7 +150,6 @@ exports.uploadProfileImage = async (req, res) => {
     });
   });
 };
-
 exports.getProfileImage = async (req, res) => {
   try {
     const { email } = req.body;
