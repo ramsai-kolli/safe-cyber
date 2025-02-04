@@ -8,6 +8,7 @@ const user = mongoose.Schema({
   violated_count: { type: Number, default: 0 },
   banned_time: { type: String, default: "" },
   chats: [{ chat_id: Number }],
+  profile_image_id: { type: mongoose.Schema.Types.ObjectId, ref: "fs.files" },
 });
 
 module.exports = mongoose.model("user", user);
