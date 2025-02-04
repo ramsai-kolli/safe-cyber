@@ -3,33 +3,20 @@ import TrendInput from "./TrendInput";
 import axios from "axios";
 
 export default function NewsTrend() {
-  const [data, setData] = useState([
-    {
-      id: 1,
-      heading: "Free iPhone Giveaway",
-      content:
-        "Claim your free iPhone now! Just enter your personal details and shipping address to win a brand new iPhone. Limited time offer!",
-    },
-    {
-      id: 2,
-      heading: "Lottery Winning Notification",
-      content:
-        "Congratulations! You've won $1,000,000 in our online lottery. To claim your prize, send a small fee for processing.",
-    },
-  ]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("");
+      const result = await response.json();
+      setData(result);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("");
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchData();
   }, []);
   const handleButtonClick = async (heading) => {
@@ -64,11 +51,11 @@ export default function NewsTrend() {
                 Noticed it!
               </button>
             </div>
-            <p className="scam-line-mat">{item.content}</p>
+            <p className="scam-line-mat">{item.tcontent}</p>
           </div>
         ))
       )}
-      <TrendInput catgry={"news"} />
+      <TrendInput catgry={"news"} refreshData={fetchData} />
     </div>
   );
 }

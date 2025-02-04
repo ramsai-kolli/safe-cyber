@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { styled, Box, Typography } from "@mui/material";
 import axios from 'axios';
 // import { emptyProfilePicture } from '../../../constants/data';
+import defaultProfilePicture from "../emtyprof.jpg";
+
 
 const formatDate = (date) => {
     const hours = new Date(date).getHours();
@@ -79,7 +81,7 @@ const Conversation = (props) => {  // once user
         <>
         {!message ? "loading convrsation" : <Component onClick={() => getChat()}>
             <Box>
-                {/* <Image src={url} alt="display picture" /> */}
+                 <Image src={defaultProfilePicture} alt="display picture" /> 
             </Box>
             <Box style={{width: '100%'}}>
                 <Container>

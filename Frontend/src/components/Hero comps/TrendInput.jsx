@@ -5,6 +5,7 @@ import axios from "axios";
 function TrendInput(props) {
   const [isdailog, setisdailog] = useState(false);
   const [text, setText] = useState("");
+  const [content, setContent] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
   function showDailog() {
@@ -12,11 +13,6 @@ function TrendInput(props) {
   }
 
   const handleSubmit = async () => {
-    // Split text into heading (first line) and content (rest of the lines)
-    const lines = text.split("\n");
-    const heading = lines[0];
-    const content = lines.slice(1).join("\n");
-
     // Select endpoint based on the category
     let endpoint = "";
     if (props.catgry === "news") {
@@ -27,12 +23,13 @@ function TrendInput(props) {
 
     try {
       let response = await axios.post(endpoint, {
-        headline: heading,
-        tcontent: content,
+        headline: text,
+        tcontent: content
       });
       if (response.data.success) {
         setSuccessMessage("Saved successfully!");
         setisdailog(false); // Close the dialog
+        props.refreshData();
       } else {
         console.log(response.data.message);
       }
@@ -72,9 +69,16 @@ function TrendInput(props) {
           >
             <textarea
               className="trend-inp-input"
-              placeholder="Enter the Scam"
+              placeholder="Enter the Heading"
               value={text}
               onChange={(e) => setText(e.target.value)} // Update text state
+            ></textarea>
+
+            <textarea
+              className="trend-inp-cont"
+              placeholder="Enter the Content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)} // Update text state
             ></textarea>
 
             <button className="trend-scam-btn" onClick={handleSubmit}>

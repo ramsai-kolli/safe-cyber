@@ -17,6 +17,6 @@ router.route("/noticed-it").post(asyncMiddleware(voteCountForFakeNews));
 // fetching the fake news based on votes
 router
   .route("/tfake-list")
-  .post(asyncMiddleware(getFakeNewsSortedByhappened_int_count));
+  .get(asyncMiddleware(getFakeNewsSortedByhappened_int_count));
 
 module.exports = router;
