@@ -7,9 +7,10 @@ export default function NewsTrend() {
   const [loading, setLoading] = useState(false);
   const fetchData = async () => {
     try {
-      const response = await axios.get("");
-      const result = await response.json();
-      setData(result);
+      const response = await axios.get("https://safecyber-api.onrender.com/api/tscam-list");
+      setData(response.data.data);
+      console.log("heey : ",response.data.data);
+
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -43,9 +44,9 @@ export default function NewsTrend() {
         data.map((item) => (
           <div key={item.id} className="scam-card">
             <div className="scam-line">
-              <h3 className="scam-line-head">{item.heading}</h3>
+              <h3 className="scam-line-head">{item.headline}</h3>
               <button
-                onClick={() => handleButtonClick(item.heading)}
+                onClick={() => handleButtonClick(item.headline)}
                 className="scam-line-btn"
               >
                 Noticed it!
