@@ -77,4 +77,33 @@
    - output/back : {success: true}
 
 7. Cyber-Support AI chatbot
+
    - we already have it
+
+8. social media
+
+   1. upload image post
+
+   - /upload-image-post
+   - input: name,email,matter,image(Dont forget to send the data in form-data format not in body)
+   - output: success,message,data[name,email,matter,image]
+
+   2. get image post
+
+   - /get-image-post
+   - input: email(in body format)
+   - output: image
+
+9. user collection
+
+   1. upload profile image
+
+   - url:/upload-profile-image
+   - input : email ,profile_image
+   - output: success,message,data[user data]
+
+   2. get profile image
+
+   - url : /get-profile-image
+   - input : email [here we have to use GET method instead of POST method]
+   - output: image

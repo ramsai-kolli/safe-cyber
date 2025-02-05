@@ -13,6 +13,7 @@ const fakenews = require("./routes/fakenewsRoute");
 const spam = require("./routes/scamRoute");
 const contsensImage = require("./routes/imageSensorRoute");
 const msgData = require("./routes/msgDataRoute");
+const socialMedia = require("./routes/socialMediaRoute");
 
 const app = express();
 
@@ -113,6 +114,7 @@ app.use("/api", tokenVerify);
 app.use("/api", contSen);
 app.use("/api", contsensImage);
 app.use("/api", msgData);
+app.use("/api", socialMedia);
 
 //assigning api to user
 app.use("/api", user);
