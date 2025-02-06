@@ -8,6 +8,7 @@ import { useState } from "react";
 import '../styles/Hero.css'
 import Trending from "./Trending";
 import Logout from "../Separate Comps/Logout";
+import SocialMedia from "./SocialMedia";
 function Hero({email}) {
   // const [tab,setTab]=useState(0);
   let flag=true;
@@ -45,6 +46,9 @@ function Hero({email}) {
     case 7:
         componentToDisplay = <ComplaintPortal email={email}/>; 
         break; 
+    case 8:
+        componentToDisplay = <SocialMedia email={email}/>; 
+        break; 
     default:
       componentToDisplay = null;
   }
@@ -53,13 +57,14 @@ function Hero({email}) {
       <div className="home-comp-bar">
   <div className="home-nav">
         <p onClick={()=>{setComp(1)}} className={comp === 1 ? "active-tab" : ""}>Home</p>
+        <p onClick={()=>{setComp(5)}} className={comp === 5 ? "active-tab" : ""}>Safe Chat</p>
+        <p onClick={()=>{setComp(8)}} className={comp === 8 ? "active-tab" : ""}>Safe Social Media</p>
         <p onClick={()=>{setComp(2)}} className={comp === 2 ? "active-tab" : ""}>Abuse Censor</p>
         <p onClick={()=>{setComp(3)}} className={comp === 3 ? "active-tab" : ""}>Fact Check</p>
-        <p onClick={()=>{setComp(4)}} className={comp === 4 ? "active-tab" : ""}>Trending</p>
-        <p onClick={()=>{setComp(5)}} className={comp === 5 ? "active-tab" : ""}>Group Chat</p>
-        <p onClick={()=>{setComp(6)}} className={comp === 6 ? "active-tab" : ""}>Gemini Chatbot</p>
+        <p onClick={()=>{setComp(4)}} className={comp === 4 ? "active-tab" : ""}>Trending Misinfo</p>
+        <p onClick={()=>{setComp(6)}} className={comp === 6 ? "active-tab" : ""}>AI Chat-Support</p>
         <p onClick={()=>{setComp(7)}} className={comp === 7 ? "active-tab" : ""}>Complaint Portal</p>
-        
+
       </div>
       <div className="hero-logout">
         { flag &&
