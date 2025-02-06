@@ -32,6 +32,17 @@
   background-repeat: no-repeat;
   cursor: pointer;
 }
+.media-pic-sm{
+    background-image: url('../../assets/img-icon.svg');
+    width:40px;
+    height:40px;
+    background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 18%;
+  margin-bottom: 30%;
+}
 .text-inp:focus {
     border-color: #28a745;
     background-color: #eef5ff;

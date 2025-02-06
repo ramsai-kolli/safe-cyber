@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Dialog, Snackbar } from "@mui/material";
+import React, { useState , useRef} from "react";
+import { Dialog, Snackbar,TextField } from "@mui/material";
 import axios from "axios";
 
 function TrendInput(props) {
@@ -7,6 +7,7 @@ function TrendInput(props) {
   const [text, setText] = useState("");
   const [content, setContent] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const textAreaRef = useRef(null);
 
   function showDailog() {
     setisdailog(!isdailog);
@@ -40,18 +41,23 @@ function TrendInput(props) {
 
   const dialogStyle = {
     marginTop: "12%",
-    height: "45%",
-    width: "40%",
+    minHeight: "45%", // Use minHeight instead of fixed height
+    width: "50%",
     maxWidth: "100%",
-    maxHeight: "100%",
     display: "flex",
+    flexDirection: "column", // Ensure vertical stacking
     alignItems: "center",
     justifyContent: "center",
     gap: "10px",
     borderRadius: 0,
-    overflow: "hidden",
+    overflowY: "auto", // Enables vertical scrolling only when needed
     backgroundColor: "white",
     textAlign: "center",
+  };
+
+  const adjustHeight = (textAreaElement) => {
+    textAreaElement.style.height = 'auto';  // Reset height to auto to calculate new height
+    textAreaElement.style.height = `${textAreaElement.scrollHeight}px`;  // Set new height based on content
   };
 
   return (
@@ -67,20 +73,29 @@ function TrendInput(props) {
             maxWidth={"md"}
             PaperProps={{ sx: dialogStyle }}
           >
-            <textarea
-              className="trend-inp-input"
-              placeholder="Enter the Heading"
-              value={text}
-              onChange={(e) => setText(e.target.value)} // Update text state
-            ></textarea>
-
-            <textarea
-              className="trend-inp-cont"
-              placeholder="Enter the Content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)} // Update text state
-            ></textarea>
-
+        
+        <textarea 
+          className="textarea-com"
+          style={{height:"60px"}}
+          ref={textAreaRef}
+          value={text}
+          onChange={
+            (e) => {setText(e.target.value) 
+            adjustHeight(e.target);
+                }
+            }
+          placeholder="Write Heading..."
+        ></textarea>
+        <textarea className="textarea-com"
+          ref={textAreaRef}
+          value={content}
+          onChange={
+              (e) => {setContent(e.target.value) 
+                adjustHeight(e.target);
+              }
+            }
+          placeholder="Write Explanation..."
+        ></textarea>
             <button className="trend-scam-btn" onClick={handleSubmit}>
               Submit
             </button>

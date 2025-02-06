@@ -1,44 +1,93 @@
 import React, { useState, useEffect } from "react";
-import { Container, Box, Typography, Button, TextField, Card, CardMedia, CardContent, Avatar } from "@mui/material";
+import { Container, Box, Typography, Button, TextField, Card, CardMedia, CardContent, Avatar, Paper } from "@mui/material";
 import { styled } from "@mui/system";
 
 // CSS-in-JS Variables
 const styles = {
-  pageBackground: "#e8f5e9",
-  primaryColor: "#2e7d32",
-  textColor: "#1b5e20",
-};
-
-const StyledContainer = styled(Container)({
-  backgroundColor: styles.pageBackground,
-  minHeight: "100vh",
-  padding: "20px",
-});
-
-const PostCard = styled(Card)({
-  maxWidth: 500,
-  margin: "20px auto",
-  boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-});
+    pageBackground: "#121212",
+    primaryColor: "#00c853",
+    secondaryColor: "#00e676",
+    textColor: "#ffffff",
+    cardBackground: "#1e1e1e",
+    borderRadius: "16px",
+    boxShadow: "0px 10px 30px rgba(0, 200, 83, 0.3)",
+  };
+  
+  const StyledContainer = styled(Container)({
+    backgroundColor: styles.pageBackground,
+    minHeight: "100vh",
+    padding: "40px 20px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  });
+  
+  const PostCard = styled(Card)({
+    maxWidth: 600,
+    width: "100%",
+    margin: "20px auto",
+    backgroundColor: styles.cardBackground,
+    color: styles.textColor,
+    borderRadius: styles.borderRadius,
+    boxShadow: styles.boxShadow,
+  });
+  
+  const StyledButton = styled(Button)({
+    background: `linear-gradient(45deg, ${styles.primaryColor}, ${styles.secondaryColor})`,
+    color: "#fff",
+    fontWeight: "bold",
+    padding: "10px 20px",
+    borderRadius: "30px",
+    transition: "0.3s",
+    '&:hover': {
+      transform: "scale(1.05)",
+    },
+  });
+  
+  const InputContainer = styled(Paper)({
+    backgroundColor: styles.cardBackground,
+    padding: "20px",
+    borderRadius: styles.borderRadius,
+    boxShadow: styles.boxShadow,
+    width: "100%",
+    maxWidth: 600,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  });
 
 export default function SocialMedia({email}) {
-  const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([
+        {
+          username: "John Doe",
+          userProfileImage: "https://via.placeholder.com/50",
+          text: "Hello everyone! This is my first post!",
+          imageUrl: "https://via.placeholder.com/400",
+        },
+        {
+          username: "Jane Smith",
+          userProfileImage: "https://via.placeholder.com/50",
+          text: "Loving this new platform! 🌿",
+          imageUrl: "https://via.placeholder.com/400",
+        },
+      ]);
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
 
   useEffect(() => {
     // Fetch posts from backend API (placeholder for now)
-    fetch("/api/posts")
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
+    // fetch("/api/posts")
+    //   .then((res) => res.json())
+    //   .then((data) => setPosts(data));
   }, []);
 
   const handlePost = async () => {
-    if (!text || !image) return;
+    if (!text) return;
 
     const formData = new FormData();
     formData.append("text", text);
     formData.append("image", image);
+    formData.append("email", email);
 
     const response = await fetch("/api/posts", {
       method: "POST",
@@ -55,38 +104,47 @@ export default function SocialMedia({email}) {
 
   return (
     <StyledContainer>
-      <Typography variant="h4" color={styles.textColor} align="center" gutterBottom>
+      <Typography variant="h3" color={styles.textColor} align="center" gutterBottom>
         Social Media Feed
       </Typography>
 
-      <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
+      <InputContainer>
         <TextField
           label="Write something..."
           variant="outlined"
           fullWidth
+          InputLabelProps={{ style: { color: "#bbb" } }}
+          InputProps={{ style: { color: "#fff" } }}
           value={text}
           onChange={(e) => setText(e.target.value)}
+          sx={{ marginBottom: 2 }}
         />
+        <label htmlFor="fileInput">
+       <div className="media-pic-sm"></div>
+      </label>
         <input
           type="file"
+          id="fileInput"
           accept="image/*"
           onChange={(e) => setImage(e.target.files[0])}
+          style={{ marginBottom: "10px", color: "#fff", display: "none" }}
         />
-        <Button variant="contained" color="success" onClick={handlePost}>
-          Post
-        </Button>
-      </Box>
+        <StyledButton onClick={handlePost}>Post</StyledButton>
+      </InputContainer>
 
       {posts.map((post, index) => (
         <PostCard key={index}>
-          <CardContent display="flex" alignItems="center">
-            <Avatar src={post.userProfileImage} alt={post.username} sx={{ marginRight: 2 }} />
-            <Typography variant="h6" color={styles.textColor}>{post.username}</Typography>
-          </CardContent>
-          <CardMedia component="img" height="200" image={post.imageUrl} alt="Post" />
-          <CardContent>
-            <Typography variant="body1" color={styles.textColor}>{post.text}</Typography>
-          </CardContent>
+            <CardContent display="flex" alignItems="center">
+                <Avatar src={post.userProfileImage} alt={post.username} sx={{ marginRight: 2, width: 50, height: 50 }} />
+                <Typography variant="h6" color={styles.textColor}>{post.username}</Typography>
+            </CardContent>
+            
+            <CardContent>
+                    <Typography variant="body1" color={styles.textColor}>{post.text}</Typography>
+            </CardContent>
+            
+            <CardMedia component="img" height="300" image={post.imageUrl} alt="Post" style={{ borderRadius: "10px" }} />
+          
         </PostCard>
       ))}
     </StyledContainer>

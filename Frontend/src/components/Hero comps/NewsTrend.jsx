@@ -9,7 +9,6 @@ export default function NewsTrend() {
     try {
       const response = await axios.get("https://safecyber-api.onrender.com/api/tscam-list");
       setData(response.data.data);
-      console.log("heey : ",response.data.data);
 
     } catch (error) {
       console.error("Error fetching data:", error);
