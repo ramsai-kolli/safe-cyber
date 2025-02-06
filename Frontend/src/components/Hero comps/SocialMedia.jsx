@@ -73,13 +73,16 @@ export default function SocialMedia({email}) {
       ]);
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
-
+  const [comp, setComp] = useState(1);
+  const [url, setUrl] = useState(`/getpublic`);
   useEffect(() => {
     // Fetch posts from backend API (placeholder for now)
-    // fetch("/api/posts")
-    //   .then((res) => res.json())
-    //   .then((data) => setPosts(data));
-  }, []);
+    fetch(`https://safecyber-api.onrender.com/api/${url}`)
+      .then((res) => res.json())
+      .then((data) => setPosts(data));
+      console.log("tab switched");
+      
+  }, [url]);
 
   const handlePost = async () => {
     if (!text) return;
@@ -102,12 +105,26 @@ export default function SocialMedia({email}) {
     }
   };
 
+  const handlePublic =()=>{
+    setComp(1);
+    setUrl(`/getpublic`)
+   }
+   const handleProfile =()=>{
+    setComp(2);
+    setUrl(`/getprofposts${email}`); // or something
+   }
+
   return (
     <StyledContainer>
       <Typography variant="h3" color={styles.textColor} align="center" gutterBottom>
         Social Media Feed
       </Typography>
-
+          
+      <div className="sm-nav">
+        <p onClick={handlePublic} className={comp === 1 ? "active-tab" : ""}  >Public</p>
+        <p onClick={handleProfile} className={comp === 2 ? "active-tab" : ""} >Your Profile</p>
+      </div>
+          
       <InputContainer>
         <TextField
           label="Write something..."
@@ -125,7 +142,7 @@ export default function SocialMedia({email}) {
         <input
           type="file"
           id="fileInput"
-          accept="image/*"
+          accept="image/*"    // --------------------> may save backend 
           onChange={(e) => setImage(e.target.files[0])}
           style={{ marginBottom: "10px", color: "#fff", display: "none" }}
         />

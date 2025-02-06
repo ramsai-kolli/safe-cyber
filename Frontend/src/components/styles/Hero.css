@@ -1,4 +1,4 @@
-/* .home-nav {
+/* .home-n@v {
     display: flex;
     flex-direction: row;
     height: 40px;
@@ -8,7 +8,7 @@
     
     background-color: rgb(255, 255, 255);
   }
-  .home-nav p {
+  .home-n@v p {
     margin-left: 15px;
     font-size: 1rem;
     cursor: pointer;
@@ -17,8 +17,6 @@
   .home-nav {
     display: flex;
     gap: 20px;
- 
-
   }
   
   .home-nav p {
@@ -30,6 +28,24 @@
   }
   
   .home-nav p:hover {
+    color: #119c46; /* Hover effect */
+  }
+
+  .sm-nav {
+    display: flex;
+    gap: 100px;
+  }
+  
+  .sm-nav p {
+    cursor: pointer;
+    padding: 10px 15px;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+    color: white;
+  }
+  
+  .sm-nav p:hover {
     color: #119c46; /* Hover effect */
   }
   .hero-logout{
