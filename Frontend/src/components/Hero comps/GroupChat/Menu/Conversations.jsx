@@ -2,10 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import React from 'react';
 import { Box, styled, Divider } from '@mui/material';
 
-// import { AccountContext } from '../../../context/AccountProvider';
 import axios from 'axios';
 //components
 import Conversation from './Conversation';
+import CreateChatButton from './CreateChatButton';
 // import { getUsers } from '../../../service/api';
 
 const Component = styled(Box)`
@@ -77,6 +77,7 @@ const Conversations = (props) => {  // once text
                 </React.Fragment>
             ))
         }
+        <CreateChatButton email={props.email} />
         </Component>
         
 </>

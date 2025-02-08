@@ -49,7 +49,8 @@ function Login(){
                 // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
                   // LOGIN page redirected from here
             }else{
-              alert("Error : ",res.data.message);
+              console.log("hey    - ",res.data.message);
+              alert("Error : wrong password",res.data.message);
             }
               })
              // console.log("register")
@@ -65,15 +66,15 @@ function Login(){
         <>
 
          <Header />
-        <div class="div1-login"> 
-        <form class='form-login' onSubmit={submitHandler} >
-          <label class="label-login1">login form</label><br></br>
-          <label class="label-login">Email ID:</label>
-          <input class="input-login" value={user.email} onChange={changeHandler} name='email' type="tel"></input><br></br>
-          <label class="label-login">Password:</label>
-          <input class="input-login" value={user.password} onChange={changeHandler} name='password' type="password"></input>
+        <div className="div1-login"> 
+        <form className='form-login' onSubmit={submitHandler} >
+          <label className="label-login1">login form</label><br></br>
+          <label className="label-login">Email ID:</label>
+          <input className="input-login" value={user.email} onChange={changeHandler} name='email' type="tel"></input><br></br>
+          <label className="label-login">Password:</label>
+          <input className="input-login" value={user.password} onChange={changeHandler} name='password' type="password"></input>
           { invalidtext && <p className="Login-error">{invalidtext}</p>}
-          <button class="btn-login" type="submit">Submit</button>
+          <button className="btn-login" type="submit">Submit</button>
         <p onClick={goregister}>Click here to register</p>
         </form>        
         </div>
