@@ -59,26 +59,30 @@ const styles = {
 export default function SocialMedia({email}) {
     const [posts, setPosts] = useState([
         {
-          username: "John Doe",
-          userProfileImage: "https://via.placeholder.com/50",
-          text: "Hello everyone! This is my first post!",
-          imageUrl: "https://via.placeholder.com/400",
+          username: "",
+          userProfileImage: "",
+          text: "",
+          imageUrl: "",
         },
-        {
-          username: "Jane Smith",
-          userProfileImage: "https://via.placeholder.com/50",
-          text: "Loving this new platform! 🌿",
-          imageUrl: "https://via.placeholder.com/400",
-        },
+        // {
+        //   username: "Jane Smith",
+        //   userProfileImage: "https://via.placeholder.com/50",
+        //   text: "Loving this new platform! 🌿",
+        //   imageUrl: "https://via.placeholder.com/400",
+        // },
       ]);
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
   const [comp, setComp] = useState(1);
   const [url, setUrl] = useState(`/getpublic`);
-  useEffect(() => {
-    // /get-image-post`)
-            
-  }, [url]);
+  // useEffect(() => {
+  //           setPosts({
+  //             username: "",
+  //             userProfileImage: "",
+  //             text: "",
+  //             imageUrl: "",
+  //           })
+  // }, [comp]);
 
   const handlePost = async () => {
     try {
@@ -103,14 +107,51 @@ export default function SocialMedia({email}) {
     }
   };
 
-  const handlePublic =()=>{
+  const handlePublic = async () => {
     setComp(1);
-    setUrl(`/getpublic`)
-   }
-   const handleProfile =()=>{
+    try {
+      const response = await axios.post("http://localhost:5002/api/get-all-posts");
+
+      console.log(response.data.images);
+      
+      if (response.data.images) {
+        setPosts(
+          response.data.images.map((post) => ({
+            username: "Anonymous", // Placeholder, as API does not return username
+            userProfileImage: "https://via.placeholder.com/50", // Placeholder image
+            text: post.matter, // Assign API's "matter" field to "text"
+            imageUrl: post.image, // Assign Base64 image
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
+  
+   const handleProfile =async ()=>{
     setComp(2);
-    setUrl(`/getprofposts${email}`); // or something
-   }
+    try {
+      const response = await axios.post("http://localhost:5002/api/get-image-post", {
+        email: email, // Send email in request body
+      });
+
+      console.log(response.data.images);
+      
+      if (response.data.images) {
+        setPosts(
+          response.data.images.map((post) => ({
+            username: "Anonymous", // Placeholder, as API does not return username
+            userProfileImage: "https://via.placeholder.com/50", // Placeholder image
+            text: post.matter, // Assign API's "matter" field to "text"
+            imageUrl: post.image, // Assign Base64 image
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  };
 
   return (
     <StyledContainer>
@@ -149,16 +190,21 @@ export default function SocialMedia({email}) {
 
       {posts.map((post, index) => (
         <PostCard key={index}>
-            <CardContent display="flex" alignItems="center">
-                <Avatar src={post.userProfileImage} alt={post.username} sx={{ marginRight: 2, width: 50, height: 50 }} />
-                <Typography variant="h6" color={styles.textColor}>{post.username}</Typography>
+            <CardContent>
+                <Box display="flex" alignItems="center">
+                  <Avatar src={post.userProfileImage} alt={post.username} sx={{ marginRight: 2, width: 50, height: 50 }} />
+                  <Typography variant="h6" color={styles.textColor}>{post.username}</Typography>
+                </Box>
             </CardContent>
+
             
             <CardContent>
                     <Typography variant="body1" color={styles.textColor}>{post.text}</Typography>
             </CardContent>
             
-            <CardMedia component="img" height="300" image={post.imageUrl} alt="Post" style={{ borderRadius: "10px" }} />
+            {/* <CardMedia component="img" height="300" image={post.imageUrl} alt="Post" style={{ borderRadius: "10px" }} /> */}
+            <CardMedia component="img" height="300" image={post.imageUrl} alt="Post"  style={{ borderRadius: "10px" }}/>
+
           
         </PostCard>
       ))}
