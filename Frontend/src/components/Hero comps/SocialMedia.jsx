@@ -75,14 +75,31 @@ export default function SocialMedia({email}) {
   const [image, setImage] = useState(null);
   const [comp, setComp] = useState(1);
   const [url, setUrl] = useState(`/getpublic`);
-  // useEffect(() => {
-  //           setPosts({
-  //             username: "",
-  //             userProfileImage: "",
-  //             text: "",
-  //             imageUrl: "",
-  //           })
-  // }, [comp]);
+
+  useEffect(() => {
+    // /get-image-post
+    const getYourPosts = async() => {
+           
+      try{
+          await axios.post('https://safecyber-api.onrender.com/api/get-image-post',{image}).then(res=>{
+             if(res.data.success){
+                 
+             console.log("conversation.jsx : const messages -> ",res.data.msgs)
+         
+         
+          setMessage(res.data.msgs)
+             }else{
+               alert("Error : to retrieve getmsg");
+             }
+               })                    
+       }
+       catch(error){
+           console.log('Error sending registration request',error);
+       }
+  }
+  getYourPosts();     
+  }, [url]);
+
 
   const handlePost = async () => {
     try {
@@ -91,7 +108,7 @@ export default function SocialMedia({email}) {
         formData.append("matter", text);
         formData.append("email", email);
  
-        const response = await axios.post("http://localhost:5002/api/upload-image-post",
+        const response = await axios.post("https://safecyber-api.onrender.com/api/upload-image-post",
           formData,
           { headers: { "Content-Type": "multipart/form-data" } } // re-checkkkk Ensure correct headers
         );
