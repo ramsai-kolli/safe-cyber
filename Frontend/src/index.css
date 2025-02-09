@@ -36,6 +36,13 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  /* only for FAQs */
+  font-family: "CursiveStyledMN";
+  src: url("../fonts/Pacifico-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
   font-family: "Poppins-Medium";

@@ -116,7 +116,7 @@ export default function SocialMedia({email}) {
 
   return (
     <StyledContainer>
-      <Typography variant="h3" color={styles.textColor} align="center" gutterBottom>
+      <Typography variant="h3" color={styles.textColor} align="center" style={{ fontFamily: 'CursiveStyledMN' }} gutterBottom>
         Social Media Feed
       </Typography>
           

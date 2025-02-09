@@ -1,93 +1,48 @@
-// import { useState, useContext } from 'react';
-
-// import { MoreVert } from '@mui/icons-material';
-// import { Menu, MenuItem, styled } from '@mui/material';
-
-// import { googleLogout } from '@react-oauth/google';
-// import { AccountContext } from '../../../context/AccountProvider';
-// import { UserContext } from '../../../context/UserProvider';
-
-// import { clientId } from '../../../constants/data';
-
-// //components
-// import InfoDrawer from '../../drawer/Drawer';
+import { styled, Box, Typography ,MenuItem} from "@mui/material";
 
 // const MenuOption = styled(MenuItem)`
-//     font-size: 14px
-//     padding: 15px 60px 5px 24px;
+//     font-size: 354px
+//     // padding: 15px 60px 5px 24px;
 //     color: #4A4A4A;
 // `;
 
-// const Logout = styled(googleLogout)`
-//     border: none;
-//     box-shadow: none;
-// `;
+const HeaderContainer = styled(Box)`
+    width: 100%;
+    background: linear-gradient(135deg, #f9f9f9, #e3e3e3);
+    // padding: 15px 60px 5px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #ccc;
+`;
 
-// const HeaderMenu = () => {
-    
-//     const [open, setOpen] = useState(false);
-//     const [openDrawer, setOpenDrawer] = useState(false);
-    
-//     const { setAccount, setShowloginButton, showlogoutButton, setShowlogoutButton } = useContext(AccountContext);
-//     const { setPerson } = useContext(UserContext);
+const HeaderTitle = styled(Typography)`
+    font-size: 34px;
+    // font-weight: bold;
+    color:rgb(45, 45, 45);
+    font-family: 'CursiveStyledMN';  // Change this to your preferred font
+`;
 
+const Container = styled(Box)`
+    display: flex;
+    flex-direction: column;
+    // height: 100vh;
+    width: 98%;
+    background: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+    overflow: hidden;
+`;
 
-//     const handleClick = (event) => {
-//         setOpen(event.currentTarget);
-//     };
+const HeaderMenu = () => {
+    return (
+        <Container>
+            <HeaderContainer>
+                <HeaderTitle>Safe Chat</HeaderTitle>
+            </HeaderContainer>
+        </Container>
+    );
+};
 
-//     const handleClose = () => {
-//         setOpen(null);
-//     };
-
-//     const onSignoutSuccess = () => {
-//         alert("You have been logged out successfully");
-//         console.clear();
-//         setShowlogoutButton(false);
-//         setShowloginButton(true);
-//         setAccount('');
-//         setPerson({});
-//     };
-
-//     const toggleDrawer = () => {
-//         setOpenDrawer(true);
-//     }
-
-
-
-//     return (
-//         <>
-//             <MoreVert onClick={handleClick} />
-//             <Menu
-//                 anchorEl={open}
-//                 keepMounted
-//                 open={open}
-//                 onClose={handleClose}
-//                 getContentAnchorEl={null}
-//                 anchorOrigin={{
-//                     vertical: 'bottom',
-//                     horizontal: 'center',
-//                 }}
-//                 transformOrigin={{
-//                     vertical: 'top',
-//                     horizontal: 'right',
-//                 }}
-//             >
-//                 <MenuOption onClick={() => { handleClose(); toggleDrawer()}}>Profile</MenuOption>
-//                 <MenuOption onClick={() => { handleClose(); }}>
-//                 {/* { showlogoutButton ?
-//                     <Logout
-//                         clientId={clientId}
-//                         buttonText="Logout"
-//                         onLogoutSuccess={onSignoutSuccess}
-//                     >
-//                     </Logout> : null
-//                 } */}
-//                 </MenuOption>
-//             </Menu>
-//             <InfoDrawer open={openDrawer} setOpen={setOpenDrawer} profile={true} />
-//         </>
-//     )
-// }
-
-// export default HeaderMenu;
+export default HeaderMenu;
