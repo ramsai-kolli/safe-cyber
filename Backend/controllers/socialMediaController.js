@@ -20,8 +20,8 @@ exports.uploadPostImage = catchAsyncErrors(async (req, res) => {
       return res.status(400).send("No file uploaded.");
     }
 
-    const { name, email, matter } = req.body;
-
+    const { email, matter } = req.body;
+    // you have to search user name by your self and post it to db
     try {
       const db = mongoose.connection.db;
       const bucket = new GridFSBucket(db);
@@ -34,7 +34,7 @@ exports.uploadPostImage = catchAsyncErrors(async (req, res) => {
 
       uploadStream.on("finish", async () => {
         const newSocialMedia = new socialMedia({
-          name: name,
+          // name: name,            get it by yourself
           email: email,
           matter: matter,
           image: req.file.originalname,

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Box, Typography, Button, TextField, Card, CardMedia, CardContent, Avatar, Paper } from "@mui/material";
 import { styled } from "@mui/system";
-
+import axios from "axios";
 // CSS-in-JS Variables
 const styles = {
     pageBackground: "#121212",
@@ -76,32 +76,30 @@ export default function SocialMedia({email}) {
   const [comp, setComp] = useState(1);
   const [url, setUrl] = useState(`/getpublic`);
   useEffect(() => {
-    // Fetch posts from backend API (placeholder for now)
-    fetch(`https://safecyber-api.onrender.com/api/${url}`)
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
-      console.log("tab switched");
-      
+    // /get-image-post`)
+            
   }, [url]);
 
   const handlePost = async () => {
-    if (!text) return;
-
-    const formData = new FormData();
-    formData.append("text", text);
-    formData.append("image", image);
-    formData.append("email", email);
-
-    const response = await fetch("/api/posts", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (response.ok) {
-      const newPost = await response.json();
-      setPosts([newPost, ...posts]);
-      setText("");
-      setImage(null);
+    try {
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("matter", text);
+        formData.append("email", email);
+ 
+        const response = await axios.post("http://localhost:5002/api/upload-image-post",
+          formData,
+          { headers: { "Content-Type": "multipart/form-data" } } // re-checkkkk Ensure correct headers
+        );
+        console.log("resp sm -> ",response.data);
+        if (response.data.success) {
+          setText("");
+          setImage(null);
+        }else{
+          console.log("response.data -> ", response.data);
+        }
+    } catch (error) {
+          console.error("Error while uploading file", error);
     }
   };
 
