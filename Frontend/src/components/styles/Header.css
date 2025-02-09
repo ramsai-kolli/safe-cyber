@@ -80,3 +80,14 @@
   border-radius: 55%;
   /* border: 10x solid white; */
 }
+
+.profile {
+  margin-right: 50px;
+  border-radius: 50%;
+  padding: 5px;
+  width: 60px;
+  height: 60px;
+  object-fit:contain;
+  border: 2px solid #ccc;
+  background-color: black
+}

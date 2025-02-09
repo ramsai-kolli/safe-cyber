@@ -116,6 +116,9 @@ exports.uploadProfileImage = async (req, res) => {
       return res.status(400).send("No file uploaded.");
     }
 
+    console.log("Request body:", req.body); // Check if email is received
+    console.log("Uploaded file:", req.file); // Check if file is received
+
     const { email } = req.body; // Identify user by email
     const db = mongoose.connection.db;
     const bucket = new GridFSBucket(db);
@@ -152,26 +155,34 @@ exports.uploadProfileImage = async (req, res) => {
 };
 exports.getProfileImage = async (req, res) => {
   try {
-    const { email } = req.body;
-    const user = await User.findOne({ email: email });
+    const { email } = req.query; // Use query params instead of req.body
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    const user = await User.findOne({ email });
 
     if (!user || !user.profile_image_id) {
-      return res.status(202).json({ message: "Profile image not found" });
+      return res.status(404).json({ message: "Profile image not found" });
     }
 
     const db = mongoose.connection.db;
     const bucket = new GridFSBucket(db);
-    const downloadStream = bucket.openDownloadStream(user.profile_image_id);
 
-    res.set("Content-Type", "image/jpeg"); // Adjust based on stored image type
+    const downloadStream = bucket.openDownloadStream(
+      new mongoose.Types.ObjectId(user.profile_image_id)
+    );
+
+    res.set("Content-Type", "image/jpeg"); // Adjust based on actual image type
     downloadStream.pipe(res);
 
     downloadStream.on("error", (err) => {
       console.error("Error downloading file:", err);
-      res.status(200).send("Error retrieving image.");
+      res.status(500).json({ message: "Error retrieving image" });
     });
   } catch (error) {
     console.error("Error:", error);
-    res.status(200).json({ error: "Error retrieving profile image" });
+    res.status(500).json({ message: "Internal server error" });
   }
 };
