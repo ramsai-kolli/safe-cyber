@@ -86,7 +86,6 @@ export default function SocialMedia({email}) {
                  
              console.log("conversation.jsx : const messages -> ",res.data.msgs)
          
-         
           setMessage(res.data.msgs)
              }else{
                alert("Error : to retrieve getmsg");
