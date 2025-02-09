@@ -6,6 +6,7 @@ import AboutUs from "./components/Separate Comps/AboutUs.jsx";
 import Header from "./components/Header.jsx";
 import Register from "./components/Register.jsx";
 import Rough from "./components/Rough.jsx";
+import YourProfile from "./components/YourProfie.jsx";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<YourProfile />} />
           <Route path="/chatbot" element={<AiChatBot />} />
           <Route
             path="/aboutus"
