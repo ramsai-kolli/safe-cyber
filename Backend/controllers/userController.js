@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const GridFSBucket = require("mongodb").GridFSBucket;
 const User = require("../models/usermodel");
+const moment=require("moment");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -57,6 +58,21 @@ exports.userLogin = catchAsyncErrors(async (req, res) => {
         .status(202)
         .json({ success: false, message: "Invalid Email_ID or password." });
     }
+
+    // Check if user is banned
+    if (user_details.banned_time) {
+      const bannedUntil = moment(user_details.banned_time, "DD-MM-YYYY HH:mm:ss");
+      const currentTime = moment();
+
+      // If the current time is before the ban expiry, deny login
+      if (currentTime.isBefore(bannedUntil)) {
+        return res.status(203).json({
+          success: false,
+          message: `You are banned until ${bannedUntil.format("YYYY-MM-DD HH:mm:ss")}`,
+        });
+      }
+    }
+
     // Compare passwords
     const passwordMatch = await bcrypt.compare(password, user_details.password);
     if (!passwordMatch) {

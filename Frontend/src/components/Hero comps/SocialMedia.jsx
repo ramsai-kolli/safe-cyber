@@ -126,7 +126,7 @@ export default function SocialMedia({email}) {
   const handlePublic = async () => {
     setComp(1);
     try {
-      const response = await axios.post("http://localhost:5002/api/get-all-posts");
+      const response = await axios.post("https://safecyber-api.onrender.com/api/get-all-posts");
 
       console.log(response.data.images);
       
@@ -148,7 +148,7 @@ export default function SocialMedia({email}) {
    const handleProfile =async ()=>{
     setComp(2);
     try {
-      const response = await axios.post("http://localhost:5002/api/get-image-post", {
+      const response = await axios.post("https://safecyber-api.onrender.com/api/get-image-post", {
         email: email, // Send email in request body
       });
 
