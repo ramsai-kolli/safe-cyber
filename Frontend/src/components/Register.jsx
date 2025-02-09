@@ -56,17 +56,17 @@ const gologin = ()=>{
     return(
         <>
         <Header />
-        <div class="div-register"> 
-         <label class="label-register">Register form</label><br></br>
-        <form class="from-register" onSubmit={submitHandler} >
-          <input class="input-register"  onChange={changeHandler} value={user.name} name='name' type='text' placeholder="enter name"  ></input><br></br>
-          <input class="input-register"  onChange={changeHandler} value={user.email} name='email' type="email" placeholder='enter email:'></input><br></br>                                                                                                               
-          <input class="input-register" onChange={changeHandler} value={user.password} name='password' type="password"  placeholder='enter password'></input>
+        <div className="div-register"> 
+         <label className="label-register">Register form</label><br></br>
+        <form className="from-register" onSubmit={submitHandler} >
+          <input className="input-register"  onChange={changeHandler} value={user.name} name='name' type='text' placeholder="enter name"  ></input><br></br>
+          <input className="input-register"  onChange={changeHandler} value={user.email} name='email' type="email" placeholder='enter email'></input><br></br>                                                                                                               
+          <input className="input-register" onChange={changeHandler} value={user.password} name='password' type="password"  placeholder='enter password'></input>
           { invalidtext && <p className="register-error">{invalidtext}</p>}
-          <button class="btn-register" type="submit">Submit</button>
+          <button className="btn-register" type="submit">Submit</button>
         
         </form>     
-        <p className="reg-to-log" onClick={gologin}>Already registered ? Click here to Login</p>   
+        <p className="reg-to-log" onClick={gologin}>Already registered ? Click here to <span style={{color:"green"}}> Login</span></p>   
         </div>
        
         </>
