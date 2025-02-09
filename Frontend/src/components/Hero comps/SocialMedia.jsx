@@ -80,7 +80,7 @@ export default function SocialMedia({email}) {
     const getYourPosts = async() => {
            
       try{
-          await axios.post('https://safecyber-api.onrender.com/api/get-image-post',{chat_id: props.chat_id}).then(res=>{
+          await axios.post('https://safecyber-api.onrender.com/api/get-image-post',{image}).then(res=>{
              if(res.data.success){
                  
              console.log("conversation.jsx : const messages -> ",res.data.msgs)
@@ -96,7 +96,7 @@ export default function SocialMedia({email}) {
            console.log('Error sending registration request',error);
        }
   }
-  getConversationMessage();     
+  getYourPosts();     
   }, [url]);
 
   const handlePost = async () => {
