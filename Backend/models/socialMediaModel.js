@@ -6,9 +6,7 @@ const socialmedia = new mongoose.Schema({
     type: String,
   },
   matter: String,
-  image: {
-    type: String,
-  },
+  image_id: { type: mongoose.Schema.Types.ObjectId, ref: "fs.files" },
   uploadedAt: {
     type: Date,
     default: Date.now,
