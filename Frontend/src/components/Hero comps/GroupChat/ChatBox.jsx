@@ -10,23 +10,11 @@ const ChatBox = (props) => {
 
   const [conversation, setConversation] = useState({});
 
-  // useEffect(() => {
-  //   const getConversationDetails = async () => {
-  //     let data = "";
-  //     //   await getConversation({
-  //     //     senderId: account.sub,
-  //     //     receiverId: person.sub,
-  //     //   });
-  //     setConversation(data);
-  //   };
-  //   getConversationDetails();
-  // }, []);
-  // //   [person.sub]);
 
   return (
     <Box style={{ height: "75%" }}>
-      <ChatHeader email={props.email} allMsgsofChat={props.allMsgsofChat}  setallMsgsofChat={props.setallMsgsofChat} />
-      <Messages  email={props.email} allMsgsofChat={props.allMsgsofChat}  setallMsgsofChat={props.setallMsgsofChat}  />
+      <ChatHeader email={props.email} allMsgsofChat={props.allMsgsofChat}   />
+      <Messages  email={props.email} allMsgsofChat={props.allMsgsofChat} refreshFunc={props.refreshFunc} />
     </Box>
   );
 };

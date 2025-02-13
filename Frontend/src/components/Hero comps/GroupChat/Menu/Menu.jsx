@@ -7,7 +7,9 @@ const Menu = (props) => {
     return (
         <Box>
             <HeaderMenu />
-            <Conversations email={props.email} setallMsgsofChat={props.setallMsgsofChat} />
+            <Conversations email={props.email} 
+            setallMsgsofChat={props.setallMsgsofChat} 
+            setrefreshFunc={props.setrefreshFunc} />
         </Box>
     )
 }

@@ -72,7 +72,10 @@ const Conversations = (props) => {  // once text
         {
                     chats && chats.map((obj, index) => (
                 <React.Fragment key={index}>
-                    <Conversation chat_id={obj.chat_id} setallMsgsofChat={props.setallMsgsofChat} />
+                    <Conversation chat_id={obj.chat_id} 
+                    setallMsgsofChat={props.setallMsgsofChat} 
+                    setrefreshFunc={props.setrefreshFunc} />
+
                     {chats.length !== (index + 1) && <StyledDivider />}
                 </React.Fragment>
             ))

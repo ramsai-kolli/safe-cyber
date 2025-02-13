@@ -50,26 +50,34 @@ const Conversation = (props) => {  // once user
 
     const [message, setMessage] = useState();
 
-    useEffect(() => {
-        const getConversationMessage = async() => {
+    const getConversationMessage = async() => {
+           console.log("get convo is colled ---------------------------");
+        try{
+            await axios.post('https://safecyber-api.onrender.com/api/getmsg',{chat_id: props.chat_id}).then(res=>{
+               if(res.data.success){
+                   
+               console.log("conversation.jsx : const messages -> ",res.data.msgs)
            
-            try{
-                await axios.post('https://safecyber-api.onrender.com/api/getmsg',{chat_id: props.chat_id}).then(res=>{
-                   if(res.data.success){
-                       
-                   console.log("conversation.jsx : const messages -> ",res.data.msgs)
-               
-               
-                setMessage(res.data.msgs)
-                   }else{
-                     alert("Error : to retrieve getmsg");
-                   }
-                     })                    
-             }
-             catch(error){
-                 console.log('Error sending registration request',error);
-             }
-        }
+           
+            setMessage(res.data.msgs)
+               }else{
+                 alert("Error : to retrieve getmsg");
+               }
+                 })                    
+         }
+         catch(error){
+             console.log('Error sending registration request',error);
+         }
+    }
+    
+
+
+useEffect(() => { 
+    props.setrefreshFunc( ()=> getConversationMessage);
+}, []);  // Empty array to run only on mount
+
+
+    useEffect(() => {
         getConversationMessage();
     }, []);
 

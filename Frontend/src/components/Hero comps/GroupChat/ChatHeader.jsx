@@ -36,7 +36,7 @@ const Status = styled(Typography)`
   margin-left: 12px !important;
 `;
 
-const ChatHeader = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
+const ChatHeader = ({email, allMsgsofChat}) => {
   // const url = person.picture || defaultProfilePicture;
   return (
    allMsgsofChat&& <Header>

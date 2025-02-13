@@ -3,9 +3,6 @@ import { Box, styled } from "@mui/material";
 import axios from "axios";
 // import { io } from 'socket.io-client';
 
-// import { getMessages, newMessages } from '../../../service/api';
-// import { AccountContext } from '../../../context/AccountProvider';
-
 //components
 import Message from "./Message";
 import Footer from "./Footer";
@@ -32,11 +29,11 @@ const Container = styled(Box)`
   padding: 1px 80px;
 `;
 
-const Messages = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
+const Messages = ({email, allMsgsofChat, refreshFunc}) => {
   // const [incomingMessage, setIncomingMessage] = useState(null);
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("");
   const [file, setFile] = useState();
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
 
   const scrollRef = useRef();
 
@@ -52,75 +49,90 @@ const Messages = ({email, allMsgsofChat  ,setallMsgsofChat}) => {
   //     });
   //   }, []);
 
-
-
     useEffect(() => {
       scrollRef.current?.scrollIntoView({ transition: "smooth" });
     }, [allMsgsofChat]);
 
-  //   useEffect(() => {
-  //     incomingMessage &&
-  //       conversation?.members?.includes(incomingMessage.senderId) &&
-  //       setMessages((prev) => [...prev, incomingMessage]);
-  //   }, [incomingMessage, conversation]);
-
-  //   const receiverId = conversation?.members?.find(
-  //     (member) => member !== account.sub
-  //   );
-
-  const sendText = async (e) => {
+const censorText =async(text)=>{
+  try{
+      const response = await fetch("https://safecyber-api.onrender.com/api/contsensor-text",
+                                    {
+                                      method: "POST",
+                                      headers: {
+                                        "Content-Type": "application/json",
+                                      },
+                                      body: JSON.stringify({
+                                        tdata: text,
+                                      }),
+                                    }
+                                  );
+      const data = await response.json();
+      if(data.success){
+        return data.sdata;
+      }else{
+        console.log("failure at content censorr !, but retruned data");
+        return data.sdata;
+      }
+  } catch(e) {
+       console.log("error : ->  ",e);
+       return text;
+    }
+}
+const sendText = async (e) => {
     let code = e.keyCode || e.which;
     if (!value) return;
-    if (code === 13) {
-      let message = {};
-      if (!file) {
-        // message = {
-        //   senderId: account.sub,
-        //   receiverId: receiverId,
-        //   conversationId: conversation._id,
-        //   type: "text",
-        //   text: value,
-        // };
-  message= {  chat_id :allMsgsofChat[0]?.chat_id ,
-              chat_name:allMsgsofChat[0]?.chat_name,
-              sentemail: email,  
-              
-            mdata:value}
-      } else {
-        message = {
-          text: image,
-          chat_id :allMsgsofChat[0]?.chat_id ,
-              chat_name:allMsgsofChat[0]?.chat_name,
-              sentemail: email,   
-            mdata:value
-        };
-      }
-      // socket.current.emit("sendMessage", message);
-      const postMsg = async() => {
-        // let data = await getUsers();
-        // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
-        // setUsers(fiteredData);
-        try{
-             await axios.post('https://safecyber-api.onrender.com/api/pushmsg',message).then(res=>{
-                if(res.data.success){
-            
-                console.log("successfully pushed/uploaded the msg")
-                }else{
-                  alert("Error : to push msg  ");
-                }
-                  })
-                 // console.log("register")
-                 
-          }
-          catch(error){
-              console.log('Error sending registration request',error);
-          }
+
+    let text=value;
+    try{
+      text = await censorText(text);
+    }catch(e){
+      console.log("caught at sendtext : ",e);
+
     }
-    postMsg();
-      setValue("");
-      setFile();
-      setImage("");
-      // setNewMessageFlag((prev) => !prev);
+    if (code === 13) {
+            let message = {};
+            if (!file) {
+              message= {  
+                    chat_id :allMsgsofChat[0]?.chat_id ,
+                    chat_name:allMsgsofChat[0]?.chat_name,
+                    sentemail: email,  
+                    mdata:text
+                  }
+            } else {
+                message = {
+                    text: image,
+                    chat_id :allMsgsofChat[0]?.chat_id ,
+                    chat_name:allMsgsofChat[0]?.chat_name,
+                    sentemail: email,   
+                    mdata:value
+                };
+            }
+            // socket.current.emit("sendMessage", message);
+            const postMsg = async() => {
+                    try{
+                        await axios.post('https://safecyber-api.onrender.com/api/pushmsg',message).then(res=>{
+                            if(res.data.success){
+                            console.log("successfully pushed/uploaded the msg");
+                           
+                            }else{
+                              alert("Error : to push msg  ");
+                            }
+                              })
+
+                              await refreshFunc();  // refresh func to reload the msgs
+
+                      }catch(error){
+                          console.log('Error sending registration request',error);
+                      }
+              }
+              
+              console.log("below ref");
+              
+          postMsg();
+          setValue("");
+          setFile();
+          setImage("");
+          // setNewMessageFlag((prev) => !prev);
     }
   };
 

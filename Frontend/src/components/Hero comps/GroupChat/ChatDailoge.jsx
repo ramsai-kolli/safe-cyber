@@ -39,16 +39,16 @@ const ChatDialog = (props) => {
 
     // const { person } = useContext(UserContext);
     const [allMsgsofChat, setallMsgsofChat] = useState();
-    
+    let [refreshFunc, setrefreshFunc]=useState(null); // null manaki use full to check "&&" condition
     return (
        
             <Component>
                 <LeftComponent>
-                    <Menu email={props.email} setallMsgsofChat={setallMsgsofChat} />
+                    <Menu email={props.email} setallMsgsofChat={setallMsgsofChat} setrefreshFunc={setrefreshFunc} />
                 </LeftComponent>
                 <RightComponent>
                     
-                     <ChatBox email={props.email} allMsgsofChat={allMsgsofChat}  setallMsgsofChat={setallMsgsofChat}/>
+                     <ChatBox email={props.email} allMsgsofChat={allMsgsofChat} refreshFunc={refreshFunc} />
                     
                 </RightComponent>
             </Component>
