@@ -8,43 +8,43 @@ const socialMedia = require("../models/socialMediaModel");
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-// Uploading the Image
-exports.uploadPostImage = catchAsyncErrors(async (req, res) => {
+exports.uploadPostImage = async (req, res) => {
   const uploadMiddleware = upload.single("image");
 
   uploadMiddleware(req, res, async (err) => {
     if (err) {
-      return res.status(500).send(err.message);
+      return res.status(400).send(err.message);
     }
     if (!req.file) {
       return res.status(400).send("No file uploaded.");
     }
 
-    const { email, matter } = req.body;
-    // you have to search user name by your self and post it to db
+    const { email, matter } = req.body; // Identify user by email
+
     try {
       const db = mongoose.connection.db;
       const bucket = new GridFSBucket(db);
-      const imageBuffer = req.file.buffer;
-      const uploadStream = bucket.openUploadStream(req.file.originalname, {
-        metadata: { email },
-      });
+      const uploadStream = bucket.openUploadStream(req.file.originalname);
 
-      uploadStream.end(imageBuffer);
+      uploadStream.end(req.file.buffer);
 
       uploadStream.on("finish", async () => {
-        const newSocialMedia = new socialMedia({
-          // name: name,            get it by yourself
+        const fileId = uploadStream.id; // Get GridFS file ID
+
+        // Save post details to MongoDB
+        const social_media = new socialMedia({
           email: email,
           matter: matter,
-          image: req.file.originalname,
+          image_id: fileId,
         });
-        await newSocialMedia.save();
 
-        res.status(200).json({
+        await social_media.save(); // Save to database
+
+        return res.status(200).json({
           success: true,
-          message: "Image uploaded and linked successfully.",
-          fileDetails: newSocialMedia,
+          message: "Post image uploaded successfully.",
+          image_id: fileId,
+          data: social_media,
         });
       });
 
@@ -52,43 +52,112 @@ exports.uploadPostImage = catchAsyncErrors(async (req, res) => {
         res.status(500).send("Error uploading image: " + err.message);
       });
     } catch (error) {
-      console.error("Error:", error);
-      res.status(400).json({ error: error.message, success: false });
+      console.error("Upload Error:", error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   });
-});
-
-// Function to get the Image based on email from metadata
-exports.getPostImage = catchAsyncErrors(async (req, res) => {
+};
+exports.getUserPostImages = async (req, res) => {
   try {
-    const { email } = req.body;
+    const { email } = req.body; // Get email from query params
+
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+
+    // Find all posts by the user
+    const posts = await socialMedia.find({ email });
+
+    if (!posts.length) {
+      return res.status(404).json({ message: "No posts found" });
+    }
+
     const db = mongoose.connection.db;
     const bucket = new GridFSBucket(db);
 
-    const file = await db
-      .collection("fs.files")
-      .findOne({ "metadata.email": email });
+    // Prepare array of image data
+    const imagePromises = posts.map((post) => {
+      return new Promise((resolve, reject) => {
+        const downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(post.image_id));
+        const chunks = [];
 
-    if (!file) {
-      return res
-        .status(404)
-        .json({ message: "File not found for this Email ID" });
-    }
+        downloadStream.on("data", (chunk) => {
+          chunks.push(chunk);
+        });
 
-    res.set({
-      "Content-Type": file.contentType || "image/jpeg",
-      "Content-Disposition": `attachment; filename="${file.filename}"`,
+        downloadStream.on("end", () => {
+          const base64Image = Buffer.concat(chunks).toString("base64");
+          resolve({
+            filename: post.image_id, // Image ID as filename (or replace with actual filename if stored)
+            matter: post.matter, // Matter from the database
+            image: `data:image/jpeg;base64,${base64Image}`, // Convert to Base64 format
+          });
+        });
+
+        downloadStream.on("error", (err) => {
+          reject(err);
+        });
+      });
     });
 
-    const downloadStream = bucket.openDownloadStream(file._id);
-    downloadStream.pipe(res);
+    const images = await Promise.all(imagePromises);
 
-    downloadStream.on("error", (err) => {
-      console.error("Error downloading file:", err);
-      res.status(500).send("Error downloading file.");
+    res.json({
+      count: images.length,
+      images,
     });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ error: "Error retrieving file" });
+    res.status(500).json({ message: "Internal server error" });
   }
-});
+};
+
+exports.getAllPosts = async (req, res) => {
+  try {
+
+    // Find all posts by the user
+    const posts = await socialMedia.find();
+
+    if (!posts.length) {
+      return res.status(404).json({ message: "No posts found" });
+    }
+
+    const db = mongoose.connection.db;
+    const bucket = new GridFSBucket(db);
+
+    // Prepare array of image data
+    const imagePromises = posts.map((post) => {
+      return new Promise((resolve, reject) => {
+        const downloadStream = bucket.openDownloadStream(new mongoose.Types.ObjectId(post.image_id));
+        const chunks = [];
+
+        downloadStream.on("data", (chunk) => {
+          chunks.push(chunk);
+        });
+
+        downloadStream.on("end", () => {
+          const base64Image = Buffer.concat(chunks).toString("base64");
+          resolve({
+            filename: post.image_id, // Image ID as filename (or replace with actual filename if stored)
+            matter: post.matter, // Matter from the database
+            image: `data:image/jpeg;base64,${base64Image}`, // Convert to Base64 format
+          });
+        });
+
+        downloadStream.on("error", (err) => {
+          reject(err);
+        });
+      });
+    });
+
+    const images = await Promise.all(imagePromises);
+
+    res.json({
+      count: images.length,
+      images,
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

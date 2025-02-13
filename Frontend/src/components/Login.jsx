@@ -49,8 +49,8 @@ function Login(){
                 // navigate('/home2', { state: { message: res.data.message } }); // Pass message to the next page and go to next page also,that mean without window.location.href = '/home2';
                   // LOGIN page redirected from here
             }else{
+              alert(res.data.message);
               console.log("hey    - ",res.data.message);
-              alert("Error : wrong password",res.data.message);
             }
               })
              // console.log("register")
