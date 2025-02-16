@@ -133,7 +133,7 @@ export default function SocialMedia({email}) {
       if (response.data.images) {
         setPosts(
           response.data.images.map((post) => ({
-            username: "Anonymous", // Placeholder, as API does not return username
+            username: post.name, // Placeholder, as API does not return username
             userProfileImage: "https://via.placeholder.com/50", // Placeholder image
             text: post.matter, // Assign API's "matter" field to "text"
             imageUrl: post.image, // Assign Base64 image
