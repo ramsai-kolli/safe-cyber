@@ -44,67 +44,32 @@ const Text = styled(Typography)`
 
 const Conversation = (props) => {  // once user
     // const url = user.picture || emptyProfilePicture;
-    
-    // const { setPerson } = useContext(UserContext);
-    // const { account, newMessageFlag }  = useContext(AccountContext);
 
-    const [message, setMessage] = useState();
-
-    const getConversationMessage = async() => {
-           console.log("get convo is colled ---------------------------");
-        try{
-            await axios.post('https://safecyber-api.onrender.com/api/getmsg',{chat_id: props.chat_id}).then(res=>{
-               if(res.data.success){
-                   
-               console.log("conversation.jsx : const messages -> ",res.data.msgs)
-           
-           
-            setMessage(res.data.msgs)
-               }else{
-                 alert("Error : to retrieve getmsg");
-               }
-                 })                    
-         }
-         catch(error){
-             console.log('Error sending registration request',error);
-         }
-    }
-    
-
-
-useEffect(() => { 
-    props.setrefreshFunc( ()=> getConversationMessage);
-}, []);  // Empty array to run only on mount
-
-
-    useEffect(() => {
-        getConversationMessage();
-    }, []);
+    const [lastMessage, setMessage] = useState();
 
     const getChat = async () => {
-        props.setallMsgsofChat(message)
+        props.setclickedchatId(props.chat_id);
     }
 
     return (
         <>
-        {!message ? "loading convrsation" : <Component onClick={() => getChat()}>
+        {!props.chat_id ? "loading convrsation" : <Component onClick={() => getChat()}>
             <Box>
                  <Image src={defaultProfilePicture} alt="display picture" /> 
             </Box>
             <Box style={{width: '100%'}}>
                 <Container>
-                    <Typography>{ message[0] ? message[0].chat_name:"no name (null)"  }</Typography>
+                    <Typography>{ `chat id : ${props.chat_id}`  }</Typography>
                     { 
-                        // message.mdata
-                        <Timestamp>
-                            {formatDate( message.length > 0 ? message[message.length - 1].time : "")}
-                            </Timestamp>        
+                        // <Timestamp>
+                        //     {formatDate( message.length > 0 ? message[message.length - 1].time : "")}
+                        //     </Timestamp>        
                     }
                 </Container>
                 <Box>
                     <Text>
-                        {message.length > 0 ? message[message.length - 1].mdata : "No messages"}
-                        
+                        {"Can't get it now"}
+                        {/* {message.length > 0 ? message[message.length - 1].mdata : "No messages"} */}
                     </Text>
                 </Box>
             </Box>

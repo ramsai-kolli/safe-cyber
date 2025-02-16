@@ -15,40 +15,31 @@ const Component = styled(Box)`
     
 const LeftComponent = styled(Box)`
     min-width: 450px;
+    max-height: 60vh;
 `;
     
 const RightComponent = styled(Box)`
     width: 73%;
     min-width: 300px;
     height: 100%;
+    max-height: 60vh;
     border-left: 1px solid rgba(0, 0, 0, 0.14);
+     overflow: scroll;
 `;
-
-const dialogStyle = {
-    height: '95%',
-    width: '100%',
-    margin: '20px',
-    maxWidth: '100%',
-    maxHeight: '100%',
-    borderRadius: 0,
-    boxShadow: 'none',
-    overflow: 'hidden'
-};
 
 const ChatDialog = (props) => {
 
     // const { person } = useContext(UserContext);
-    const [allMsgsofChat, setallMsgsofChat] = useState();
-    let [refreshFunc, setrefreshFunc]=useState(null); // null manaki use full to check "&&" condition
+    const [clickedchatId, setclickedchatId] = useState(-1);
     return (
        
             <Component>
                 <LeftComponent>
-                    <Menu email={props.email} setallMsgsofChat={setallMsgsofChat} setrefreshFunc={setrefreshFunc} />
+                    <Menu email={props.email} setclickedchatId ={setclickedchatId} />
                 </LeftComponent>
                 <RightComponent>
                     
-                     <ChatBox email={props.email} allMsgsofChat={allMsgsofChat} refreshFunc={refreshFunc} />
+                     <ChatBox email={props.email} clickedchatId={clickedchatId} />
                     
                 </RightComponent>
             </Component>

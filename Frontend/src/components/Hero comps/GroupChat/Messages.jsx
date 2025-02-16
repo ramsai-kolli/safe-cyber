@@ -21,7 +21,7 @@ const StyledFooter = styled(Box)`
 `;
 
 const Component = styled(Box)`
-  height: 80vh;
+  height: 50vh;
   overflow-y: scroll;
 `;
 
@@ -29,11 +29,11 @@ const Container = styled(Box)`
   padding: 1px 80px;
 `;
 
-const Messages = ({email, allMsgsofChat, refreshFunc}) => {
-  // const [incomingMessage, setIncomingMessage] = useState(null);
+const Messages = ({email, clickedchatId}) => {
   const [value, setValue] = useState("");
   const [file, setFile] = useState();
   const [image, setImage] = useState(null);
+  const [allMsgsofChat, setallMsgsofChat] = useState();
 
   const scrollRef = useRef();
 
@@ -51,7 +51,30 @@ const Messages = ({email, allMsgsofChat, refreshFunc}) => {
 
     useEffect(() => {
       scrollRef.current?.scrollIntoView({ transition: "smooth" });
-    }, [allMsgsofChat]);
+    }, [clickedchatId]);
+
+    
+    const getConversationMessage = async() => {
+      console.log("get convo is colled msg.jsx ---------------------------");
+   try{
+       await axios.post('https://safecyber-api.onrender.com/api/getmsg',{chat_id: clickedchatId}).then(res=>{
+          if(res.data.success){
+            // console.log("conversation.jsx : const messages -> ",res.data.msgs)
+            setallMsgsofChat(res.data.msgs)
+
+          }else{
+              alert("Error : to retrieve getmsg");
+          }
+            })                    
+      }
+      catch(error){
+          console.log('Error getting msgs ',error);
+      }
+}
+
+useEffect(() => {
+   getConversationMessage();
+}, [clickedchatId]);
 
 const censorText =async(text)=>{
   try{
@@ -86,14 +109,13 @@ const sendText = async (e) => {
     try{
       text = await censorText(text);
     }catch(e){
-      console.log("caught at sendtext : ",e);
-
+      console.log("at sendtext failed to censor it: ",e);
     }
     if (code === 13) {
             let message = {};
             if (!file) {
               message= {  
-                    chat_id :allMsgsofChat[0]?.chat_id ,
+                    chat_id :clickedchatId ,
                     chat_name:allMsgsofChat[0]?.chat_name,
                     sentemail: email,  
                     mdata:text
@@ -101,38 +123,34 @@ const sendText = async (e) => {
             } else {
                 message = {
                     text: image,
-                    chat_id :allMsgsofChat[0]?.chat_id ,
+                    chat_id :clickedchatId ,
                     chat_name:allMsgsofChat[0]?.chat_name,
                     sentemail: email,   
                     mdata:value
                 };
             }
             // socket.current.emit("sendMessage", message);
-            const postMsg = async() => {
-                    try{
-                        await axios.post('https://safecyber-api.onrender.com/api/pushmsg',message).then(res=>{
-                            if(res.data.success){
-                            console.log("successfully pushed/uploaded the msg");
-                           
-                            }else{
-                              alert("Error : to push msg  ");
-                            }
-                              })
+        const postMsg = async() => {
+                try{
+                    await axios.post('https://safecyber-api.onrender.com/api/pushmsg',message).then(res=>{
+                        if(res.data.success){
+                        console.log("successfully pushed/uploaded the msg");
+                        }else{
+                          alert("Error : to push msg  ");
+                        }
+                          })
+                    // reload
+                        await getConversationMessage();  
+                  }catch(error){
+                      console.log('Error sending registration request',error);
+                  }
+          }
 
-                              await refreshFunc();  // refresh func to reload the msgs
-
-                      }catch(error){
-                          console.log('Error sending registration request',error);
-                      }
-              }
-              
-              console.log("below ref");
-              
-          postMsg();
-          setValue("");
-          setFile();
-          setImage("");
-          // setNewMessageFlag((prev) => !prev);
+          console.log("below ref");
+      postMsg();
+      setValue("");
+      setFile();
+      setImage("");
     }
   };
 

@@ -95,7 +95,7 @@ exports.userLogin = catchAsyncErrors(async (req, res) => {
     });
   } catch (error) {
     console.error("Error during login:", error);
-    res.status(200).json({ success: false, error: "Internal server error" });
+    res.status(200).json({ success: false, error: "Internal server error",message:`Error during login: ${error}` });
   }
 });
 

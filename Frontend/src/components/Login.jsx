@@ -11,7 +11,7 @@ function Login(){
    const [user, setUser] = useState({
         
        email : "",
-       password : "",
+       password : ""
          
    });
    const [invalidtext, setInvalidtext] = useState("");

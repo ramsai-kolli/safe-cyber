@@ -36,13 +36,13 @@ const Status = styled(Typography)`
   margin-left: 12px !important;
 `;
 
-const ChatHeader = ({email, allMsgsofChat}) => {
+const ChatHeader = ({email, clickedchatId}) => {
   // const url = person.picture || defaultProfilePicture;
   return (
-   allMsgsofChat&& <Header>
+    clickedchatId&& <Header>
       <Image src={defaultProfilePicture} alt="display picture" />
       <Box>
-        <Name>{allMsgsofChat[0].chat_name ?allMsgsofChat[0].chat_name :"loading"}</Name>
+        <Name>{clickedchatId ? `chat id : ${clickedchatId}` :"loading"}</Name>
         {/* <Status>
           {/* {activeUsers?.find((user) => user.sub === person.sub)
             ? "Online"

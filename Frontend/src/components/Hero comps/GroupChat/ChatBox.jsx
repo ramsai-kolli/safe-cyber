@@ -1,21 +1,24 @@
 import {  useState, useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box , styled} from "@mui/material";
 
 //components
 import ChatHeader from "./ChatHeader";
 import Messages from "./Messages";
 
+const RightComponent = styled(Box)`
+    min-width: 300px;
+    // height: 100%;
+    max-height: 40vh;
+     overflow: scroll;
+`;
+
 const ChatBox = (props) => {
-  
-
   const [conversation, setConversation] = useState({});
-
-
   return (
-    <Box style={{ height: "75%" }}>
-      <ChatHeader email={props.email} allMsgsofChat={props.allMsgsofChat}   />
-      <Messages  email={props.email} allMsgsofChat={props.allMsgsofChat} refreshFunc={props.refreshFunc} />
-    </Box>
+    <RightComponent>
+      <ChatHeader email={props.email} clickedchatId={props.clickedchatId}  />
+      <Messages  email={props.email}  clickedchatId={props.clickedchatId}  />
+    </RightComponent>
   );
 };
 

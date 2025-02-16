@@ -9,8 +9,8 @@ import CreateChatButton from './CreateChatButton';
 // import { getUsers } from '../../../service/api';
 
 const Component = styled(Box)`
-    overflow: overlay;
-    height: 81vh;
+    // overflow: overlay;
+    height: 70vh;
 `;
 
 const StyledDivider = styled(Divider)`
@@ -21,18 +21,8 @@ const StyledDivider = styled(Divider)`
 
 const Conversations = (props) => {  // once text
     const [chats, setChats] = useState([{chat_id:1}]);
-    // const [user, setUser] = useState(null);
+
     // const { account, socket, setActiveUsers } = useContext(AccountContext);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         // let data = await getUsers();
-    //         // let fiteredData = data.filter(user => user.name.toLowerCase().includes(text.toLowerCase()));
-    //         // setUsers(fiteredData);
-    //     }
-    //     fetchData();
-    // }, []);
-
     // useEffect(() => {
     //     socket.current.emit('addUser', account);
     //     socket.current.on("getUsers", users => {
@@ -73,8 +63,7 @@ const Conversations = (props) => {  // once text
                     chats && chats.map((obj, index) => (
                 <React.Fragment key={index}>
                     <Conversation chat_id={obj.chat_id} 
-                    setallMsgsofChat={props.setallMsgsofChat} 
-                    setrefreshFunc={props.setrefreshFunc} />
+                    setclickedchatId={props.setclickedchatId}   />
 
                     {chats.length !== (index + 1) && <StyledDivider />}
                 </React.Fragment>

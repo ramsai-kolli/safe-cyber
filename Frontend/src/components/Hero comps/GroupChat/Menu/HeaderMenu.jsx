@@ -26,12 +26,12 @@ const HeaderTitle = styled(Typography)`
 const Container = styled(Box)`
     display: flex;
     flex-direction: column;
-    // height: 100vh;
+    height: 5vh;
     width: 98%;
     background: #f1f1f1;
     border-radius: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 12px;
+    padding: 9px;
     overflow: hidden;
 `;
 
