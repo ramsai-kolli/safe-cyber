@@ -30,6 +30,14 @@ collection : chatinfo
 {
    chat_id
    chat_name
-//praticipants :["ramsai","deva"]
+   praticipants :["ramsai","deva"]
 
 }
+
+
+/create-new-chat
+
+
+/getmetachats
+
+chatid->name,paticipants

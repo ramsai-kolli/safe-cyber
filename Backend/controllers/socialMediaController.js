@@ -4,6 +4,7 @@ const GridFSBucket = require("mongodb").GridFSBucket;
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 const socialMedia = require("../models/socialMediaModel");
+const User=require("../models/usermodel");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -28,11 +29,17 @@ exports.uploadPostImage = async (req, res) => {
 
       uploadStream.end(req.file.buffer);
 
+      const Username=await User.findOne({email});
+      if(!Username){
+        return res.status(202).json({success:false,message:"User not found"});
+      }
+
       uploadStream.on("finish", async () => {
         const fileId = uploadStream.id; // Get GridFS file ID
 
         // Save post details to MongoDB
         const social_media = new socialMedia({
+          name:Username.name,
           email: email,
           matter: matter,
           image_id: fileId,

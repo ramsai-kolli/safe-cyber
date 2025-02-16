@@ -107,3 +107,13 @@
    - url : /get-profile-image
    - input : email [here we have to use GET method instead of POST method]
    - output: image
+
+
+10.  meta chats controller
+
+    1. /create-new-chat
+       - input : chat_name,participants{array}
+       - output: success,message,data(meta data about group)
+   2. /get-chat-meta
+       - input : chat_id
+       - ouput : success ,message , corresponding chat_id data
