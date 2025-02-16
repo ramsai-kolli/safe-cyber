@@ -1,6 +1,5 @@
 const catchAsyncErrors = require("../middleware/catchAsyncErrors"); // Assuming this is a custom error handling middleware
 const messagedata = require("../models/messageDataModel"); // GroupChat model
-const chatinfo = require("../models/chatinfoModel"); // Metadata model
 const user = require("../models/usermodel");
 // import axios from 'axios';
 // import { notify } from '../app';
