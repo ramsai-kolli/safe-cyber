@@ -1,4 +1,5 @@
-# SafeCyber
+# Safe Cyber
 
-- We built this SafeCyber website to help people from cyberbullying and misinformation.
-- This is a team project built in the Dev Challenge '25 a hackathon hosted by GDG on Campus, SRKR!
+- A multi-featured platform integrating abuse detection for text & images,  AI-powered fact checking.
+- A group chat system with real-time toxic content filtering, trending content analysis. websockets is under development.
+- Implemented AI chatbot assistance, a cybercrime complaint portal streamlined emailing of online abuse.

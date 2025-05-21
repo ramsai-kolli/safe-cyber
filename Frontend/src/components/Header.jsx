@@ -26,7 +26,7 @@ export default function Header({ email ,pro=false}) {
 
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5002/api/get-profile-image?email=${email}`, {
+      fetch(`https://safecyber-api.onrender.com/api/get-profile-image?email=${email}`, {
         method: "GET",
       })
         .then((response) => response.blob()) // Convert response to an image blob

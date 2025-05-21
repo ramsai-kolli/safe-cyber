@@ -20,7 +20,7 @@ const YourProfile = () => {
   useEffect(() => {
     // const fetchProfileImage = () => {
     if (email) {
-      fetch(`http://localhost:5002/api/get-profile-image?email=${email}`, {
+      fetch(`https://safecyber-api.onrender.com/api/get-profile-image?email=${email}`, {
         method: "GET",
       })
         .then((response) => response.blob())
@@ -46,7 +46,7 @@ const YourProfile = () => {
     formData.append("email", email); 
     formData.append("profile_image", selectedFile);
 
-    fetch("http://localhost:5002/api/upload-profile-image", {
+    fetch("https://safecyber-api.onrender.com/api/upload-profile-image", {
       method: "POST",
       body: formData,
     })
